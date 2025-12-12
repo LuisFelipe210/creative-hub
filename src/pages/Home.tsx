@@ -1,7 +1,36 @@
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowRight, Star, ArrowUpRight, Layout, PenTool, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
+
+// --- COMPONENTE DE IMAGEM COM SKELETON (INTERNO) ---
+const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+        // O container precisa ter relative pra segurar o skeleton absoluto
+        <div className={`relative w-full h-full bg-gray-100 ${className}`}>
+
+            {/* SKELETON (O bloco cinza que pulsa) */}
+            {!isLoaded && (
+                <div className="absolute inset-0 bg-gray-200 animate-pulse z-10" />
+            )}
+
+            {/* A IMAGEM REAL */}
+            <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                onLoad={() => setIsLoaded(true)}
+                className={`w-full h-full object-cover transition-opacity duration-700 ${
+                    isLoaded ? "opacity-100" : "opacity-0"
+                } ${className}`} // Repassa as classes pra imagem também
+                {...props}
+            />
+        </div>
+    );
+};
 
 const Home = () => {
     return (
@@ -11,7 +40,7 @@ const Home = () => {
             {/* --- HERO RESPONSIVO --- */}
             <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 min-h-[90vh] flex items-center bg-[#fffbff] overflow-hidden">
 
-                {/* OTIMIZAÇÃO 1: BLUR SÓ NO DESKTOP (hidden no mobile) */}
+                {/* BLUR SÓ NO DESKTOP */}
                 <div className="hidden md:block absolute top-0 right-0 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 z-0 pointer-events-none transform-gpu translate-z-0"></div>
 
                 <div className="container mx-auto px-4 relative z-10">
@@ -19,7 +48,6 @@ const Home = () => {
 
                         {/* COLUNA ESQUERDA */}
                         <div className="lg:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left">
-
                             <div className="flex justify-center lg:justify-start">
                                 <div className="inline-flex items-center gap-2 bg-white border-2 border-black text-black px-3 py-1.5 md:px-4 md:py-2 font-bold uppercase tracking-widest text-[14px] md:text-xs shadow-[2px_2px_0px_0px_#EEACC5] md:shadow-[4px_4px_0px_0px_#EEACC5] rounded-full mb-2 md:animate-in md:slide-in-from-left md:duration-1000 md:fill-mode-both">
                                     Social Media & Design
@@ -54,15 +82,13 @@ const Home = () => {
                                     alt="Iasmim Trajano Logo"
                                     width={400}
                                     height={400}
-                                    className="w-full h-auto object-contain" // Removi o scale no hover pra mobile
+                                    className="w-full h-auto object-contain"
                                 />
                             </div>
 
-                            {/* Elementos decorativos (Só no Desktop agora) */}
                             <Star className="hidden md:block absolute -top-6 -right-6 text-black w-14 h-14 animate-spin-slow opacity-20" />
                             <ArrowRight className="hidden md:block absolute -bottom-6 -left-8 text-black w-20 h-20 opacity-20" />
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -70,7 +96,6 @@ const Home = () => {
             {/* --- DIVISOR MARQUEE --- */}
             <div className="bg-accent border-y-2 border-black overflow-hidden py-3 relative z-20 shadow-sm">
                 <div className="flex animate-marquee whitespace-nowrap will-change-transform transform-gpu">
-                    {/* Reduzi a quantidade de itens no array pra pesar menos */}
                     {[1, 2, 3, 4].map((i) => (
                         <div key={i} className="flex items-center mx-4">
                             <span className="text-2xl md:text-3xl font-display font-black uppercase text-black">Brand Strategy</span>
@@ -124,9 +149,8 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SEÇÃO DESTAQUES --- */}
+                {/* --- SEÇÃO DESTAQUES (COM SKELETON) --- */}
                 <section className="py-16 md:py-20 bg-black text-white rounded-t-[2.5rem] md:rounded-t-[3rem] relative overflow-hidden border-t-4 border-primary">
-                    {/* OTIMIZAÇÃO 3: NOISE SÓ NO DESKTOP */}
                     <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
 
                     <div className="container mx-auto px-4 relative z-10">
@@ -144,19 +168,17 @@ const Home = () => {
                             </Link>
                         </div>
 
-                        {/* GRID DE PROJETOS */}
+                        {/* GRID DE PROJETOS OTIMIZADO */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <Link to="/portfolio/gabrielle-weiss" className="group block bg-white/5 border border-white/10 p-4 rounded-2xl hover:border-primary transition-colors transform-gpu">
                                 <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4 relative">
-                                    <img
+                                    {/* USANDO O COMPONENTE DE SKELETON AQUI */}
+                                    <ImageWithSkeleton
                                         src="/fundo.jpg"
-                                        loading="lazy"
-                                        width={600}
-                                        height={450}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         alt="Gabrielle Weiss"
+                                        className="group-hover:scale-105 transition-transform duration-500" // A classe vai pro <img>
                                     />
-                                    <div className="absolute top-3 right-3 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div className="absolute top-3 right-3 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20">
                                         <ArrowUpRight size={16} />
                                     </div>
                                 </div>
@@ -168,15 +190,13 @@ const Home = () => {
 
                             <Link to="/portfolio/wyate-boutique" className="group block bg-white/5 border border-white/10 p-4 rounded-2xl hover:border-primary transition-colors transform-gpu">
                                 <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4 relative">
-                                    <img
+                                    {/* USANDO O COMPONENTE DE SKELETON AQUI */}
+                                    <ImageWithSkeleton
                                         src="/dog.jpg"
-                                        loading="lazy"
-                                        width={600}
-                                        height={450}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         alt="Wyate Boutique"
+                                        className="group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <div className="absolute top-3 right-3 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div className="absolute top-3 right-3 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20">
                                         <ArrowUpRight size={16} />
                                     </div>
                                 </div>
@@ -195,15 +215,14 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SOBRE --- */}
+                {/* --- SOBRE (COM SKELETON) --- */}
                 <section className="py-16 md:py-20 container mx-auto px-4">
                     <div className="bg-[#fffbff] border-2 border-black rounded-3xl p-6 md:p-12 shadow-[4px_4px_0px_0px_#000000] md:shadow-[8px_8px_0px_0px_#000000] flex flex-col md:flex-row items-center gap-8 md:gap-10">
                         <div className="w-full md:w-1/3">
                             <div className="aspect-square rounded-2xl border-2 border-black overflow-hidden relative shadow-md">
-                                <img
+                                {/* USANDO O COMPONENTE DE SKELETON AQUI */}
+                                <ImageWithSkeleton
                                     src="/iasmim.png"
-                                    loading="lazy"
-                                    className="w-full h-full object-cover" // Sem grayscale, sem hover no mobile
                                     alt="Iasmim"
                                 />
                             </div>

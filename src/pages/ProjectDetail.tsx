@@ -2,11 +2,34 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowLeft, ArrowRight, Share2, Check, Copy, X, Home, ChevronRight } from "lucide-react";
-import { FaWhatsapp, FaTwitter, FaInstagram } from "react-icons/fa";
+import { ArrowLeft, ArrowRight, Share2, Copy, X, Home, ChevronRight } from "lucide-react";
+import { FaWhatsapp, FaTwitter } from "react-icons/fa";
 import { toast } from "sonner";
 
-// --- DADOS COM SLUGS ---
+// --- COMPONENTE SKELETON ---
+const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+        <div className={`relative w-full h-full bg-gray-100 overflow-hidden ${className}`}>
+            {!isLoaded && (
+                <div className="absolute inset-0 bg-gray-200 animate-pulse z-10" />
+            )}
+            <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                onLoad={() => setIsLoaded(true)}
+                className={`w-full h-full object-cover transition-all duration-700 ${
+                    isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                } ${className}`}
+                {...props}
+            />
+        </div>
+    );
+};
+
+// --- DADOS ---
 const allProjects = [
     {
         id: 1,
@@ -63,12 +86,10 @@ const allProjects = [
 ];
 
 const ProjectDetail = () => {
-    // PEGA O SLUG DA URL
     const { slug } = useParams();
     const navigate = useNavigate();
     const [isShareOpen, setIsShareOpen] = useState(false);
 
-    // PROCURA O PROJETO PELO SLUG
     const project = allProjects.find((p) => p.slug === slug);
 
     useEffect(() => {
@@ -83,7 +104,6 @@ const ProjectDetail = () => {
 
     if (!project) return null;
 
-    // LÓGICA DO PRÓXIMO PROJETO
     const currentIndex = allProjects.findIndex(p => p.id === project.id);
     const nextIndex = (currentIndex + 1) % allProjects.length;
     const nextProject = allProjects[nextIndex];
@@ -93,12 +113,8 @@ const ProjectDetail = () => {
 
     const handleCopyLink = () => {
         navigator.clipboard.writeText(currentUrl);
-        toast.success("Link copiado para a área de transferência.", {
-            style: {
-                background: '#000',
-                color: '#fff',
-                border: '2px solid #EEACC5'
-            }
+        toast.success("Link copiado! Cole no seu Story.", {
+            style: { background: '#000', color: '#fff', border: '2px solid #EEACC5' }
         });
         setIsShareOpen(false);
     };
@@ -128,7 +144,7 @@ const ProjectDetail = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-                        <div>
+                        <div className="animate-in slide-in-from-left duration-700">
                             <div className="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest flex-wrap">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -160,7 +176,7 @@ const ProjectDetail = () => {
                             </h1>
                         </div>
 
-                        <div className="md:max-w-sm w-full pl-4 border-l-4 border-primary text-left">
+                        <div className="md:max-w-sm w-full pl-4 border-l-4 border-primary text-left animate-in slide-in-from-right duration-700">
                             <div className="flex flex-col gap-4">
                                 <div>
                                     <span className="block text-[10px] font-bold uppercase text-gray-400 tracking-widest">Ano</span>
@@ -181,15 +197,15 @@ const ProjectDetail = () => {
                 </div>
             </section>
 
-            {/* CORPO DO PROJETO - IMPORTANTE: AQUI É UMA DIV, NÃO SECTION */}
+            {/* CORPO DO PROJETO */}
             <div className="container mx-auto px-4 py-12">
 
-                {/* CAPA GIGANTE */}
-                <div className="w-full h-[40vh] md:h-[55vh] rounded-3xl overflow-hidden border-2 border-black shadow-[8px_8px_0px_0px_#000000] mb-16 group relative">
-                    <img
+                {/* CAPA GIGANTE COM SKELETON */}
+                <div className="w-full h-[40vh] md:h-[55vh] rounded-3xl overflow-hidden border-2 border-black shadow-[8px_8px_0px_0px_#000000] mb-16 group relative animate-in fade-in zoom-in-95 duration-1000">
+                    <ImageWithSkeleton
                         src={project.image}
                         alt={`Capa do projeto ${project.client}`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        className="group-hover:scale-105 transition-transform duration-1000"
                     />
                 </div>
 
@@ -198,7 +214,7 @@ const ProjectDetail = () => {
 
                     {/* COLUNA ESQUERDA (TEXTO STICKY) */}
                     <div className="lg:col-span-4">
-                        <div className="lg:sticky lg:top-32 space-y-8">
+                        <div className="lg:sticky lg:top-32 space-y-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
                             <div className="bg-[#fffbff] border-2 border-black p-8 rounded-2xl shadow-[4px_4px_0px_0px_#000000]">
                                 <h3 className="text-2xl font-black uppercase mb-4 flex items-center gap-2">
                                     <span className="w-3 h-3 bg-primary rounded-full animate-pulse"></span>
@@ -215,8 +231,7 @@ const ProjectDetail = () => {
                                 <div className="relative">
                                     <button
                                         onClick={() => setIsShareOpen(!isShareOpen)}
-                                        className={`w-full flex items-center justify-center gap-2 border-2 border-black py-3 rounded-xl font-bold uppercase transition-all ${
-                                            isShareOpen ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white"
+                                        className={`w-full flex items-center justify-center gap-2 border-2 border-black py-3 rounded-xl font-bold uppercase transition-all ${isShareOpen ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white"
                                         }`}
                                     >
                                         {isShareOpen ? <X size={18} /> : <Share2 size={18} />}
@@ -225,21 +240,18 @@ const ProjectDetail = () => {
 
                                     {isShareOpen && (
                                         <div className="absolute top-full left-0 w-full mt-2 bg-white border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_#EEACC5] overflow-hidden z-20 animate-in slide-in-from-top-2 fade-in duration-200">
-
                                             <button
                                                 onClick={handleWhatsApp}
                                                 className="w-full text-left px-4 py-3 border-b-2 border-black/10 hover:bg-[#25D366] hover:text-white font-bold uppercase text-xs flex items-center gap-3 transition-colors"
                                             >
                                                 <FaWhatsapp size={16} /> WhatsApp
                                             </button>
-
                                             <button
                                                 onClick={handleTwitter}
                                                 className="w-full text-left px-4 py-3 border-b-2 border-black/10 hover:bg-black hover:text-white font-bold uppercase text-xs flex items-center gap-3 transition-colors"
                                             >
                                                 <FaTwitter size={16} /> Twitter / X
                                             </button>
-
                                             <button
                                                 onClick={handleCopyLink}
                                                 className="w-full text-left px-4 py-3 hover:bg-primary hover:text-black font-bold uppercase text-xs flex items-center gap-3 transition-colors group"
@@ -253,21 +265,26 @@ const ProjectDetail = () => {
                         </div>
                     </div>
 
-                    {/* COLUNA DIREITA - GALERIA */}
-                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+                    {/* COLUNA DIREITA - GALERIA COM SKELETON (ATUALIZADA) */}
+                    {/* MUDANÇA AQUI: gap-6 virou gap-4 pra ficarem mais próximas */}
+                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
                         {project.gallery?.map((img, index) => (
-                            <div key={index} className="group relative rounded-2xl overflow-hidden border-2 border-black shadow-[4px_4px_0px_0px_#EEACC5] bg-gray-100 h-64 md:h-80">
-                                <img
+                            <div
+                                key={index}
+                                // MUDANÇA AQUI: Removi a lógica do index === 0. Agora todas são iguais.
+                                className="group relative rounded-2xl overflow-hidden border-2 border-black shadow-[4px_4px_0px_0px_#EEACC5] bg-gray-100 h-64 md:h-80"
+                            >
+                                <ImageWithSkeleton
                                     src={img}
                                     alt={`Detalhe ${index + 1}`}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    className="group-hover:scale-105 transition-transform duration-700"
                                 />
                             </div>
                         ))}
 
-                        <div className="md:col-span-2 bg-black text-white p-12 rounded-3xl border-2 border-primary mt-8 text-center">
+                        <div className="md:col-span-2 bg-black text-white p-12 rounded-3xl border-2 border-primary mt-8 text-center shadow-[8px_8px_0px_0px_#000000]">
                             <h3 className="text-3xl font-black uppercase mb-4">Resultado</h3>
-                            <p className="text-gray-400 max-w-lg mx-auto">
+                            <p className="text-gray-400 max-w-lg mx-auto font-medium">
                                 Entregamos não apenas um design bonito, mas uma ferramenta de negócios que posicionou a marca em outro patamar de mercado.
                             </p>
                         </div>
@@ -276,7 +293,7 @@ const ProjectDetail = () => {
 
             </div>
 
-            {/* NAV FOOTER (LINK PARA PRÓXIMO PROJETO) */}
+            {/* NAV FOOTER */}
             <Link to={`/portfolio/${nextProject.slug}`} className="block group border-t-2 border-black bg-[#fffbff] relative overflow-hidden">
                 <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
                 <div className="container mx-auto px-4 py-20 md:py-32 relative z-10 flex flex-col items-center justify-center text-center">
