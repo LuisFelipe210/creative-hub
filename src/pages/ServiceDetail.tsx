@@ -45,7 +45,7 @@ const ServiceDetail = () => {
     if (!service) return null;
 
     return (
-        <main className="min-h-screen flex flex-col selection:bg-black selection:text-primary">
+        <main className="min-h-screen flex flex-col selection:bg-primary selection:text-black">
             <Navigation />
 
             {/* HEADER SÓLIDA IGUAL ABOUT PAGE */}
@@ -82,7 +82,7 @@ const ServiceDetail = () => {
                         </div>
 
                         <div className="md:max-w-sm mb-2">
-                            <Link to="/servicos" className="inline-flex items-center gap-2 text-xs font-bold uppercase border-b-2 border-black hover:text-primary hover:border-primary transition-colors pb-1">
+                            <Link to="/servicos" className="inline-flex items-center gap-2 text-xs text-accent font-bold uppercase hover:text-primary hover:border-primary transition-colors pb-1">
                                 <ArrowLeft size={12} /> Voltar para Serviços
                             </Link>
                         </div>

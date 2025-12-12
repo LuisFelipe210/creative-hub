@@ -1,57 +1,114 @@
+import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react"; // Ou use react-icons se preferir
+import { Home, AlertTriangle, Star, Sparkles, ArrowUpRight, Ban, Mail } from "lucide-react";
 
 const NotFound = () => {
     return (
-        <main className="min-h-screen w-full bg-black relative flex items-center justify-center overflow-hidden selection:bg-primary selection:text-black">
+        <main className="min-h-screen flex flex-col selection:bg-black selection:text-primary bg-dots-pattern relative overflow-hidden">
 
-            {/* BACKGROUND COM IMAGEM E OVERLAY */}
-            <div className="absolute inset-0 bg-[url('/fundo.jpg')] bg-cover bg-center">
-                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
-            </div>
+            {/* --- LOGO NO CANTO (FIXA) --- */}
+            <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 z-30 hover:scale-105 transition-transform">
+                <img
+                    src="/logo2.svg"
+                    alt="Iasmim Trajano"
+                    className="w-24 md:w-32 h-auto object-contain"
+                />
+            </Link>
 
-            <div className="relative z-10 container mx-auto px-4 text-center">
+            {/* --- ELEMENTOS DECORATIVOS FLUTUANTES (MAIS DETALHES) --- */}
+            <Star className="absolute top-32 right-[20%] text-black w-8 h-8 animate-spin-slow opacity-20 pointer-events-none hidden md:block" />
+            <Sparkles className="absolute bottom-40 left-[15%] text-primary w-12 h-12 opacity-30 pointer-events-none hidden md:block" />
+            <div className="absolute top-1/2 left-10 w-32 h-32 bg-primary rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
+            <div className="absolute bottom-10 right-10 w-60 h-60 bg-black rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
 
-                {/* LOGO CENTRALIZADA */}
-                <div className="flex justify-center mb-12 animate-in fade-in zoom-in duration-700">
-                    <img
-                        src="/logo.svg"
-                        alt="Iasmim Trajano"
-                        className="w-48 md:w-64 h-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
-                    />
+            {/* --- CORPO CENTRALIZADO --- */}
+            <div className="flex-1 flex flex-col items-center justify-center container mx-auto px-4 py-20 relative z-10">
+
+                {/* CARD TIPO "TICKET DE ERRO" */}
+                <div className="relative group max-w-lg w-full">
+
+                    {/* Sombra Sólida Deslocada */}
+                    <div className="absolute top-3 left-3 w-full h-full bg-black rounded-3xl -z-10 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+
+                    <div className="bg-[#fffbff] border-2 border-black rounded-3xl overflow-hidden relative">
+
+                        {/* CABEÇALHO DO CARD (DETALHE TÉCNICO) */}
+                        <div className="bg-black text-white py-2 px-6 flex justify-between items-center border-b-2 border-black">
+                            <span className="font-mono text-xs font-bold tracking-widest text-primary">ERR_CODE: 404</span>
+                            <div className="flex gap-2">
+                                <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                                <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                            </div>
+                        </div>
+
+                        <div className="p-10 md:p-14 text-center relative">
+
+                            {/* 404 COM EFEITO */}
+                            <div className="relative mb-8 inline-block">
+                                <h1
+                                    className="text-9xl font-black text-transparent leading-none tracking-tighter select-none relative z-10"
+                                    style={{ WebkitTextStroke: '2px black' }}
+                                >
+                                    404
+                                </h1>
+                                {/* Sombra do texto rosa deslocada */}
+                                <h1
+                                    className="text-9xl font-black text-primary leading-none tracking-tighter select-none absolute top-1 left-1 z-0 opacity-50"
+                                >
+                                    404
+                                </h1>
+
+                                {/* Badge Flutuante */}
+                                <div className="absolute -top-6 -right-10 bg-white text-black text-xs font-bold px-3 py-1 border-2 border-black rotate-12 shadow-sm">
+                                    SUMIU!
+                                </div>
+                            </div>
+
+                            <h2 className="text-2xl md:text-3xl font-black uppercase text-black mb-4 flex items-center justify-center gap-2">
+                                <Ban size={28} className="text-primary" />
+                                Página Off-line
+                            </h2>
+
+                            <p className="text-gray-600 font-medium text-base leading-relaxed mb-8 max-w-sm mx-auto">
+                                Parece que o link quebrou ou essa página não existe. Verifique a URL ou escolha um destino abaixo.
+                            </p>
+
+                            {/* BARCODE FAKE (DETALHE VISUAL) */}
+                            <div className="flex justify-center gap-1 h-4 mb-8 opacity-20">
+                                {[...Array(20)].map((_, i) => (
+                                    <div key={i} className={`bg-black w-${Math.random() > 0.5 ? '1' : '2'}`}></div>
+                                ))}
+                            </div>
+
+                            {/* BOTÕES DE AÇÃO */}
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link
+                                    to="/"
+                                    className="inline-flex items-center justify-center gap-2 bg-black text-white px-6 py-3 font-black text-sm uppercase rounded-xl hover:bg-primary hover:text-black hover:border-black border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_#EEACC5] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+                                >
+                                    <Home size={16} className="mb-0.5" />
+                                    Voltar pra Home
+                                </Link>
+                                <Link
+                                    to="/contato"
+                                    className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 font-black text-sm uppercase rounded-xl border-2 border-black hover:bg-gray-50 transition-all hover:shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+                                >
+                                    <Mail size={16} className="mb-0.5" />
+                                    Reportar Erro
+                                </Link>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {/* Decoração Extra Fora do Card */}
+                    <ArrowUpRight className="absolute -bottom-8 -left-8 text-black w-16 h-16 opacity-10 rotate-12 hidden md:block" />
                 </div>
 
-                {/* TEXTO DE ERRO */}
-                <div className="relative">
-                    {/* 404 Gigante de Fundo */}
-                    <h1 className="text-[12rem] md:text-[18rem] font-black text-white/5 leading-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                        404
-                    </h1>
-
-                    <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-6 relative z-10">
-                        Página não <br/>
-                        <span className="text-primary" style={{ WebkitTextStroke: '1px white' }}>encontrada</span>
-                    </h2>
-
-                    <p className="text-xl text-gray-400 font-medium max-w-lg mx-auto mb-10 relative z-10">
-                        O link que você acessou pode estar quebrado ou a página foi removida.
-                    </p>
-
-                    {/* BOTÃO VOLTAR */}
-                    <Link
-                        to="/"
-                        className="inline-flex items-center gap-3 btn-primary-soft px-8 py-4 font-black text-lg uppercase rounded-xl relative z-10 hover:scale-105 transition-transform"
-                    >
-                        <ArrowLeft size={20} /> Voltar ao Início
-                    </Link>
-                </div>
-
             </div>
 
-            {/* DECORAÇÃO DE RODAPÉ */}
-            <div className="absolute bottom-8 left-0 w-full text-center text-white/20 text-xs font-bold uppercase tracking-[0.5em]">
-                Error • Page Not Found • 404
-            </div>
+            <Footer />
         </main>
     );
 };

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowUpRight, ArrowRight, Eye, ChevronRight, Home, Briefcase } from "lucide-react";
+import { ArrowRight, Eye, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const allProjects = [
     {
         id: 1,
+        slug: "gabrielle-weiss",
         client: "Gabrielle Weiss",
         title: "Advocacia Premium",
         category: "Branding",
@@ -14,9 +15,9 @@ const allProjects = [
         image: "/fundo.jpg",
         desc: "Redesign completo de identidade visual focado em alto padrão."
     },
-    // ... outros projetos
     {
         id: 2,
+        slug: "wyate-boutique",
         client: "Wyate Boutique",
         title: "Moda Feminina",
         category: "Social Media",
@@ -26,6 +27,7 @@ const allProjects = [
     },
     {
         id: 3,
+        slug: "marfim-atelie",
         client: "Marfim Ateliê",
         title: "E-commerce Artesanal",
         category: "Web Design",
@@ -35,6 +37,7 @@ const allProjects = [
     },
     {
         id: 4,
+        slug: "up-engenharia",
         client: "Up Engenharia",
         title: "Posicionamento Marca",
         category: "Social Media",
@@ -51,7 +54,6 @@ const PortfolioPage = () => {
         <main className="min-h-screen selection:bg-black selection:text-primary">
             <Navigation />
 
-            {/* --- HEADER SÓLIDA --- */}
             <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
@@ -59,7 +61,7 @@ const PortfolioPage = () => {
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
                         <div>
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
@@ -72,7 +74,7 @@ const PortfolioPage = () => {
                                 </span>
                             </div>
 
-                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter">
+                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Meus <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
                                     Projetos
@@ -80,7 +82,7 @@ const PortfolioPage = () => {
                             </h1>
                         </div>
 
-                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary">
+                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Resultados reais para marcas que não aceitam o básico. Confira os cases.
                             </p>
@@ -91,24 +93,31 @@ const PortfolioPage = () => {
 
             <div className="bg-dots-pattern w-full relative z-0">
 
+                {/* DESKTOP LAYOUT */}
                 <section className="hidden lg:flex container mx-auto px-4 py-10 gap-24 h-[85vh] items-stretch">
 
-                    <div
-                        className="w-5/12 flex flex-col overflow-y-auto pr-2 overscroll-contain bg-[#fffbff]/90 backdrop-blur-sm border-2 border-black rounded-2xl p-4 shadow-[8px_8px_0px_0px_#000000]
-                        [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-primary [&::-webkit-scrollbar-thumb]:rounded-full"
-                    >
-                        <div className="sticky top-0 bg-[#fffbff]/0 z-10 pb-4 pt-2">
-                            <div className="flex justify-between text-xs font-bold uppercase text-gray-400 border-b-2 border-black pb-4">
+                    {/* LISTA LATERAL (AGORA BLINDADA) */}
+                    <div className="w-5/12 flex flex-col bg-[#fffbff] border-2 border-black rounded-2xl shadow-[8px_8px_0px_0px_#000000] overflow-hidden">
+
+                        {/* HEADER FIXO (FORA DA ÁREA DE ROLAGEM) */}
+                        <div className="bg-[#fffbff] p-5 border-b-2 border-black z-20">
+                            <div className="flex justify-between text-xs font-bold uppercase text-gray-400">
                                 <span>Selecionar Projeto</span>
                             </div>
                         </div>
 
-                        <div className="space-y-2 pb-20">
+                        {/* ÁREA DE ROLAGEM INDEPENDENTE */}
+                        <div className="flex-1 overflow-y-auto p-4 space-y-2
+                            [&::-webkit-scrollbar]:w-2
+                            [&::-webkit-scrollbar-track]:bg-gray-100
+                            [&::-webkit-scrollbar-thumb]:bg-primary
+                            [&::-webkit-scrollbar-thumb]:rounded-full"
+                        >
                             {allProjects.map((project) => (
-                                <Link
-                                    to="#"
+                                <div
                                     key={project.id}
                                     onMouseEnter={() => setHoveredProject(project)}
+                                    onClick={() => setHoveredProject(project)}
                                     className={`group block border-l-4 transition-all duration-300 py-6 cursor-pointer relative
                                         ${hoveredProject.id === project.id
                                         ? "border-primary pl-6 bg-gray-50"
@@ -122,7 +131,9 @@ const PortfolioPage = () => {
                                                 {project.category}
                                             </span>
                                             <h3 className={`text-4xl font-black uppercase leading-none transition-colors duration-300 ${
-                                                hoveredProject.id === project.id ? "text-black" : "text-gray-300 group-hover:text-gray-500"
+                                                hoveredProject.id === project.id
+                                                    ? "text-black"
+                                                    : "text-gray-500 group-hover:text-black"
                                             }`}>
                                                 {project.client}
                                             </h3>
@@ -132,7 +143,7 @@ const PortfolioPage = () => {
                                             hoveredProject.id === project.id ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                                         }`}>
                                             <div className="bg-black text-white p-3 rounded-full shadow-lg">
-                                                <ArrowUpRight size={24} />
+                                                <ArrowRight size={24} />
                                             </div>
                                         </div>
                                     </div>
@@ -144,13 +155,15 @@ const PortfolioPage = () => {
                                             {project.desc}
                                         </p>
                                     </div>
-                                </Link>
+                                </div>
                             ))}
+                            {/* Espaço extra no final pra não cortar o último item */}
+                            <div className="h-10"></div>
                         </div>
                     </div>
 
-                    {/* IMAGEM FIXA */}
-                    <div className="w-7/12 h-full relative">
+                    {/* IMAGEM FIXA E BOTÃO DE DETALHES */}
+                    <div className="w-6/12 h-full relative">
                         <div className="w-full h-full rounded-3xl overflow-hidden shadow-[20px_20px_0px_0px_#000000] border-4 border-primary bg-gray-900 group relative">
                             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
 
@@ -168,9 +181,12 @@ const PortfolioPage = () => {
                             </div>
 
                             <div className="absolute bottom-8 left-8 z-20">
-                                <button className="btn-primary-soft flex items-center gap-2 text-sm px-6 py-3">
+                                <Link
+                                    to={`/portfolio/${hoveredProject.slug}`}
+                                    className="flex items-center gap-2 bg-white text-black border-2 border-black px-6 py-3 rounded-full font-bold text-sm uppercase hover:bg-primary hover:scale-105 transition-all shadow-[4px_4px_0px_0px_#000000]"
+                                >
                                     <Eye size={18} /> Ver Detalhes
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -179,12 +195,12 @@ const PortfolioPage = () => {
                 {/* MOBILE LAYOUT */}
                 <section className="lg:hidden container mx-auto px-4 py-12 space-y-16">
                     {allProjects.map((project) => (
-                        <Link to="#" key={project.id} className="block group bg-[#fffbff] border-2 border-black p-4 rounded-3xl shadow-[8px_8px_0px_0px_#000000]">
+                        <Link to={`/portfolio/${project.slug}`} key={project.id} className="block group bg-[#fffbff] border-2 border-black p-4 rounded-3xl shadow-[8px_8px_0px_0px_#000000]">
                             <div className="relative aspect-[4/5] overflow-hidden border-2 border-black rounded-2xl mb-6">
                                 <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                    className="w-full h-full object-cover transition-all duration-500"
                                 />
                             </div>
                             <div className="px-2">
@@ -197,7 +213,7 @@ const PortfolioPage = () => {
                                             {project.client}
                                         </h3>
                                     </div>
-                                    <ArrowUpRight className="text-gray-300 group-hover:text-black transition-colors" size={28} />
+                                    <ArrowRight className="text-gray-300 group-hover:text-black transition-colors" size={28} />
                                 </div>
                             </div>
                         </Link>

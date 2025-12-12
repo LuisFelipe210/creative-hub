@@ -10,11 +10,29 @@ const Navigation = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+            setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Trava o scroll do corpo quando menu abre
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
+    // Função pra subir pro topo ao clicar na Logo/Home
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+        setIsOpen(false);
+    };
 
     const serviceLinks = [
         { name: "Social Media", path: "/servicos/social-media" },
@@ -23,7 +41,6 @@ const Navigation = () => {
         { name: "Design Gráfico", path: "/servicos/design-grafico" },
     ];
 
-    // Estilo dos botões Desktop
     const btnClass = (isActive: boolean) => `
         px-5 py-2 font-bold text-sm uppercase transition-all border-2 rounded-lg flex items-center gap-1
         ${isActive
@@ -32,11 +49,11 @@ const Navigation = () => {
     }
     `;
 
-    // Estilo dos links Mobile
     const mobileLinkClass = (path: string) => {
+        // Lógica do Mobile também precisa ajustar pro Portfolio
         const isActive = path === '/'
             ? location.pathname === '/'
-            : location.pathname.startsWith(path);
+            : location.pathname.startsWith(path); // Aqui já tava meio caminho andado
 
         return `text-4xl font-black uppercase tracking-tighter transition-colors ${
             isActive ? "text-primary" : "text-black hover:text-primary"
@@ -46,38 +63,47 @@ const Navigation = () => {
     return (
         <nav
             className={`fixed top-0 w-full z-50 px-4 transition-all duration-300 ${
-                isOpen
-                    ? "bg-transparent border-transparent py-4"
-                    : isScrolled
-                        ? "bg-[#fffbff] border-b-2 border-accent py-4 shadow-sm"
-                        : "bg-transparent border-transparent py-6"
+                isOpen || isScrolled
+                    ? "bg-[#fffbff]/80 backdrop-blur-md py-4 shadow-sm"
+                    : "bg-transparent py-6 border-b-2 border-transparent"
             }`}
         >
             <div className="container mx-auto flex justify-between items-center">
 
-                {/* LOGO DA NAVBAR (RESPONSIVA) */}
-                <Link to="/" className="relative z-50 transition-transform hover:scale-105">
+                {/* LOGO */}
+                <Link
+                    to="/"
+                    className="relative z-50 transition-transform hover:scale-105"
+                    onClick={scrollToTop}
+                >
                     <img
                         src="/logo2.svg"
-                        alt="B.Criativo Logo Mobile"
+                        alt="Logo Brand Criativo – voltar para a home"
                         className="h-12 w-auto object-contain md:hidden"
                     />
-                    {/* Desktop mantém h-16 */}
                     <img
                         src="/logo2.svg"
-                        alt="B.Criativo Logo Desktop"
+                        alt="Logo Brand Criativo – voltar para a home"
                         className="h-16 w-auto object-contain hidden md:block"
                     />
                 </Link>
 
                 {/* MENU DESKTOP */}
                 <div className="hidden md:flex gap-4 items-center">
-                    <Link to="/" className={btnClass(location.pathname === '/')}>Home</Link>
+                    <Link
+                        to="/"
+                        className={btnClass(location.pathname === '/')}
+                        onClick={scrollToTop}
+                    >
+                        Home
+                    </Link>
+
                     <Link to="/sobre" className={btnClass(location.pathname === '/sobre')}>Sobre</Link>
 
                     <div className="relative group">
                         <Link
                             to="/servicos"
+                            // MUDANÇA AQUI: Usa includes pra pegar sub-rotas
                             className={btnClass(location.pathname.includes('/servicos'))}
                         >
                             Serviços
@@ -98,11 +124,17 @@ const Navigation = () => {
                         </div>
                     </div>
 
-                    <Link to="/portfolio" className={btnClass(location.pathname === '/portfolio')}>Portfólio</Link>
+                    <Link
+                        to="/portfolio"
+                        className={btnClass(location.pathname.includes('/portfolio'))}
+                    >
+                        Portfólio
+                    </Link>
+
                     <Link to="/contato" className={btnClass(location.pathname === '/contato')}>Contato</Link>
                 </div>
 
-                {/* Botão Mobile */}
+                {/* BOTÃO MOBILE */}
                 <button
                     className="relative z-50 md:hidden bg-white border-2 border-accent p-2 shadow-soft rounded-lg text-black active:translate-y-1 active:shadow-none transition-all hover:text-primary"
                     onClick={() => setIsOpen(!isOpen)}
@@ -113,13 +145,13 @@ const Navigation = () => {
 
             {/* MENU MOBILE OVERLAY */}
             {isOpen && (
-                <div className="fixed inset-0 bg-[#fffbff]/95 backdrop-blur-md z-40 flex flex-col items-center justify-center animate-in fade-in zoom-in duration-200 overflow-y-auto py-20">
+                <div className="fixed inset-0 bg-[#fffbff] z-40 flex flex-col items-center justify-center overflow-y-auto py-20 h-screen w-screen">
 
                     <div className="flex flex-col gap-6 text-center w-full px-8 max-w-md">
 
                         <Link
                             to="/"
-                            onClick={() => setIsOpen(false)}
+                            onClick={scrollToTop}
                             className={mobileLinkClass('/')}
                         >
                             Home
@@ -158,7 +190,7 @@ const Navigation = () => {
                             </div>
 
                             {isServicesOpen && (
-                                <div className="flex flex-col gap-3 mt-4 bg-white/50 w-full rounded-xl p-4 border-2 border-accent/20 animate-in slide-in-from-top-2">
+                                <div className="flex flex-col gap-3 mt-4 bg-white/50 w-full rounded-xl p-4 border-2 border-accent/20">
                                     {serviceLinks.map((subLink) => (
                                         <Link
                                             key={subLink.path}

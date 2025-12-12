@@ -1,11 +1,11 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowRight, Star, Heart, Coffee, Layers, ChevronRight, Home, User } from "lucide-react";
+import { ArrowRight, Star, Heart, Coffee, Layers, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AboutPage = () => {
     return (
-        <main className="min-h-screen selection:bg-black selection:text-primary">
+        <main className="min-h-screen selection:bg-primary selection:text-black">
             <Navigation />
 
             {/* --- HEADER SÓLIDA --- */}
@@ -64,10 +64,13 @@ const AboutPage = () => {
 
                 {/* BENTO GRID */}
                 <section className="pb-24 container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+                    {/* ALTERAÇÃO 1: 'auto-rows-[300px]' agora é 'md:auto-rows-[300px]'.
+                        No mobile fica 'auto', ou seja, o tamanho do conteúdo. */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]">
 
                         {/* CARD 1: FOTO */}
-                        <div className="md:col-span-1 md:row-span-2 relative rounded-3xl overflow-hidden border-2 border-black group shadow-[8px_8px_0px_0px_#000000]">
+                        {/* Adicionei h-[450px] no mobile pra foto não ficar minuscula nem sumir */}
+                        <div className="h-[450px] md:h-auto md:col-span-1 md:row-span-2 relative rounded-3xl overflow-hidden border-2 border-black group shadow-[8px_8px_0px_0px_#000000]">
                             <img
                                 src="/iasmim.png"
                                 alt="Iasmim Trajano"
@@ -79,11 +82,13 @@ const AboutPage = () => {
                             </div>
                         </div>
 
-                        {/* CARD 2: BIO */}
+                        {/* CARD 2: BIO (Minha História) */}
+                        {/* ALTERAÇÃO 2: overflow e max-h só existem no 'md:'. No mobile o texto cresce livre. */}
                         <div className="md:col-span-2 bg-black text-white p-8 rounded-3xl flex flex-col justify-center relative overflow-hidden border-2 border-black shadow-[8px_8px_0px_0px_#EEACC5]">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[80px] opacity-20"></div>
                             <h3 className="text-2xl font-black uppercase mb-4 text-primary">Minha História</h3>
-                            <div className="font-medium text-gray-300 text-base md:text-lg leading-relaxed space-y-4 overflow-y-auto max-h-[220px] pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-primary">
+
+                            <div className="font-medium text-gray-300 text-base md:text-lg leading-relaxed space-y-4 md:overflow-y-auto md:max-h-[220px] pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-primary">
                                 <p>
                                     Desde pequena, sempre fui envolvida com o mundo das artes, e hoje transformo isso em projetos visuais que comunicam com propósito. Sou detalhista, perfeccionista e tenho um olhar apurado, o que me permite entregar trabalhos com identidade e qualidade.
                                 </p>
@@ -100,14 +105,14 @@ const AboutPage = () => {
                         </div>
 
                         {/* CARD 4: FERRAMENTAS */}
-                        <div className="bg-white p-8 rounded-3xl border-2 border-black flex flex-col justify-between shadow-[8px_8px_0px_0px_#000000]">
-                            <div className="flex items-center gap-2 mb-4">
+                        <div className="bg-white p-8 rounded-3xl border-2 border-black flex flex-col justify-between shadow-[8px_8px_0px_0px_#000000] gap-4">
+                            <div className="flex items-center gap-2 mb-0 md:mb-4">
                                 <Layers className="text-primary" />
                                 <h3 className="font-black uppercase text-lg">Ferramentas</h3>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                {["Photoshop", "Illustrator", "Figma", "CapCut", "Trello"].map(tool => (
-                                    <span key={tool} className="px-3 py-1 border border-gray-300 rounded-full text-xs font-bold uppercase hover:bg-black hover:text-white transition-colors cursor-default">
+                                {["Photoshop", "Canva", "Figma", "CapCut", "Trello"].map(tool => (
+                                    <span key={tool} className="px-3 py-1 border border-gray-300 rounded-full text-xs font-bold uppercase hover:bg-primary hover:border-black hover:text-black transition-colors cursor-default">
                                         {tool}
                                     </span>
                                 ))}
@@ -117,8 +122,8 @@ const AboutPage = () => {
                         {/* CARD 5: FILOSOFIA */}
                         <div className="md:col-span-1 bg-[#fdf2f8] p-8 rounded-3xl border-2 border-primary flex flex-col justify-center relative overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
                             <Heart className="absolute -bottom-4 -right-4 w-32 h-32 text-primary/10" />
-                            <h3 className="font-black uppercase text-lg mb-2">O que esperar?</h3>
-                            <ul className="space-y-2 font-bold text-sm text-gray-700">
+                            <h3 className="font-black uppercase text-lg mb-4">O que esperar?</h3>
+                            <ul className="space-y-3 font-bold text-sm text-gray-700">
                                 <li className="flex items-center gap-2"><Star size={14} className="text-primary"/> Atendimento próximo</li>
                                 <li className="flex items-center gap-2"><Star size={14} className="text-primary"/> Prazos cumpridos</li>
                                 <li className="flex items-center gap-2"><Star size={14} className="text-primary"/> Foco em conversão</li>

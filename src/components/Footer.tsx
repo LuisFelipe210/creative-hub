@@ -90,7 +90,7 @@ const Footer = () => {
                                 <div>
                                     <span className="block font-bold text-xs uppercase text-gray-500">Email</span>
                                     <a href="mailto:Trajanoiasmim9@gmail.com" className="font-bold break-all hover:text-white transition-colors">
-                                        Trajanoiasmim9@gmail.com
+                                        trajanoiasmim9@gmail.com
                                     </a>
                                 </div>
                             </li>

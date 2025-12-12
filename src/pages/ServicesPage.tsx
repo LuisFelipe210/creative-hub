@@ -1,11 +1,10 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowRight, Sparkles, Target, Zap, Layers, Star, ChevronRight, Home } from "lucide-react";
+import { ArrowRight, Sparkles, Target, Zap, Layers, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
-    // ... (seus dados services continuam idênticos)
     {
         id: "01",
         title: "Social Media",
@@ -44,28 +43,21 @@ const ServicesPage = () => {
     const [activeService, setActiveService] = useState<string | null>(null);
 
     return (
-        // Tirei o bg-[#fffbff] fixo do main para permitir os fundos variados
-        <main className="min-h-screen selection:bg-black selection:text-primary">
+        <main className="min-h-screen selection:bg-primary selection:text-black">
             <Navigation />
 
-            {/* --- HEADER BRUTALISTA COMPACTA E SÓLIDA --- */}
-            {/* MUDANÇAS AQUI:
-                1. pt-48 pb-12  -> pt-32 pb-8 (Mais compacta)
-                2. bg-[#fffbff] -> Fundo sólido off-white
-                3. border-b-2 border-black -> Linha divisória clara embaixo
-            */}
+            {/* --- HEADER SÓLIDA (Alinhada à Esquerda no Mobile - Igual ao Sobre) --- */}
             <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
                 <div className="container mx-auto px-4 relative z-10">
-
-                    {/* Linha superior decorativa (removi a margem inferior grande) */}
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                    {/* Alinhamento: items-start no mobile pra ficar na esquerda */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
                         <div>
-                            {/* BREADCRUMB */}
+                            {/* Breadcrumb alinhado à esquerda */}
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -77,8 +69,8 @@ const ServicesPage = () => {
                                 </span>
                             </div>
 
-                            {/* TÍTULO (Um pouco menor para acompanhar o header compacto) */}
-                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter">
+                            {/* Título Gigante Alinhado à Esquerda */}
+                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Soluções <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
                                     Criativas
@@ -86,8 +78,8 @@ const ServicesPage = () => {
                             </h1>
                         </div>
 
-                        {/* Descrição */}
-                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary">
+                        {/* Descrição Lateral (Esquerda no mobile) */}
+                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Não é sobre postar bonitinho. É sobre construir uma presença digital sólida, estratégica e impossível de ignorar.
                             </p>
@@ -97,11 +89,9 @@ const ServicesPage = () => {
             </section>
 
             {/* --- CORPO DA PÁGINA COM FUNDO DE BOLINHAS --- */}
-            {/* Embrulhei o resto do conteúdo nesta div com a classe do padrão */}
             <div className="bg-dots-pattern w-full relative z-0">
 
                 {/* LISTA DE SERVIÇOS */}
-                {/* Adicionei bg-[#fffbff]/80 para o texto ficar legível sobre as bolinhas se necessário, ou deixe transparente */}
                 <section className="py-20 container mx-auto px-4">
                     <div className="flex flex-col bg-[#fffbff]/60 backdrop-blur-sm border-2 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
                         {services.map((service) => (
@@ -163,7 +153,7 @@ const ServicesPage = () => {
                     </div>
                 </section>
 
-                {/* PROCESSO CRIATIVO (FUNDO PRETO - Mantém destaque) */}
+                {/* PROCESSO CRIATIVO */}
                 <section className="py-24 bg-black text-white relative overflow-hidden border-y-2 border-black">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -194,11 +184,11 @@ const ServicesPage = () => {
                     </div>
                 </section>
 
-                {/* CTA FINAL (Sobre o fundo de bolinhas) */}
+                {/* CTA FINAL */}
                 <section className="py-24 container mx-auto px-4 text-center">
                     <div className="bg-primary border-2 border-black p-12 rounded-3xl shadow-[12px_12px_0px_0px_#000000] relative z-10">
                         <h2 className="text-4xl md:text-5xl font-black uppercase text-black mb-8">
-                            Não sabe por onde começar?
+                            Agendar conversa gratuita
                         </h2>
                         <p className="text-black/80 font-bold text-lg mb-10 max-w-xl mx-auto">
                             Relaxa. Vamos marcar uma conversa e eu te ajudo a entender o que sua marca precisa agora.

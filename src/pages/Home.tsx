@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
-        <main className="min-h-screen flex flex-col selection:bg-black selection:text-primary">
+        <main className="min-h-screen flex flex-col selection:bg-primary selection:text-black">
             <Navigation />
 
             {/* --- HERO RESPONSIVO --- */}
@@ -39,10 +39,10 @@ const Home = () => {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2">
-                                <Link to="/portfolio" className="bg-black text-white border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl hover:bg-primary hover:text-black hover:border-black hover:shadow-[4px_4px_0px_0px_#000000] transition-all flex items-center justify-center gap-2 group">
+                                <Link to="/portfolio" className="px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:bg-black hover:text-white hover:border-2 hover:border-black hover:shadow-[2px_2px_0px_0px_#000000] transition-all flex items-center justify-center gap-2 group">
                                     Ver Trabalhos <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
-                                <Link to="/contato" className="bg-white text-black border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl hover:bg-gray-50 hover:shadow-[4px_4px_0px_0px_#000000] transition-all flex items-center justify-center">
+                                <Link to="/contato" className="bg-white text-black border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg shadow-[4px_4px_0px_0px_#000000] uppercase rounded-xl hover:bg-gray-50 hover:shadow-[2px_2px_0px_0px_#000000] transition-all flex items-center justify-center">
                                     Entrar em Contato
                                 </Link>
                             </div>
@@ -50,9 +50,6 @@ const Home = () => {
 
                         {/* COLUNA DIREITA: O "SELO" VISUAL (AUMENTADO) */}
                         <div className="lg:col-span-5 flex justify-center relative lg:justify-end mt-10 lg:mt-0">
-                            {/* O Card da Logo AGORA MAIOR */}
-                            {/* Mudei padding para p-8 md:p-12 */}
-                            {/* Mudei max-w para w-full max-w-sm lg:max-w-md */}
                             <div className="relative z-10 bg-white border-4 border-black p-8 md:p-12 rounded-3xl shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[14px_14px_0px_0px_#EEACC5] rotate-3 hover:rotate-0 transition-all duration-500 group w-full max-w-sm lg:max-w-md">
                                 <img
                                     src="/logo2.svg"
@@ -64,7 +61,7 @@ const Home = () => {
 
                             {/* Elementos decorativos ajustados para o novo tamanho */}
                             <Star className="absolute -top-6 -right-6 md:top-0 md:right-0 lg:-right-8 text-black w-10 h-10 md:w-14 md:h-14 animate-spin-slow opacity-20 hidden sm:block" />
-                            <ArrowUpRight className="absolute -bottom-6 -left-6 md:bottom-0 md:left-0 lg:-left-8 text-black w-14 h-14 md:w-20 md:h-20 opacity-20 hidden sm:block" />
+                            <ArrowRight className="absolute -bottom-6 -left-6 md:bottom-0 md:left-0 lg:-left-8 text-black w-14 h-14 md:w-20 md:h-20 opacity-20 hidden sm:block" />
                         </div>
 
                     </div>
@@ -106,7 +103,7 @@ const Home = () => {
                             <Link
                                 key={index}
                                 to={item.link}
-                                className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-2xl shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex flex-col items-center text-center"
+                                className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-2xl shadow-[4px_4px_0px_0px_#EEACC5] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex flex-col items-center text-center"
                             >
                                 <div className="bg-primary p-4 rounded-full border-2 border-black mb-6 group-hover:scale-110 transition-transform">
                                     <item.icon size={28} className="text-black md:w-8 md:h-8" />
@@ -121,7 +118,7 @@ const Home = () => {
                     </div>
 
                     <div className="text-center mt-12">
-                        <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase bg-black text-white px-6 py-3 rounded-xl hover:bg-primary hover:text-black transition-colors text-sm md:text-base">
+                        <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase hover:bg-black hover:text-white px-6 py-3 rounded-xl bg-primary text-black transition-colors text-sm md:text-base">
                             Ver todos os serviços <ArrowRight size={16} />
                         </Link>
                     </div>
@@ -141,7 +138,7 @@ const Home = () => {
                                     Projetos que saíram do papel e viraram resultado.
                                 </p>
                             </div>
-                            <Link to="/portfolio" className="border border-white/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition-all hidden md:block">
+                            <Link to="/portfolio" className="border border-white/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-black transition-all hidden md:block">
                                 Ver tudo
                             </Link>
                         </div>
@@ -215,7 +212,7 @@ const Home = () => {
                         <p className="text-gray-600 font-bold text-base md:text-lg mb-8">
                             Vamos transformar suas ideias em uma marca forte e lucrativa.
                         </p>
-                        <Link to="/contato" className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 md:px-10 font-black text-base md:text-lg uppercase rounded-xl hover:scale-105 transition-all shadow-xl">
+                        <Link to="/contato" className="inline-flex items-center gap-3 hover:bg-black hover:text-white px-8 py-4 md:px-10 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black hover:scale-105 transition-all shadow-xl">
                             Solicitar Orçamento <ArrowRight size={20} />
                         </Link>
                     </div>

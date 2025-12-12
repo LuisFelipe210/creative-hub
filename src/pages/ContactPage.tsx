@@ -6,11 +6,10 @@ import { FaWhatsapp, FaEnvelope, FaArrowRight, FaPaperPlane } from "react-icons/
 
 const ContactPage = () => {
     return (
-        // MAIN: flex flex-col para permitir que o filho cresça
-        <main className="min-h-screen flex flex-col selection:bg-black selection:text-primary">
+        <main className="min-h-screen flex flex-col selection:bg-primary selection:text-black bg-dots-pattern">
             <Navigation />
 
-            {/* --- HEADER SÓLIDA (Igual AboutPage) --- */}
+            {/* --- HEADER SÓLIDA (CORRIGIDA MOBILE) --- */}
             <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
@@ -18,7 +17,8 @@ const ContactPage = () => {
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                    {/* FIX: items-start no mobile (esquerda), items-end no desktop (baixo/direita) */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
                         <div>
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
@@ -31,7 +31,8 @@ const ContactPage = () => {
                                 </span>
                             </div>
 
-                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter">
+                            {/* Adicionei text-left pra garantir */}
+                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Vamos <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
                                     Conversar
@@ -39,7 +40,8 @@ const ContactPage = () => {
                             </h1>
                         </div>
 
-                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary">
+                        {/* Adicionei text-left pra garantir */}
+                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Sua marca tá pedindo socorro ou tá pronta pra crescer?
                             </p>
@@ -48,8 +50,7 @@ const ContactPage = () => {
                 </div>
             </section>
 
-            {/* --- CORPO COM BOLINHAS QUE ESTICA (Igual AboutPage, mas com flex-1) --- */}
-            {/* O flex-1 garante que essa div com as bolinhas ocupe todo o espaço sobrando até o fim da tela */}
+            {/* --- CORPO --- */}
             <div className="bg-dots-pattern w-full relative z-0 flex-1 flex flex-col justify-between">
 
                 <div className="container mx-auto px-4 pt-16 pb-16">
