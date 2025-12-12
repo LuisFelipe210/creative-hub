@@ -2,168 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
-
 @layer base {
-  :root {
-    --background: 240 10% 6%;
-    --foreground: 0 0% 98%;
+    :root {
+        /* -- PALETA SOFT BRUTALISM -- */
+        --background: 0 0% 100%; /* Branco */
+        --foreground: 0 0% 0%;   /* Preto */
 
-    --card: 240 10% 8%;
-    --card-foreground: 0 0% 98%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 0%;
 
-    --popover: 240 10% 8%;
-    --popover-foreground: 0 0% 98%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 0%;
 
-    --primary: 16 90% 60%;
-    --primary-foreground: 240 10% 6%;
+        /* Rosa (#EEACC5) */
+        --primary: 337 66% 80%;
+        --primary-foreground: 0 0% 0%;
 
-    --secondary: 240 10% 12%;
-    --secondary-foreground: 0 0% 98%;
+        /* Cinza (#A6A6A6) */
+        --secondary: 0 0% 90%;
+        --secondary-foreground: 0 0% 0%;
 
-    --muted: 240 10% 15%;
-    --muted-foreground: 240 5% 55%;
+        --muted: 0 0% 96%;
+        --muted-foreground: 0 0% 40%;
 
-    --accent: 280 80% 65%;
-    --accent-foreground: 0 0% 98%;
+        --accent: 0 0% 65%; /* O Cinza Escuro pra detalhes */
+        --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
 
-    --border: 240 10% 18%;
-    --input: 240 10% 18%;
-    --ring: 16 90% 60%;
+        --border: 0 0% 65%;
+        --input: 0 0% 65%;
+        --ring: 337 66% 80%;
 
-    --radius: 0.75rem;
+        --radius: 0.5rem;
+    }
 
-    /* Custom design tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(16 90% 60%) 0%, hsl(280 80% 65%) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(16 90% 60%) 0%, hsl(280 80% 65%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(240 10% 8%) 0%, hsl(240 10% 6%) 100%);
-    --shadow-glow: 0 0 60px hsl(16 90% 60% / 0.15);
-    --shadow-card: 0 25px 50px -12px hsl(0 0% 0% / 0.4);
-  }
+    * {
+        @apply border-border;
+    }
 
-  .dark {
-    --background: 240 10% 6%;
-    --foreground: 0 0% 98%;
-  }
+    body {
+        background-color: #fffbff;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        color: #000;
+    }
 }
 
+/* --- SCROLLBAR E SELEÇÃO ROSA --- */
 @layer base {
-  * {
-    @apply border-border;
-  }
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #ffffff;
+        border-left: 1px solid #e5e5e5;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: hsl(var(--primary)); /* Rosa */
+        border: 3px solid #ffffff; /* Borda branca pra ficar redondinho */
+        border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #d690a8;
+    }
 
-  body {
-    @apply bg-background text-foreground font-body antialiased;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
-  }
+    /* Seleção de Texto */
+    ::selection {
+        background-color: hsl(var(--primary));
+        color: black;
+    }
+    ::-moz-selection {
+        background-color: hsl(var(--primary));
+        color: black;
+    }
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-text);
-  }
-
-  .gradient-border {
-    position: relative;
-  }
-
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: var(--gradient-primary);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-
-  .glass-card {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50;
-  }
-
-  .hover-lift {
-    @apply transition-all duration-500 ease-out;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-glow);
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-@layer utilities {
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 4s ease-in-out infinite;
-  }
-
-  .animate-fade-up {
-    animation: fade-up 0.8s ease-out forwards;
-  }
-
-  .animate-fade-up-delay {
-    animation: fade-up 0.8s ease-out 0.2s forwards;
-    opacity: 0;
-  }
-
-  .animate-scale-in {
-    animation: scale-in 0.6s ease-out forwards;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    /* Mantenha suas classes de botões aqui (btn-soft, card-soft, text-mega, etc) */
+    .btn-soft {
+        @apply bg-white border-2 border-[hsl(0,0%,65%)] text-black px-6 py-2 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_hsl(337,66%,80%)] transition-all hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_hsl(0,0%,65%)] active:translate-y-0 active:shadow-none rounded-lg;
+    }
+    .btn-primary-soft {
+        @apply bg-primary text-black border-2 border-black font-bold px-6 py-2 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] transition-all;
+    }
+    .card-soft {
+        @apply bg-white border-2 border-[hsl(0,0%,65%)] p-6 rounded-xl shadow-soft hover:shadow-soft-hover transition-all duration-300;
+    }
+    .text-mega {
+        @apply text-7xl md:text-9xl lg:text-[10rem] font-black leading-[0.8] uppercase tracking-tighter;
+    }
 }
