@@ -118,13 +118,13 @@ const BriefingForm = () => {
                 {/* BOTÃO SUBMIT */}
                 <button
                     type="submit"
-                    className="w-full bg-black text-white py-3.5 rounded-xl font-black text-lg uppercase tracking-widest
+                    className="w-full bg-primary text-black py-3.5 rounded-xl font-black text-lg uppercase tracking-widest
                                transition-all flex items-center justify-center gap-3 mt-4 border-2 border-black
-                               shadow-[6px_6px_0px_0px_#EEACC5] /* Sombra Rosa */
+                               shadow-[6px_6px_0px_0px_#000000] /* Sombra Rosa */
                                hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transform-gpu"
                 >
-                    <ArrowRight size={20} />
                     Enviar Proposta
+                    <ArrowRight size={20} />
                 </button>
             </form>
         </div>

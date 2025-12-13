@@ -264,8 +264,8 @@ const Home = () => {
                         ))}
                     </div>
                     <div className="text-center mt-16">
-                        <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase border-2 border-black bg-white hover:bg-black hover:text-white px-8 py-3 rounded-xl text-black transition-colors text-base shadow-[4px_4px_0px_0px_#EEACC5] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
-                            Ver Tabela de Preços <ArrowRight size={18} />
+                        <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase border-2 border-black bg-primary   px-8 py-3 rounded-xl text-black transition-colors text-base shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                            Ver Mais Detalhes <ArrowRight size={18} />
                         </Link>
                     </div>
                 </section>
