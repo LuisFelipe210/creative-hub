@@ -9,7 +9,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LoadingScreen from "@/components/LoadingScreen";
 
-// ... Imports das páginas ...
+// --- IMPORTS DAS PÁGINAS ---
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import PortfolioPage from "./pages/PortfolioPage";
@@ -19,37 +19,71 @@ import ServiceDetail from "./pages/ServiceDetail";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Criação do Client do React Query
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false, // Evita refetch chato quando troca de aba
+            retry: false,
+        },
+    },
+});
 
 const App = () => {
+    // Só mostra o LoadingScreen se estiver na raiz ("/")
     const [isLoading, setIsLoading] = useState(window.location.pathname === "/");
 
-    // Lógica da Scrollbar Mágica...
-    useEffect(() => { /* ... seu código ... */ }, []);
+    // Lógica da Scrollbar Mágica e Controle de Overflow
+    useEffect(() => {
+        if (isLoading) {
+            // Trava o scroll enquanto carrega
+            document.body.style.overflow = "hidden";
+            // Opcional: Rola para o topo para garantir que o loader comece do zero
+            window.scrollTo(0, 0);
+        } else {
+            // Libera a desgraça do scroll quando termina
+            document.body.style.overflow = "unset";
+        }
+
+        // Limpeza (caso o componente desmonte)
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [isLoading]);
 
     return (
         <QueryClientProvider client={queryClient}>
             <TooltipProvider>
+
+                {/* TELA DE CARREGAMENTO */}
                 {isLoading && (
                     <LoadingScreen onComplete={() => setIsLoading(false)} />
                 )}
 
-                <div className="min-h-screen w-full relative z-0">
+                <div className="min-h-screen w-full relative z-0 bg-background text-foreground">
+                    {/* TOASTERS (Notificações) */}
                     <Toaster />
                     <Sonner />
 
+                    {/* BOTÃO FLUTUANTE DO ZAP */}
                     <WhatsAppButton />
 
                     <BrowserRouter>
+                        {/* Componente que joga a tela pra cima nas trocas de rota */}
                         <ScrollToTop />
+
                         <Routes>
-                            <Route path="/" element={<Home key={isLoading ? 'loading' : 'loaded'} />} />
+                            <Route
+                                path="/"
+                                element={<Home key={isLoading ? 'loading' : 'loaded'} />}
+                            />
                             <Route path="/sobre" element={<AboutPage />} />
                             <Route path="/portfolio" element={<PortfolioPage />} />
                             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
                             <Route path="/servicos" element={<ServicesPage />} />
                             <Route path="/servicos/:slug" element={<ServiceDetail />} />
                             <Route path="/contato" element={<ContactPage />} />
+                            {/* Rota 404 para qualquer link quebrado */}
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </BrowserRouter>
