@@ -222,7 +222,7 @@ const ProjectDetail = () => {
                         <div className="lg:sticky lg:top-24 space-y-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
 
                             {/* CARD DE DESAFIO - DESIGN NOVO (ROSA E PRETO) */}
-                            <div className="bg-primary selection:bg-neutral-900 selection:text-primary p-8 rounded-2xl border-4 border-black
+                            <div className="bg-primary selection:bg-neutral-950 selection:text-primary p-8 rounded-2xl border-4 border-black
                                            shadow-[12px_12px_0px_0px_#000000] relative overflow-hidden">
 
                                 <span className="absolute top-0 left-0 bg-black text-primary px-3 py-1 font-black text-[10px] uppercase tracking-widest rounded-br-lg">
