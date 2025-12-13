@@ -28,6 +28,57 @@ const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttri
     );
 };
 
+// --- NOVO COMPONENTE DE ITEM DE CASE ---
+const CaseGridItem = ({ title, service, link, image, isFeatured }: { title: string, service: string, link: string, image: string, isFeatured?: boolean }) => {
+
+    // Configurações Brutalistas
+    const baseClasses = "group block border-4 border-black transition-all duration-300 transform-gpu";
+    const shadowClass = isFeatured ? "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[6px_6px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1" : "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[1px] hover:translate-y-[1px]";
+    const paddingClass = isFeatured ? "p-6 md:p-8 bg-neutral-800" : "p-4 bg-neutral-800";
+
+    return (
+        <Link to={link} className={`${baseClasses} ${shadowClass}`}>
+            <div className={`${paddingClass} relative overflow-hidden`}>
+                <div className={`${isFeatured ? "aspect-[5/3] md:aspect-[16/9]" : "aspect-[4/3]"} rounded-lg overflow-hidden mb-4 relative`}>
+                    <ImageWithSkeleton src={image} alt={title} className="group-hover:scale-[1.03] transition-transform duration-700" />
+                    <div className="absolute top-3 right-3 bg-primary text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20 shadow-md">
+                        <ArrowUpRight size={18} />
+                    </div>
+                </div>
+                <div className="px-1 pt-2">
+                    <h3 className={`font-black uppercase mb-1 leading-tight ${isFeatured ? "text-3xl" : "text-xl"}`}>{title}</h3>
+                    <p className={`text-primary font-bold uppercase ${isFeatured ? "text-sm" : "text-xs"}`}>{service}</p>
+                </div>
+            </div>
+        </Link>
+    );
+};
+
+// --- DADOS DOS CASES (AUMENTEI PRA TER 3) ---
+const caseData = [
+    {
+        title: "Gabrielle Weiss",
+        service: "Branding e Design Web",
+        link: "/portfolio/gabrielle-weiss",
+        image: "/fundo.jpg", // Substituir pelo path real
+        isFeatured: true, // Este será o maior
+    },
+    {
+        title: "Wyate Boutique",
+        service: "Estratégia Social Media",
+        link: "/portfolio/wyate-boutique",
+        image: "/dog.jpg", // Substituir pelo path real
+        isFeatured: false,
+    },
+    {
+        title: "Up Engenharia",
+        service: "Identidade Visual",
+        link: "/portfolio/up-engenharia",
+        image: "/dog.jpg", // Substituir pelo path real
+        isFeatured: false,
+    },
+];
+
 // --- NOVO CARD BRUTALISTA (ADAPTADO) ---
 const TestimonialCard = ({ name, role, text }: { name: string, role: string, text: string }) => {
     return (
@@ -161,28 +212,40 @@ const Home = () => {
                 {/* --- SEÇÃO SERVIÇOS --- */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
                     <div className="text-center mb-10 md:mb-12">
-                        <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">O que eu faço</span>
-                        <h2 className="text-3xl md:text-5xl font-black uppercase text-black">Soluções Criativas</h2>
+                        <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Serviços</span>
+                        <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">Minhas <span className="bg-primary px-2">Soluções</span></h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    {/* GRID DE SERVIÇOS: 3 COLUNAS BRUTALISTAS */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
-                            { icon: Share2, title: "Social Media", desc: "Gestão completa, estratégia e conteúdo que engaja.", link: "/servicos/social-media" },
-                            { icon: PenTool, title: "Identidade Visual", desc: "Logos e branding para marcas inesquecíveis.", link: "/servicos/identidade-visual" },
-                            { icon: Layout, title: "Web Design", desc: "Sites rápidos e otimizados para converter.", link: "/servicos/web-design" }
+                            { icon: Share2, title: "Social Media", desc: "Gestão completa, planejamento estratégico e conteúdo visual que gera engajamento e vendas.", link: "/servicos/social-media" },
+                            { icon: PenTool, title: "Identidade Visual", desc: "Criação de marcas inesquecíveis: logo, paleta, tipografia e manuais de uso para autoridade.", link: "/servicos/identidade-visual" },
+                            { icon: Layout, title: "Web Design", desc: "Sites institucionais e landing pages de alta conversão, rápidos e otimizados para o Google.", link: "/servicos/web-design" }
                         ].map((item, index) => (
-                            <Link key={index} to={item.link} className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-2xl shadow-[2px_2px_0px_0px_#EEACC5] md:shadow-[4px_4px_0px_0px_#EEACC5] hover:bg-primary/10 hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex flex-col items-center text-center transform-gpu">
-                                <div className="bg-primary p-4 rounded-full border-2 border-black mb-6 group-hover:scale-110 transition-transform">
-                                    <item.icon size={28} className="text-black md:w-8 md:h-8" />
+                            <Link
+                                key={index}
+                                to={item.link}
+                                className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-xl
+                                           shadow-[6px_6px_0px_0px_#000000] hover:shadow-[10px_10px_0px_0px_#EEACC5]
+                                           hover:-translate-x-[2px] hover:-translate-y-[2px]
+                                           transition-all duration-300 transform-gpu flex flex-col justify-start text-left"
+                            >
+                                <div className="p-2 border-2 border-black mb-4 w-fit bg-primary text-black transition-colors">
+                                    <item.icon size={36} className="text-black" />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-black uppercase mb-3">{item.title}</h3>
-                                <p className="text-gray-600 font-medium text-sm mb-6">{item.desc}</p>
-                                <span className="mt-auto text-xs font-bold uppercase border-b-2 border-black pb-1 group-hover:text-primary group-hover:border-primary transition-colors">Saiba mais</span>
+                                <h3 className="text-2xl font-black uppercase mb-3 text-black group-hover:text-primary transition-colors">{item.title}</h3>
+                                <p className="text-gray-700 font-medium text-base mb-6">{item.desc}</p>
+
+                                <span className="mt-auto text-sm font-bold uppercase text-black border-b-2 border-black pb-1 group-hover:text-primary group-hover:border-primary transition-colors flex items-center gap-2">
+                                    Explorar Serviço <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                </span>
                             </Link>
                         ))}
                     </div>
-                    <div className="text-center mt-12">
-                        <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase hover:bg-black hover:text-white px-6 py-3 rounded-xl bg-primary text-black transition-colors text-sm md:text-base">
-                            Ver todos os serviços <ArrowRight size={16} />
+                    <div className="text-center mt-16">
+                        <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase border-2 border-black bg-white hover:bg-black hover:text-white px-8 py-3 rounded-xl text-black transition-colors text-base shadow-[4px_4px_0px_0px_#EEACC5] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
+                            Ver Tabela de Preços <ArrowRight size={18} />
                         </Link>
                     </div>
                 </section>
@@ -191,37 +254,30 @@ const Home = () => {
                 <section className="py-16 md:py-20 bg-black text-white rounded-t-[2.5rem] md:rounded-t-[3rem] relative overflow-hidden border-t-4 border-primary animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
                     <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
                     <div className="container mx-auto px-4 relative z-10">
-                        <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-12 gap-6">
+                        <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
                             <div className="text-center md:text-left w-full md:w-auto">
-                                <h2 className="text-3xl md:text-5xl font-black uppercase mb-2">Cases <span className="text-primary">Selecionados</span></h2>
-                                <p className="text-gray-400 max-w-lg text-sm md:text-base mx-auto md:mx-0">Projetos que saíram do papel e viraram resultado.</p>
+                                <h2 className="text-4xl md:text-6xl font-black uppercase mb-2 leading-none">Cases de <span className="text-primary">Impacto</span></h2>
+                                <p className="text-gray-400 max-w-lg text-sm md:text-base mx-auto md:mx-0">Projetos estratégicos que transformaram negócios.</p>
                             </div>
-                            <Link to="/portfolio" className="border border-white/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-black transition-all hidden md:block">Ver tudo</Link>
+                            <Link to="/portfolio" className="border-2 border-primary text-primary px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-black transition-all">Ver Portfólio Completo</Link>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <Link to="/portfolio/gabrielle-weiss" className="group block bg-white/5 border border-white/10 p-4 rounded-2xl hover:border-primary transition-colors transform-gpu">
-                                <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4 relative">
-                                    <ImageWithSkeleton src="/fundo.jpg" alt="Gabrielle Weiss" className="group-hover:scale-105 transition-transform duration-500" />
-                                    <div className="absolute top-3 right-3 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"><ArrowUpRight size={16} /></div>
-                                </div>
-                                <div className="px-2">
-                                    <h3 className="text-xl font-black uppercase mb-1">Gabrielle Weiss</h3>
-                                    <p className="text-primary text-xs font-bold uppercase">Branding</p>
-                                </div>
-                            </Link>
-                            <Link to="/portfolio/wyate-boutique" className="group block bg-white/5 border border-white/10 p-4 rounded-2xl hover:border-primary transition-colors transform-gpu">
-                                <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4 relative">
-                                    <ImageWithSkeleton src="/dog.jpg" alt="Wyate Boutique" className="group-hover:scale-105 transition-transform duration-500" />
-                                    <div className="absolute top-3 right-3 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"><ArrowUpRight size={16} /></div>
-                                </div>
-                                <div className="px-2">
-                                    <h3 className="text-xl font-black uppercase mb-1">Wyate Boutique</h3>
-                                    <p className="text-primary text-xs font-bold uppercase">Social Media</p>
-                                </div>
-                            </Link>
+
+                        {/* NOVO GRID ASSIMÉTRICO */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            {/* Item de Destaque (Col-Span 2) */}
+                            <div className="lg:col-span-2">
+                                <CaseGridItem {...caseData[0]} />
+                            </div>
+
+                            {/* Itens Menores (Col-Span 1) */}
+                            <div className="lg:col-span-1 space-y-8">
+                                <CaseGridItem {...caseData[1]} />
+                                <CaseGridItem {...caseData[2]} />
+                            </div>
                         </div>
-                        <div className="text-center mt-10 md:hidden">
-                            <Link to="/portfolio" className="border border-white/30 text-white px-6 py-3 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition-all inline-block">Ver todos os projetos</Link>
+
+                        <div className="text-center mt-12 lg:hidden">
+                            <Link to="/portfolio" className="border-2 border-primary text-primary px-6 py-3 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-black transition-all inline-block">Ver Portfólio Completo</Link>
                         </div>
                     </div>
                 </section>
@@ -230,7 +286,9 @@ const Home = () => {
                 <section className="py-20 border-b-2 border-black bg-[#fffbff] overflow-hidden">
                     <div className="container mx-auto px-4 mb-16 text-center">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Feedback</span>
-                        <h2 className="text-3xl md:text-5xl font-black uppercase text-black">Quem confia</h2>
+                        <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">
+                            <span className="bg-primary px-2">Quem</span> Confia
+                        </h2>
                     </div>
 
                     {/* GRID DE CARDS */}
@@ -245,26 +303,61 @@ const Home = () => {
 
                 {/* --- SOBRE (BENTO SMALL) --- */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
-                    <div className="bg-[#fffbff] border-2 border-black rounded-3xl p-6 md:p-12 shadow-[4px_4px_0px_0px_#000000] md:shadow-[8px_8px_0px_0px_#000000] flex flex-col md:flex-row items-center gap-8 md:gap-10">
+                    {/* Alteração na sombra para destaque Rosa e bordas arredondadas menos suaves */}
+                    <div className="bg-[#fffbff] border-4 border-black rounded-xl md:rounded-2xl p-6 md:p-12
+                                    shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5]
+                                    flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu">
+
+                        {/* IMAGEM: com borda dupla agressiva */}
                         <div className="w-full md:w-1/3">
-                            <div className="aspect-square rounded-2xl border-2 border-black overflow-hidden relative shadow-md">
-                                <ImageWithSkeleton src="/iasmim.png" alt="Iasmim" />
+                            <div className="aspect-square rounded-lg border-4 border-primary overflow-hidden relative shadow-lg">
+                                <ImageWithSkeleton src="/iasmim.png" alt="Iasmim" className="object-cover" />
                             </div>
                         </div>
-                        <div className="w-full md:w-2/3 space-y-4 md:space-y-6 text-center md:text-left">
-                            <h2 className="text-3xl md:text-5xl font-black uppercase text-black leading-tight">Design com <br className="hidden md:block"/> <span className="bg-primary px-2">Propósito</span>.</h2>
-                            <p className="text-gray-600 font-medium text-base md:text-lg leading-relaxed">Prazer, <strong>Iasmim</strong>. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.</p>
-                            <Link to="/sobre" className="inline-flex items-center gap-2 font-black uppercase border-b-2 border-black hover:text-primary hover:border-primary transition-colors pb-1 text-sm md:text-base">Conhecer minha história <ArrowRight size={16} /></Link>
+
+                        {/* TEXTO: Alinhamento fixo na esquerda e título padronizado */}
+                        <div className="w-full md:w-2/3 space-y-4 md:space-y-6 text-left">
+
+                            <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-tight">
+                                Design com <br className="hidden md:block"/>
+                                <span className="bg-primary px-2">Propósito</span>.
+                            </h2>
+
+                            <p className="text-gray-700 font-medium text-base md:text-lg leading-relaxed border-l-4 border-black pl-4">
+                                Prazer, **Iasmim**. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
+                            </p>
+
+                            <Link to="/sobre" className="inline-flex items-center gap-2 font-black uppercase border-b-2 border-black hover:text-primary hover:border-primary transition-colors pb-1 text-sm md:text-base">
+                                Conhecer minha história <ArrowRight size={16} />
+                            </Link>
                         </div>
                     </div>
                 </section>
-
-                {/* --- CTA FINAL --- */}
+                {/* --- CTA FINAL (BRUTALISTA) --- */}
                 <section className="py-16 md:py-20 container mx-auto px-4 text-center">
                     <div className="max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-6xl font-black uppercase text-black mb-6">Pronto pra começar?</h2>
-                        <p className="text-gray-600 font-bold text-base md:text-lg mb-8">Vamos transformar suas ideias em uma marca forte e lucrativa.</p>
-                        <Link to="/contato" className="inline-flex items-center gap-3 hover:bg-black hover:text-white px-8 py-4 md:px-10 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black hover:scale-105 transition-all shadow-xl">Solicitar Orçamento <ArrowRight size={20} /></Link>
+
+                        {/* Título Padronizado */}
+                        <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
+                            Pronto pra <span className="bg-primary px-2">Começar</span>?
+                        </h2>
+
+                        <p className="text-gray-700 font-bold text-base md:text-lg mb-10">
+                            Vamos transformar suas ideias em uma marca forte e lucrativa.
+                        </p>
+
+                        {/* BOTÃO FINAL BRUTALISTA (Sombra Dura e Efeito de Deslizamento) */}
+                        <Link
+                            to="/contato"
+                            className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
+                                       rounded-xl bg-primary text-black border-2 border-black
+                                       px-8 py-4 md:px-10
+                                       shadow-[6px_6px_0px_0px_#000000]
+                                       hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
+                                       transition-all active:scale-[0.98] transform-gpu"
+                        >
+                            Solicitar Orçamento <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
                     </div>
                 </section>
 

@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Check, ChevronRight, Home, HelpCircle } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Home, HelpCircle, ArrowRight } from "lucide-react";
 import SEO from "@/components/SEO";
 
+// --- DADOS DOS SERVIÇOS ---
 const servicesData: Record<string, { title: string; subtitle: string; description: string; includes: string[] }> = {
     "social-media": {
         title: "Social Media",
@@ -51,23 +52,28 @@ const ServiceDetail = () => {
             />
             <Navigation />
 
+            {/* --- HEADER SÓLIDA (PADRÃO BRUTALISTA ESQUERDA) --- */}
             <section
                 key={`header-${slug}`}
                 className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10"
             >
                 <div className="container mx-auto px-4 relative z-10">
+                    {/* Linha de separação decorativa */}
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                    {/* FLEX CONTAINER: items-start garante tudo à esquerda no mobile */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+
                         {/* LADO ESQUERDO (Slide da Esquerda) */}
-                        <div className="animate-in slide-in-from-left duration-700 fade-in">
+                        <div className="animate-in slide-in-from-left duration-700 fade-in w-full md:w-auto">
+
+                            {/* BREADCRUMB */}
                             <div className="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest flex-wrap">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
-                                    <Home size={12} className="mb-0.5" />
-                                    Home
+                                    <Home size={12} className="mb-0.5" /> Home
                                 </Link>
                                 <ChevronRight size={12} className="text-gray-300" />
                                 <Link to="/servicos" className="text-gray-400 hover:text-primary transition-colors">
@@ -79,6 +85,7 @@ const ServiceDetail = () => {
                                 </span>
                             </div>
 
+                            {/* SUBTÍTULO E TÍTULO */}
                             <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">
                                 {service.subtitle}
                             </span>
@@ -87,9 +94,10 @@ const ServiceDetail = () => {
                             </h1>
                         </div>
 
-                        {/* LADO DIREITO (Slide da Direita) */}
-                        <div className="md:max-w-sm mb-2 animate-in slide-in-from-right duration-700 fade-in">
-                            <Link to="/servicos" className="inline-flex items-center gap-2 text-xs text-accent font-bold uppercase hover:text-primary hover:border-primary transition-colors pb-1">
+                        {/* LADO DIREITO (Voltar e Destaque) */}
+                        <div className="md:max-w-sm mb-2 animate-in slide-in-from-right duration-700 fade-in w-full md:w-auto mt-4 md:mt-0">
+                            {/* Coluna 'Voltar' alinhada à esquerda no mobile */}
+                            <Link to="/servicos" className="inline-flex items-center gap-2 text-xs text-black font-bold uppercase hover:text-primary hover:border-primary transition-colors pb-1">
                                 <ArrowLeft size={12} /> Voltar para Serviços
                             </Link>
                         </div>
@@ -107,7 +115,7 @@ const ServiceDetail = () => {
 
                     <div className="grid lg:grid-cols-12 gap-12 items-start">
 
-                        {/* Coluna Esquerda */}
+                        {/* Coluna Esquerda: Detalhes do Serviço */}
                         <div className="lg:col-span-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
                             <div className="bg-[#fffbff] border-2 border-black p-8 md:p-12 rounded-3xl shadow-[8px_8px_0px_0px_#000000] mb-12">
                                 <h2 className="text-3xl font-black uppercase mb-6">O que é?</h2>
@@ -116,6 +124,7 @@ const ServiceDetail = () => {
                                 </p>
                             </div>
 
+                            {/* BOX INCLUSO - Brutalista */}
                             <div className="bg-black text-white p-8 md:p-12 rounded-3xl border-2 border-primary shadow-[8px_8px_0px_0px_#EEACC5] relative overflow-hidden mb-12">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
 
@@ -141,14 +150,14 @@ const ServiceDetail = () => {
                                     <HelpCircle className="text-black" /> Dúvidas Comuns
                                 </h3>
 
-                                <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl">
+                                <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[4px_4px_0px_0px_#EEACC5]">
                                     <h4 className="font-black uppercase mb-2">Quanto tempo demora?</h4>
                                     <p className="text-gray-600 text-sm font-medium">
                                         Depende da complexidade. Tudo será alinhado no contrato.
                                     </p>
                                 </div>
 
-                                <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl">
+                                <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[4px_4px_0px_0px_#EEACC5]">
                                     <h4 className="font-black uppercase mb-2">Quais as formas de pagamento?</h4>
                                     <p className="text-gray-600 text-sm font-medium">
                                         Aceito PIX (com desconto de 5%), Cartão de Crédito em até 12x ou Boleto.
@@ -157,7 +166,7 @@ const ServiceDetail = () => {
                             </div>
                         </div>
 
-                        {/* Coluna Direita (Sticky) */}
+                        {/* Coluna Direita (Sticky CTA) */}
                         <div className="lg:col-span-4 sticky top-28 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both fade-in">
                             <div className="bg-primary border-2 border-black p-8 rounded-3xl shadow-[8px_8px_0px_0px_#000000] text-center">
                                 <h3 className="text-2xl font-black uppercase text-black mb-4">
