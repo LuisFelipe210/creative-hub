@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowRight, Sparkles, Target, Zap, Layers, ChevronRight, Home, Hammer } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 
 const services = [
     {
@@ -44,6 +45,7 @@ const ServicesPage = () => {
 
     return (
         <main className="min-h-screen selection:bg-primary selection:text-black">
+            <SEO title="Serviços" description="Estratégia, Branding e Web Design focados em resultado. Meu processo é execução impecável, sem achismo." />
             <Navigation />
 
             {/* --- HEADER SÓLIDA --- */}
