@@ -64,7 +64,6 @@ const ServiceDetail = () => {
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    {/* FLEX CONTAINER: items-start garante tudo à esquerda no mobile */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
 
                         {/* LADO ESQUERDO (Slide da Esquerda) */}

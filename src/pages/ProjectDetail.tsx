@@ -298,14 +298,14 @@ const ProjectDetail = () => {
 
             </div>
 
-            {/* NAV FOOTER */}
-            <Link to={`/portfolio/${nextProject.slug}`} className="block group border-t-2 border-black bg-[#fffbff] relative overflow-hidden">
-                <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+            {/* NAV FOOTER  */}
+            <Link to={`/portfolio/${nextProject.slug}`} className="block group border-t-2 border-black bg-primary relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/50 md:bg-black translate-y-full md:translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
                 <div className="container mx-auto px-4 py-20 md:py-32 relative z-10 flex flex-col items-center justify-center text-center">
-                    <span className="text-xs font-bold uppercase tracking-[0.3em] mb-4 text-gray-500 group-hover:text-black transition-colors">
+                    <span className="text-sm font-black uppercase tracking-[0.3em] mb-4 text-black md:text-gray-500 group-hover:text-primary transition-colors">
                         Próximo Case
                     </span>
-                    <h2 className="text-4xl md:text-8xl font-black uppercase text-black leading-none group-hover:scale-105 transition-transform duration-500 flex items-center justify-center gap-4 md:gap-8">
+                    <h2 className="text-4xl md:text-8xl font-black uppercase text-black leading-none group-hover:scale-105 transition-transform duration-500 flex items-center justify-center gap-4 md:gap-8 group-hover:text-white">
                         Ver Projeto <ArrowRight className="w-8 h-8 md:w-20 md:h-20 group-hover:translate-x-4 transition-transform" />
                     </h2>
                 </div>

@@ -98,20 +98,25 @@ const ServicesPage = () => {
                                 onMouseLeave={() => setActiveService(null)}
                                 className="group border-b-2 border-black last:border-b-0 relative transition-all duration-500"
                             >
+                                {/* 1. EFEITO DE SLIDE DE FUNDO */}
                                 <div className={`absolute inset-0 bg-primary origin-left transition-transform duration-500 ease-out z-0 ${
-                                    activeService === service.id ? "scale-x-100" : "scale-x-0"
+                                    // NO MOBILE: SEMPRE VISÍVEL (scale-x-100)
+                                    // NO DESKTOP (md): VISÍVEL SOMENTE NO HOVER
+                                    activeService === service.id ? "scale-x-100" : "scale-x-100 md:scale-x-0" // <-- MUDANÇA AQUI
                                 }`}></div>
 
                                 <Link to={service.link} className="relative z-10 block py-10 md:py-14 px-6 md:px-10">
                                     <div className="grid md:grid-cols-12 gap-8 items-center">
 
                                         <div className="md:col-span-5">
+                                            {/* 2. SUBTÍTULO: NO MOBILE VAI SER PRETO (TEXTO HOVER) */}
                                             <span className={`block text-xs font-black uppercase tracking-widest mb-2 transition-colors ${
-                                                activeService === service.id ? "text-black" : "text-gray-600"
+                                                activeService === service.id ? "text-black" : "text-black md:text-gray-600" // <-- MUDANÇA AQUI
                                             }`}>
-                                                {service.id} — {service.subtitle}
-                                            </span>
+                                {service.id} — {service.subtitle}
+                            </span>
                                             <h2 className={`text-3xl md:text-5xl font-black uppercase leading-none transition-colors ${
+                                                // 3. TÍTULO: JÁ ESTÁ PRETO, SEM MUDANÇA NECESSÁRIA AQUI
                                                 activeService === service.id ? "text-black" : "text-black"
                                             }`}>
                                                 {service.title}
@@ -119,27 +124,32 @@ const ServicesPage = () => {
                                         </div>
 
                                         <div className="md:col-span-5">
+                                            {/* 4. DESCRIÇÃO: NO MOBILE VAI SER PRETO (TEXTO HOVER) */}
                                             <p className={`text-lg font-medium leading-relaxed transition-colors ${
-                                                activeService === service.id ? "text-black" : "text-gray-700"
+                                                activeService === service.id ? "text-black" : "text-black md:text-gray-700" // <-- MUDANÇA AQUI
                                             }`}>
                                                 {service.description}
                                             </p>
                                             <div className="flex flex-wrap gap-2 mt-4">
                                                 {service.tags.map(tag => (
+                                                    /* 5. TAGS: NO MOBILE VAI TER FUNDO PRETO E TEXTO BRANCO (ESTILO HOVER) */
                                                     <span key={tag} className={`text-xs font-bold uppercase border border-black px-2 py-1 rounded-full transition-colors ${
-                                                        activeService === service.id ? "bg-black text-white border-black" : "bg-transparent text-gray-600 border-black"
+                                                        activeService === service.id ?
+                                                            "bg-black text-white border-black" :
+                                                            "bg-black text-white border-black md:bg-transparent md:text-gray-600" // <-- MUDANÇA AQUI
                                                     }`}>
-                                                        {tag}
-                                                    </span>
+                                        {tag}
+                                    </span>
                                                 ))}
                                             </div>
                                         </div>
 
                                         <div className="md:col-span-2 flex justify-end">
+                                            {/* 6. SETA: NO MOBILE VAI FICAR COM AS PROPRIEDADES DO HOVER */}
                                             <ArrowRight
                                                 size={40}
                                                 className={`transform transition-all duration-500 ${
-                                                    activeService === service.id ? "rotate-0 translate-x-2 text-black" : "-rotate-45 text-black"
+                                                    activeService === service.id ? "rotate-0 translate-x-2 text-black" : "rotate-0 translate-x-2 md:-rotate-45 text-black" // <-- MUDANÇA AQUI
                                                 }`}
                                             />
                                         </div>
