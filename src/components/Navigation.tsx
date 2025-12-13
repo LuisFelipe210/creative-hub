@@ -64,7 +64,7 @@ const Navigation = () => {
         <nav
             className={`fixed top-0 w-full z-50 px-4 transition-all duration-300 ${
                 isOpen || isScrolled
-                    ? "bg-[#fffbff]/80 backdrop-blur-md py-4 shadow-sm"
+                    ? "bg-[#fffbff]/90 backdrop-blur-md py-4 shadow-sm"
                     : "bg-transparent py-6 border-b-2 border-transparent"
             }`}
         >

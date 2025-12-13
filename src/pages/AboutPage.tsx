@@ -2,13 +2,15 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowRight, Star, Heart, Coffee, Layers, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 
 const AboutPage = () => {
     return (
         <main className="min-h-screen selection:bg-primary selection:text-black">
+            <SEO title="Sobre" description="Conheça a mente por trás da criatividade e descubra como transformo ideias em marcas fortes." />
             <Navigation />
 
-            {/* --- HEADER SÓLIDA --- */}
+            {/* --- HEADER SÓLIDA COM ANIMAÇÃO --- */}
             <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
@@ -17,7 +19,9 @@ const AboutPage = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-end gap-8">
-                        <div>
+
+                        {/* LADO ESQUERDO (Slide da Esquerda) */}
+                        <div className="animate-in slide-in-from-left duration-700">
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -37,7 +41,8 @@ const AboutPage = () => {
                             </h1>
                         </div>
 
-                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary">
+                        {/* LADO DIREITO (Slide da Direita) */}
+                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary animate-in slide-in-from-right duration-700">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Conheça a mente por trás da criatividade e descubra como transformo ideias em marcas fortes.
                             </p>
@@ -64,12 +69,10 @@ const AboutPage = () => {
 
                 {/* BENTO GRID */}
                 <section className="pb-24 container mx-auto px-4">
-                    {/* ALTERAÇÃO 1: 'auto-rows-[300px]' agora é 'md:auto-rows-[300px]'.
-                        No mobile fica 'auto', ou seja, o tamanho do conteúdo. */}
+                    {/* Grid responsivo */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]">
 
                         {/* CARD 1: FOTO */}
-                        {/* Adicionei h-[450px] no mobile pra foto não ficar minuscula nem sumir */}
                         <div className="h-[450px] md:h-auto md:col-span-1 md:row-span-2 relative rounded-3xl overflow-hidden border-2 border-black group shadow-[8px_8px_0px_0px_#000000]">
                             <img
                                 src="/iasmim.png"
@@ -82,8 +85,7 @@ const AboutPage = () => {
                             </div>
                         </div>
 
-                        {/* CARD 2: BIO (Minha História) */}
-                        {/* ALTERAÇÃO 2: overflow e max-h só existem no 'md:'. No mobile o texto cresce livre. */}
+                        {/* CARD 2: BIO */}
                         <div className="md:col-span-2 bg-black text-white p-8 rounded-3xl flex flex-col justify-center relative overflow-hidden border-2 border-black shadow-[8px_8px_0px_0px_#EEACC5]">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[80px] opacity-20"></div>
                             <h3 className="text-2xl font-black uppercase mb-4 text-primary">Minha História</h3>

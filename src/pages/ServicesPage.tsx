@@ -46,7 +46,7 @@ const ServicesPage = () => {
         <main className="min-h-screen selection:bg-primary selection:text-black">
             <Navigation />
 
-            {/* --- HEADER SÓLIDA (Alinhada à Esquerda no Mobile - Igual ao Sobre) --- */}
+            {/* --- HEADER SÓLIDA --- */}
             <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
@@ -54,10 +54,8 @@ const ServicesPage = () => {
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    {/* Alinhamento: items-start no mobile pra ficar na esquerda */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-                        <div>
-                            {/* Breadcrumb alinhado à esquerda */}
+                        <div className="animate-in slide-in-from-left duration-700 fade-in">
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -69,7 +67,6 @@ const ServicesPage = () => {
                                 </span>
                             </div>
 
-                            {/* Título Gigante Alinhado à Esquerda */}
                             <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Soluções <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
@@ -78,8 +75,8 @@ const ServicesPage = () => {
                             </h1>
                         </div>
 
-                        {/* Descrição Lateral (Esquerda no mobile) */}
-                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left">
+                        {/* LADO DIREITO (Slide da Direita) */}
+                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left animate-in slide-in-from-right duration-700 fade-in">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Não é sobre postar bonitinho. É sobre construir uma presença digital sólida, estratégica e impossível de ignorar.
                             </p>
@@ -88,11 +85,11 @@ const ServicesPage = () => {
                 </div>
             </section>
 
-            {/* --- CORPO DA PÁGINA COM FUNDO DE BOLINHAS --- */}
+            {/* --- CORPO DA PÁGINA --- */}
             <div className="bg-dots-pattern w-full relative z-0">
 
-                {/* LISTA DE SERVIÇOS */}
-                <section className="py-20 container mx-auto px-4">
+                {/* LISTA DE SERVIÇOS - Animando de baixo pra cima */}
+                <section className="py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
                     <div className="flex flex-col bg-[#fffbff]/60 backdrop-blur-sm border-2 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
                         {services.map((service) => (
                             <div

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowRight, Check, ChevronRight, Home, ArrowLeft, HelpCircle } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Home, HelpCircle } from "lucide-react";
+import SEO from "@/components/SEO";
 
-// ... (DADOS IGUAIS, MANTENHA O SEU CÓDIGO AQUI)
 const servicesData: Record<string, { title: string; subtitle: string; description: string; includes: string[] }> = {
     "social-media": {
         title: "Social Media",
@@ -12,7 +12,6 @@ const servicesData: Record<string, { title: string; subtitle: string; descriptio
         description: "Postar por postar não paga boleto. Aqui o buraco é mais embaixo: criamos narrativas que prendem, engajam e vendem. Deixe a parte chata comigo e foque no seu negócio.",
         includes: [ "Planejamento Estratégico de Conteúdo", "Criação de Artes e Legendas (Copy)", "Edição de Reels/TikTok (CapCut)", "Agendamento e Publicação", "Análise Mensal de Métricas", "Gestão de Tráfego Pago (Opcional)" ]
     },
-    // ... outros dados
     "identidade-visual": {
         title: "Identidade Visual",
         subtitle: "Branding & Logos",
@@ -46,10 +45,16 @@ const ServiceDetail = () => {
 
     return (
         <main className="min-h-screen flex flex-col selection:bg-primary selection:text-black">
+            <SEO
+                title={service.title}
+                description={service.description}
+            />
             <Navigation />
 
-            {/* HEADER SÓLIDA IGUAL ABOUT PAGE */}
-            <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
+            <section
+                key={`header-${slug}`}
+                className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10"
+            >
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
                         <div className="w-2 h-2 bg-black rounded-full"></div>
@@ -57,7 +62,8 @@ const ServiceDetail = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-end gap-8">
-                        <div>
+                        {/* LADO ESQUERDO (Slide da Esquerda) */}
+                        <div className="animate-in slide-in-from-left duration-700 fade-in">
                             <div className="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest flex-wrap">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -81,7 +87,8 @@ const ServiceDetail = () => {
                             </h1>
                         </div>
 
-                        <div className="md:max-w-sm mb-2">
+                        {/* LADO DIREITO (Slide da Direita) */}
+                        <div className="md:max-w-sm mb-2 animate-in slide-in-from-right duration-700 fade-in">
                             <Link to="/servicos" className="inline-flex items-center gap-2 text-xs text-accent font-bold uppercase hover:text-primary hover:border-primary transition-colors pb-1">
                                 <ArrowLeft size={12} /> Voltar para Serviços
                             </Link>
@@ -90,15 +97,18 @@ const ServiceDetail = () => {
                 </div>
             </section>
 
-            {/* CORPO DE BOLINHAS COM FLEX-1 PRA EMPURRAR O FOOTER */}
-            <div className="bg-dots-pattern w-full relative z-0 flex-1 flex flex-col justify-between">
+            {/* CORPO DE BOLINHAS - key={slug} aqui também */}
+            <div
+                key={`body-${slug}`}
+                className="bg-dots-pattern w-full relative z-0 flex-1 flex flex-col justify-between"
+            >
 
                 <div className="container mx-auto px-4 py-16">
 
                     <div className="grid lg:grid-cols-12 gap-12 items-start">
 
                         {/* Coluna Esquerda */}
-                        <div className="lg:col-span-8">
+                        <div className="lg:col-span-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
                             <div className="bg-[#fffbff] border-2 border-black p-8 md:p-12 rounded-3xl shadow-[8px_8px_0px_0px_#000000] mb-12">
                                 <h2 className="text-3xl font-black uppercase mb-6">O que é?</h2>
                                 <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
@@ -148,7 +158,7 @@ const ServiceDetail = () => {
                         </div>
 
                         {/* Coluna Direita (Sticky) */}
-                        <div className="lg:col-span-4 sticky top-28">
+                        <div className="lg:col-span-4 sticky top-28 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both fade-in">
                             <div className="bg-primary border-2 border-black p-8 rounded-3xl shadow-[8px_8px_0px_0px_#000000] text-center">
                                 <h3 className="text-2xl font-black uppercase text-black mb-4">
                                     Curtiu a proposta?

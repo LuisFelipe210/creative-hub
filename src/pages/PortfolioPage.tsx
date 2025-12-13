@@ -3,20 +3,17 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowUpRight, Eye, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 
 // --- COMPONENTE SKELETON INTERNO ---
-// (Isso faz a mágica de não travar e mostrar o bloco cinza)
 const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     return (
         <div className={`relative w-full h-full bg-gray-100 ${className}`}>
-            {/* O Bloco Cinza Pulsante */}
             {!isLoaded && (
                 <div className="absolute inset-0 bg-gray-200 animate-pulse z-10" />
             )}
-
-            {/* A Imagem Real */}
             <img
                 src={src}
                 alt={alt}
@@ -78,7 +75,8 @@ const PortfolioPage = () => {
     const [hoveredProject, setHoveredProject] = useState(allProjects[0]);
 
     return (
-        <main className="min-h-screen selection:bg-black selection:text-primary">
+        <main className="min-h-screen selection:bg-primary selection:text-black">
+            <SEO title="Portfólio" description="Confira meus últimos projetos de Branding, Social Media e Web Design." />
             <Navigation />
 
             {/* --- HEADER --- */}
@@ -90,7 +88,9 @@ const PortfolioPage = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-                        <div>
+
+                        {/* LADO ESQUERDO (Slide da Esquerda) */}
+                        <div className="animate-in slide-in-from-left duration-700">
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -110,7 +110,8 @@ const PortfolioPage = () => {
                             </h1>
                         </div>
 
-                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left">
+                        {/* LADO DIREITO (Slide da Direita) */}
+                        <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left animate-in slide-in-from-right duration-700">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Resultados reais para marcas que não aceitam o básico. Confira os cases.
                             </p>
@@ -147,7 +148,7 @@ const PortfolioPage = () => {
                                     onClick={() => setHoveredProject(project)}
                                     className={`group block border-l-4 transition-all duration-200 py-5 px-4 cursor-pointer relative rounded-r-lg
                                         ${hoveredProject.id === project.id
-                                        ? "border-primary bg-primary/5 pl-6"
+                                        ? "border-primary bg-primary/10 pl-6"
                                         : "border-transparent bg-transparent pl-4 hover:bg-gray-50 hover:border-gray-300"
                                     }
                                     `}
@@ -194,12 +195,12 @@ const PortfolioPage = () => {
 
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
 
-                            {/* AQUI ESTÁ O SKELETON FUNCIONANDO NA PREVIEW DESKTOP */}
+                            {/* SKELETON NA PREVIEW */}
                             <ImageWithSkeleton
-                                key={hoveredProject.id} // Key importante pro React saber que a imagem mudou e resetar o skeleton
+                                key={hoveredProject.id}
                                 src={hoveredProject.image}
                                 alt={hoveredProject.title}
-                                className="group-hover:scale-105 transition-transform duration-700" // Classes da imagem
+                                className="group-hover:scale-105 transition-transform duration-700"
                             />
 
                             <div className="absolute top-6 right-6 z-20">
@@ -227,7 +228,7 @@ const PortfolioPage = () => {
                         <Link to={`/portfolio/${project.slug}`} key={project.id} className="block group bg-[#fffbff] border-2 border-black p-4 rounded-3xl shadow-[8px_8px_0px_0px_#000000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all">
 
                             <div className="relative aspect-[4/3] overflow-hidden border-2 border-black rounded-2xl mb-6">
-                                {/* SKELETON NO MOBILE TAMBÉM */}
+                                {/* SKELETON NO MOBILE */}
                                 <ImageWithSkeleton
                                     src={project.image}
                                     alt={project.title}

@@ -1,10 +1,14 @@
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import { Home, AlertTriangle, Star, Sparkles, ArrowUpRight, Ban, Mail } from "lucide-react";
+import { Home, Star, Sparkles, ArrowUpRight, Ban, Mail } from "lucide-react";
+import SEO from "@/components/SEO"; // <--- ADICIONA ESSA IMPORTAÇÃO
 
 const NotFound = () => {
     return (
         <main className="min-h-screen flex flex-col selection:bg-black selection:text-primary bg-dots-pattern relative overflow-hidden">
+
+            {/* --- SEO: PRA FICAR PROFISSIONAL --- */}
+            <SEO title="404 - Página não encontrada" description="Ops! Essa página sumiu do mapa." />
 
             {/* --- LOGO NO CANTO (FIXA) --- */}
             <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 z-30 hover:scale-105 transition-transform">

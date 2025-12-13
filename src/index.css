@@ -95,3 +95,9 @@
         @apply text-7xl md:text-9xl lg:text-[10rem] font-black leading-[0.8] uppercase tracking-tighter;
     }
 }
+
+@media (min-width: 768px) {
+    * {
+        cursor: none !important;
+    }
+}

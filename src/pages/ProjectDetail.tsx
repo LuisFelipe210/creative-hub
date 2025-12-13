@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { ArrowLeft, ArrowRight, Share2, Copy, X, Home, ChevronRight } from "lucide-react";
 import { FaWhatsapp, FaTwitter } from "react-icons/fa";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
 
 // --- COMPONENTE SKELETON ---
 const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
@@ -132,7 +133,11 @@ const ProjectDetail = () => {
     };
 
     return (
-        <main className="min-h-screen selection:bg-black selection:text-primary bg-dots-pattern">
+        <main className="min-h-screen selection:bg-primary selection:text-black bg-dots-pattern">
+            <SEO
+                title={`${project.client} - ${project.title}`}
+                description={project.description}
+            />
             <Navigation />
 
             {/* HEADER SÓLIDA */}
