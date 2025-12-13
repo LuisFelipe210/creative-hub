@@ -150,9 +150,9 @@ const AboutPage = () => {
 
                 {/* --- CTA FINAL (FUNDO ROSA BRUTALISTA) --- */}
                 <section className="py-24 container mx-auto px-4 border-t-2 border-black bg-dots-pattern">
-                    <div className="bg-primary selection-inverty text-black rounded-2xl md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden
+                    <div className="bg-primary selection-invert text-black rounded-2xl md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden
                         border-4 border-black
-                        shadow-[14px_14px_0px_0px_#000000] /* Sombra preta para alto contraste */
+                        shadow-[14px_14px_0px_0px_#000000]
                         transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
 
                         <div className="relative z-10">
