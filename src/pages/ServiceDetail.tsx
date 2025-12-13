@@ -168,7 +168,9 @@ const ServiceDetail = () => {
 
                         {/* Coluna Direita (Sticky CTA) */}
                         <div className="lg:col-span-4 sticky top-28 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both fade-in">
-                            <div className="bg-primary border-2 border-black p-8 rounded-3xl shadow-[8px_8px_0px_0px_#000000] text-center">
+                            {/* Bloco lateral: Fundo Rosa com Sombra Preta (OK) */}
+                            <div className="bg-primary border-4 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_#000000] text-center">
+
                                 <h3 className="text-2xl font-black uppercase text-black mb-4">
                                     Curtiu a proposta?
                                 </h3>
@@ -177,9 +179,15 @@ const ServiceDetail = () => {
                                 </p>
 
                                 <div className="space-y-4">
+                                    {/* BOTÃO BRUTALISTA: Preto, Sombra Rosa, Efeito PUSH */}
                                     <Link
                                         to="/contato"
-                                        className="w-full inline-flex justify-center items-center gap-2 bg-black text-white py-4 font-black text-lg uppercase rounded-xl hover:scale-105 transition-all shadow-lg"
+                                        className="w-full inline-flex justify-center items-center gap-2
+                                           bg-black text-white py-4 font-black text-lg uppercase
+                                           rounded-xl border-2 border-black
+                                           shadow-[6px_6px_0px_0px_#EEACC5] /* Sombra Rosa */
+                                           hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
+                                           transition-all active:scale-[0.98] transform-gpu"
                                     >
                                         Solicitar Orçamento
                                     </Link>

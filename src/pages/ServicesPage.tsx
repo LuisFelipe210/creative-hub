@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowRight, Sparkles, Target, Zap, Layers, ChevronRight, Home } from "lucide-react";
+import { ArrowRight, Sparkles, Target, Zap, Layers, ChevronRight, Home, Hammer } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
@@ -150,48 +150,85 @@ const ServicesPage = () => {
                     </div>
                 </section>
 
-                {/* PROCESSO CRIATIVO */}
-                <section className="py-24 bg-black text-white relative overflow-hidden border-y-2 border-black">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+                {/* --- SEÇÃO PROCESSO (FLUXOGRAMA BRUTALISTA) --- */}
+                <section className="py-24 bg-black text-white relative overflow-hidden border-y-4 border-primary">
+
+                    {/* Efeito de ruído no fundo para dar textura */}
+                    <div className="absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0"></div>
 
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="text-center mb-20">
-                            <h2 className="text-4xl md:text-6xl font-black uppercase mb-4">
-                                Como a mágica <span className="text-primary">acontece</span>
+                            {/* Título Agressivo e Padronizado */}
+                            <h2 className="text-4xl md:text-6xl font-black uppercase mb-4 leading-none">
+                                Processo de <span className="text-primary" style={{ WebkitTextStroke: '1px #EEACC5' }}>Execução</span>
                             </h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto">
-                                Sem "achismo". Meu processo é baseado em pesquisa, estratégia e execução impecável.
+                            <p className="text-gray-400 max-w-2xl mx-auto font-medium">
+                                Sem "achismo". Meu processo é baseado em pesquisa, estratégia e **execução impecável**.
                             </p>
                         </div>
 
+                        {/* GRID DE CARDS COM ESTILO BRUTALISTA INVERTIDO (Preto com Sombra Rosa) */}
                         <div className="grid md:grid-cols-4 gap-8">
                             {[
-                                { icon: Target, title: "1. Imersão", desc: "Mergulho fundo no seu negócio para entender dores e objetivos." },
-                                { icon: Layers, title: "2. Estratégia", desc: "Defino o caminho visual e verbal que vai te destacar." },
-                                { icon: Sparkles, title: "3. Criação", desc: "Mão na massa. Design, copy e identidade tomando forma." },
-                                { icon: Zap, title: "4. Entrega", desc: "Arquivos organizados e suporte para implementação." }
+                                { icon: Target, title: "1. Imersão", desc: "Mergulho fundo no seu negócio para entender dores e objetivos. Tudo documentado.", delay: "100" },
+                                { icon: Layers, title: "2. Estratégia", desc: "Defino o caminho visual e verbal que vai te destacar. O Mapa da Mina.", delay: "300" },
+                                { icon: Hammer, title: "3. Criação", desc: "Mão na massa e design puro. Identidade e copy tomando forma com peso.", delay: "500" },
+                                { icon: Zap, title: "4. Entrega", desc: "Arquivos organizados, suporte para implementação e tudo pronto para subir.", delay: "700" }
                             ].map((step, i) => (
-                                <div key={i} className="group p-8 border border-white/10 hover:border-primary/50 bg-white/5 hover:bg-white/10 rounded-2xl transition-all duration-300">
-                                    <step.icon className="w-12 h-12 text-primary mb-6 group-hover:scale-110 transition-transform" />
-                                    <h3 className="text-xl font-black uppercase mb-3">{step.title}</h3>
-                                    <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+                                <div
+                                    key={i}
+                                    className={`group p-6 md:p-8 bg-black border-4 border-primary/50 text-white 
+                                rounded-xl md:rounded-2xl 
+                                shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[12px_12px_0px_0px_#EEACC5] 
+                                transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 
+                                animate-in slide-in-from-bottom fill-mode-both duration-700`}
+                                    style={{ animationDelay: `${step.delay}ms` }}
+                                >
+                                    {/* Número do Passo Grande */}
+                                    <div className="text-4xl font-black text-primary mb-4 leading-none border-b border-white/10 pb-2">
+                                        {step.title.split('.')[0]}.
+                                    </div>
+
+                                    <step.icon className="w-10 h-10 text-primary mb-4 mt-2 group-hover:scale-[1.05] transition-transform" />
+
+                                    <h3 className="text-xl font-black uppercase mb-3 text-white">{step.title.split('.')[1].trim()}</h3>
+
+                                    <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                                        {step.desc}
+                                    </p>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </section>
 
-                {/* CTA FINAL */}
+                {/* --- CTA FINAL (FUNDO ROSA BRUTALISTA) --- */}
                 <section className="py-24 container mx-auto px-4 text-center">
-                    <div className="bg-primary border-2 border-black p-12 rounded-3xl shadow-[12px_12px_0px_0px_#000000] relative z-10">
-                        <h2 className="text-4xl md:text-5xl font-black uppercase text-black mb-8">
-                            Agendar conversa gratuita
+                    {/* Mantém a sombra dura preta, mas adiciona borda para mais peso */}
+                    <div className="bg-primary border-4 border-black p-8 md:p-12 rounded-2xl md:rounded-3xl
+                                    shadow-[14px_14px_0px_0px_#000000] relative z-10
+                                    transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
+
+                        {/* Título Padronizado: Usa o destaque de cor que criamos */}
+                        <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
+                            Agendar <span className="bg-black text-white px-2">Conversa</span> Gratuita
                         </h2>
-                        <p className="text-black/80 font-bold text-lg mb-10 max-w-xl mx-auto">
+
+                        <p className="text-black/80 font-bold text-base md:text-lg mb-10 max-w-xl mx-auto">
                             Relaxa. Vamos marcar uma conversa e eu te ajudo a entender o que sua marca precisa agora.
                         </p>
-                        <Link to="/contato" className="inline-flex items-center gap-2 bg-black text-white px-10 py-4 font-black text-lg uppercase rounded-xl hover:scale-105 transition-all">
-                            Falar com Iasmim <ArrowRight />
+
+                        {/* BOTÃO FINAL BRUTALISTA (Efeito PUSH) */}
+                        <Link
+                            to="/contato"
+                            className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
+                                       rounded-xl bg-black text-white border-2 border-black
+                                       px-8 py-4 md:px-10
+                                       shadow-[6px_6px_0px_0px_#EEACC5]
+                                       hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
+                                       transition-all active:scale-[0.98] transform-gpu"
+                        >
+                            Falar com Iasmim <ArrowRight size={20} />
                         </Link>
                     </div>
                 </section>

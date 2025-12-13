@@ -146,26 +146,41 @@ const AboutPage = () => {
                     </div>
                 </section>
 
-                {/* CTA FINAL */}
-                <section className="py-24 container mx-auto px-4 border-t-2 border-black bg-[#fffbff]">
-                    <div className="bg-black text-white rounded-3xl p-12 text-center border-2 border-accent relative overflow-hidden shadow-[12px_12px_0px_0px_#EEACC5]">
+                {/* --- CTA FINAL (FUNDO ROSA BRUTALISTA) --- */}
+                <section className="py-24 container mx-auto px-4 border-t-2 border-black bg-dots-pattern">
+                    {/* Bloco principal agora é ROSA (bg-primary) */}
+                    <div className="bg-primary text-black rounded-2xl md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden
+                        border-4 border-black
+                        shadow-[14px_14px_0px_0px_#000000] /* Sombra preta para alto contraste */
+                        transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
+
+                        {/* Removemos o overlay de ruído, que só funciona bem em fundo escuro */}
                         <div className="relative z-10">
-                            <h2 className="text-4xl md:text-5xl font-black uppercase mb-6">
-                                Chega de perder tempo
+
+                            {/* Título Padronizado: Texto Preto Sólido (Sem Contorno) */}
+                            <h2 className="text-4xl md:text-6xl font-black uppercase mb-6 leading-none">
+                                Chega de <span className="bg-black text-white px-2">Perder</span> Tempo
                             </h2>
-                            <p className="text-gray-400 font-bold text-lg mb-8 max-w-xl mx-auto">
+
+                            <p className="text-black/80 font-bold text-base md:text-lg mb-10 max-w-xl mx-auto">
                                 Sua marca merece esse nível de cuidado e estratégia.
                             </p>
+
+                            {/* BOTÃO FINAL BRUTALISTA: Agora é PRETO, com Sombra ROSA */}
                             <Link
                                 to="/contato"
-                                className="inline-flex items-center gap-3 bg-primary text-black px-10 py-4 font-black text-lg uppercase rounded-xl hover:scale-105 transition-all"
+                                className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
+                                   rounded-xl bg-black text-white border-2 border-black
+                                   px-8 py-4 md:px-10
+                                   shadow-[6px_6px_0px_0px_#EEACC5] /* Sombra Rosa */
+                                   hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
+                                   transition-all active:scale-[0.98] transform-gpu"
                             >
-                                Vamos Conversar <ArrowRight />
+                                Vamos Conversar <ArrowRight size={20} />
                             </Link>
                         </div>
                     </div>
                 </section>
-
                 <Footer />
             </div>
         </main>
