@@ -221,10 +221,9 @@ const ProjectDetail = () => {
                     <div className="lg:col-span-4">
                         <div className="lg:sticky lg:top-24 space-y-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
 
-                            {/* CARD DE DESAFIO NOVO E BRUTALISTA */}
-                            <div className="bg-primary p-8 rounded-2xl border-4 border-black
-                                           shadow-[12px_12px_0px_0px_#000000] // Sombra de destaque preta
-                                           relative overflow-hidden">
+                            {/* CARD DE DESAFIO - DESIGN NOVO (ROSA E PRETO) */}
+                            <div className="bg-primary selection:bg-neutral-900 selection:text-primary p-8 rounded-2xl border-4 border-black
+                                           shadow-[12px_12px_0px_0px_#000000] relative overflow-hidden">
 
                                 <span className="absolute top-0 left-0 bg-black text-primary px-3 py-1 font-black text-[10px] uppercase tracking-widest rounded-br-lg">
                                     O ponto chave
@@ -236,7 +235,7 @@ const ProjectDetail = () => {
 
                                 <div className="h-0.5 w-full bg-black mb-4"></div>
 
-                                <p className="text-gray-800 font-medium leading-relaxed text-base md:text-lg">
+                                <p className="text-gray-900 font-bold leading-relaxed text-base md:text-lg">
                                     {project.challenge || project.description}
                                 </p>
                             </div>
@@ -281,37 +280,43 @@ const ProjectDetail = () => {
                         </div>
                     </div>
 
-                    {/* COLUNA DIREITA - GALERIA GRUDADA E CARD DE RESULTADO COLADO */}
-                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4 auto-rows-fr animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
+                    {/* COLUNA DIREITA - CONTAINER FLEX PARA GALERIA + RESULTADO */}
+                    <div className="lg:col-span-8 flex flex-col gap-0 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
 
-                        {project.gallery?.map((img, index) => (
-                            <div
-                                key={index}
-                                // TAMANHOS: h-52 (mobile) e md:h-80 (desktop original)
-                                className={`group relative overflow-hidden border-2 border-black bg-gray-100 shadow-[4px_4px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu
-                                    h-52 md:h-80 // Altura compacta no mobile
-                                    ${index === 0 ? 'rounded-t-lg md:rounded-2xl' : index === project.gallery!.length - 1 ? 'rounded-none' : 'rounded-none'} // Borda só no topo do bloco de fotos
-                                    ${index % 2 === 0 ? 'md:rounded-l-2xl' : 'md:rounded-r-2xl'} // Mantém o arredondamento de desktop
-                                `}
-                            >
-                                <ImageWithSkeleton
-                                    src={img}
-                                    alt={`Detalhe ${index + 1}`}
-                                    className="group-hover:scale-105 transition-transform duration-700"
-                                />
-                                {/* LINHA DE SEPARAÇÃO INTERNA: Adiciona uma borda na parte inferior (mobile) */}
-                                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black md:hidden"></div>
-                                {/* MOLDURA INTERNA ROSA */}
-                                <div className="absolute inset-2 border border-primary/50 pointer-events-none rounded-md hidden md:block"></div>
-                            </div>
-                        ))}
+                        {/* GRID DE FOTOS (ISOLADO PARA GARANTIR O GLUING) */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4">
+                            {project.gallery?.map((img, index) => (
+                                <div
+                                    key={index}
+                                    // TAMANHOS: h-52 (mobile) e md:h-80 (desktop original)
+                                    className={`group relative overflow-hidden border-2 border-black bg-gray-100 
+                                        md:shadow-[4px_4px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu
+                                        h-52 md:h-80 // Altura compacta no mobile
+                                        ${index === 0 ? 'rounded-t-lg md:rounded-2xl' : index === project.gallery!.length - 1 ? 'rounded-none' : 'rounded-none'} // Borda só no topo do bloco de fotos (mobile)
+                                        ${index !== 0 ? 'mt-[-2px] md:mt-0' : ''} // COLA AS FOTOS NO MOBILE FUNDINDO A BORDA
+                                        ${index % 2 === 0 ? 'md:rounded-l-2xl' : 'md:rounded-r-2xl'} // Mantém o arredondamento de desktop
+                                    `}
+                                >
+                                    <ImageWithSkeleton
+                                        src={img}
+                                        alt={`Detalhe ${index + 1}`}
+                                        className="group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                    {/* LINHA DE SEPARAÇÃO INTERNA: Adiciona uma borda na parte inferior (mobile) */}
+                                    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-black md:hidden"></div>
+                                    {/* MOLDURA INTERNA ROSA */}
+                                    <div className="absolute inset-2 border border-primary/50 pointer-events-none rounded-md hidden md:block"></div>
+                                </div>
+                            ))}
+                        </div>
 
-                        {/* CARD DE RESULTADO COLADO ABAIXO DA GALERIA */}
-                        <div className="col-span-full overflow-x-clip">
-                            {/* AJUSTES AQUI: MT-8 E ROUNDED-2XL LIMPO */}
-                            <div className={`relative p-10 pt-16 md:p-14 bg-black text-white border-4 border-primary mt-8
+                        {/* CARD DE RESULTADO - ELEMENTO INDEPENDENTE, IRMÃO DO GRID */}
+                        <div className="w-full overflow-x-clip">
+                            {/* AJUSTES AQUI: MT-[-2px] no mobile para colar na ultima foto, MT-8 no desktop */}
+                            <div className={`relative p-10 pt-16 md:p-14 bg-black text-white border-4 border-primary
+                                            mt-[-2px] md:mt-8
                                             shadow-[8px_8px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu 
-                                            rounded-2xl`}>
+                                            rounded-b-2xl rounded-t-none md:rounded-2xl`}>
 
                                 {/* SELO DE DESTAQUE */}
                                 <div className="absolute top-[-15px] right-8 bg-primary text-black px-4 py-1 font-black text-xs uppercase rotate-2 border-2 border-black shadow-[2px_2px_0px_0px_#000000] z-10">
@@ -326,7 +331,7 @@ const ProjectDetail = () => {
                                 </p>
                             </div>
                         </div>
-                        {/* FIM CARD DE RESULTADO COLADO */}
+                        {/* FIM CARD DE RESULTADO */}
 
                     </div>
                 </div>

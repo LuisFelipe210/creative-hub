@@ -207,14 +207,11 @@ const ServicesPage = () => {
                     </div>
                 </section>
 
-                {/* --- CTA FINAL (FUNDO ROSA BRUTALISTA) --- */}
                 <section className="py-24 container mx-auto px-4 text-center">
-                    {/* Mantém a sombra dura preta, mas adiciona borda para mais peso */}
-                    <div className="bg-primary border-4 border-black p-8 md:p-12 rounded-2xl md:rounded-3xl
+                    <div className="bg-primary selection:bg-neutral-900 selection:text-primary border-4 border-black p-8 md:p-12 rounded-2xl md:rounded-3xl
                                     shadow-[14px_14px_0px_0px_#000000] relative z-10
                                     transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
 
-                        {/* Título Padronizado: Usa o destaque de cor que criamos */}
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
                             Agendar <span className="bg-black text-white px-2">Conversa</span> Gratuita
                         </h2>
@@ -222,8 +219,6 @@ const ServicesPage = () => {
                         <p className="text-black/80 font-bold text-base md:text-lg mb-10 max-w-xl mx-auto">
                             Relaxa. Vamos marcar uma conversa e eu te ajudo a entender o que sua marca precisa agora.
                         </p>
-
-                        {/* BOTÃO FINAL BRUTALISTA (Efeito PUSH) */}
                         <Link
                             to="/contato"
                             className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
