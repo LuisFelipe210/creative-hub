@@ -103,9 +103,9 @@ const AboutPage = () => {
                         </div>
 
                         {/* CARD 3: ESTATÍSTICAS */}
-                        <div className="bg-white p-8 rounded-3xl border-2 border-black flex flex-col justify-center items-center text-center hover:bg-primary transition-colors group shadow-[8px_8px_0px_0px_#000000]">
+                        <div className="bg-primary p-8 rounded-3xl border-2 border-black flex flex-col justify-center items-center text-center transition-colors group shadow-[8px_8px_0px_0px_#000000]">
                             <span className="text-6xl font-black text-black mb-2 group-hover:scale-110 transition-transform">40+</span>
-                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 group-hover:text-black">Projetos Entregues</p>
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-black group-hover:text-black">Projetos Entregues</p>
                         </div>
 
                         {/* CARD 4: FERRAMENTAS */}
@@ -116,7 +116,7 @@ const AboutPage = () => {
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 {["Photoshop", "Canva", "Figma", "CapCut", "Trello"].map(tool => (
-                                    <span key={tool} className="px-3 py-1 border border-gray-300 rounded-full text-xs font-bold uppercase hover:bg-primary hover:border-black hover:text-black transition-colors cursor-default">
+                                    <span key={tool} className="px-3 py-1 border border-gray-300 rounded-full bg-black text-primary text-xs font-bold uppercase hover:bg-primary hover:border-black hover:text-black transition-colors cursor-default">
                                         {tool}
                                     </span>
                                 ))}

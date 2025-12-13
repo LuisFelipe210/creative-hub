@@ -8,7 +8,7 @@ interface SEOProps {
 const SEO = ({ title, description }: SEOProps) => {
     return (
         <Helmet>
-            <title>{title} | Iasmim Trajano</title>
+            <title>{title} - Iasmim Trajano</title>
 
             <meta
                 name="description"

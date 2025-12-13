@@ -29,16 +29,28 @@ const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttri
 };
 
 // --- NOVO COMPONENTE DE ITEM DE CASE ---
-const CaseGridItem = ({ title, service, link, image, isFeatured }: { title: string, service: string, link: string, image: string, isFeatured?: boolean }) => {
+const CaseGridItem = ({ title, service, link, image, isFeatured, customBg, customShadow }: { title: string, service: string, link: string, image: string, isFeatured?: boolean, customBg?: string, customShadow?: string }) => {
 
     // Configurações Brutalistas
     const baseClasses = "group block border-4 border-black transition-all duration-300 transform-gpu";
-    const shadowClass = isFeatured ? "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[6px_6px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1" : "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[1px] hover:translate-y-[1px]";
-    const paddingClass = isFeatured ? "p-6 md:p-8 bg-neutral-800" : "p-4 bg-neutral-800";
+
+    // Usa customShadow se fornecido, senão usa o padrão.
+    const shadowClass = customShadow ? customShadow : (
+        isFeatured ? "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[6px_6px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1" : "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[1px] hover:translate-y-[1px]"
+    );
+
+    // Usa customBg se fornecido, senão usa o padrão.
+    const bgClass = customBg ? customBg : "bg-neutral-800";
+
+    // Define a cor do texto principal baseada no background
+    const textColor = customBg === 'bg-primary' ? 'text-black' : 'text-white';
+    const serviceColor = customBg === 'bg-primary' ? 'text-black/80' : 'text-primary';
+
+    const paddingClass = isFeatured ? "p-6 md:p-8" : "p-4";
 
     return (
         <Link to={link} className={`${baseClasses} ${shadowClass}`}>
-            <div className={`${paddingClass} relative overflow-hidden`}>
+            <div className={`${paddingClass} ${bgClass} relative overflow-hidden`}>
                 <div className={`${isFeatured ? "aspect-[5/3] md:aspect-[16/9]" : "aspect-[4/3]"} rounded-lg overflow-hidden mb-4 relative`}>
                     <ImageWithSkeleton src={image} alt={title} className="group-hover:scale-[1.03] transition-transform duration-700" />
                     <div className="absolute top-3 right-3 bg-primary text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20 shadow-md">
@@ -46,8 +58,8 @@ const CaseGridItem = ({ title, service, link, image, isFeatured }: { title: stri
                     </div>
                 </div>
                 <div className="px-1 pt-2">
-                    <h3 className={`font-black uppercase mb-1 leading-tight ${isFeatured ? "text-3xl" : "text-xl"}`}>{title}</h3>
-                    <p className={`text-primary font-bold uppercase ${isFeatured ? "text-sm" : "text-xs"}`}>{service}</p>
+                    <h3 className={`font-black uppercase mb-1 leading-tight ${isFeatured ? "text-3xl" : "text-xl"} ${textColor}`}>{title}</h3>
+                    <p className={`font-bold uppercase ${isFeatured ? "text-sm" : "text-xs"} ${serviceColor}`}>{service}</p>
                 </div>
             </div>
         </Link>
@@ -270,7 +282,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SEÇÃO DESTAQUES --- */}
+                {/* --- SEÇÃO DESTAQUES (AJUSTE AQUI) --- */}
                 <section className="py-16 md:py-20 bg-black text-white rounded-t-[2.5rem] md:rounded-t-[3rem] relative overflow-hidden border-t-4 border-primary animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
                     <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
                     <div className="container mx-auto px-4 relative z-10">
@@ -284,9 +296,12 @@ const Home = () => {
 
                         {/* NOVO GRID ASSIMÉTRICO */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            {/* Item de Destaque (Col-Span 2) */}
                             <div className="lg:col-span-2">
-                                <CaseGridItem {...caseData[0]} />
+                                <CaseGridItem
+                                    {...caseData[0]}
+                                    customBg="bg-primary" // Fundo Rosa
+                                    customShadow=" hover:-translate-x-1 hover:-translate-y-1"
+                                />
                             </div>
 
                             {/* Itens Menores (Col-Span 1) */}
@@ -353,7 +368,7 @@ const Home = () => {
                             </h2>
 
                             <p className="text-gray-700 font-medium text-base md:text-lg leading-relaxed border-l-4 border-black pl-4">
-                                Prazer, <strong> Iasmim</strong>. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
+                                Prazer, **Iasmim**. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
                             </p>
 
                             <Link to="/sobre" className="inline-flex items-center gap-2 font-black uppercase border-b-2 border-black hover:text-primary hover:border-primary transition-colors pb-1 text-sm md:text-base">
