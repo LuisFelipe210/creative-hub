@@ -18,7 +18,8 @@ const AboutPage = () => {
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                    {/* CORREÇÃO AQUI: Usando items-start no mobile para garantir alinhamento à esquerda */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
 
                         {/* LADO ESQUERDO (Slide da Esquerda) */}
                         <div className="animate-in slide-in-from-left duration-700">
@@ -33,7 +34,8 @@ const AboutPage = () => {
                                 </span>
                             </div>
 
-                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter">
+                            {/* Garantindo text-left no h1 também */}
+                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Criativa & <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
                                     Estrategista
