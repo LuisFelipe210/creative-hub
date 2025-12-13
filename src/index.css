@@ -78,6 +78,18 @@
         background-color: hsl(var(--primary));
         color: black;
     }
+
+    .selection-invert ::selection {
+        background-color: #171717 !important; /* neutral-900 */
+        color: #EEACC5 !important; /* Sua cor primary (confira o hex exato) */
+        -webkit-text-fill-color: #EEACC5 !important;
+    }
+
+    /* Para garantir no Firefox tbm */
+    .selection-invert ::-moz-selection {
+        background-color: #171717 !important;
+        color: #EEACC5 !important;
+    }
 }
 
 @layer components {

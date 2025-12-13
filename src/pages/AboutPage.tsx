@@ -103,7 +103,7 @@ const AboutPage = () => {
                         </div>
 
                         {/* CARD 3: ESTATÍSTICAS */}
-                        <div className="bg-primary selection:bg-neutral-900 selection:text-primary p-8 rounded-3xl border-2 border-black flex flex-col justify-center items-center text-center transition-colors group shadow-[8px_8px_0px_0px_#000000]">
+                        <div className="bg-primary selection-invert p-8 rounded-3xl border-2 border-black flex flex-col justify-center items-center text-center transition-colors group shadow-[8px_8px_0px_0px_#000000]">
                             <span className="text-6xl font-black text-black mb-2 group-hover:scale-110 transition-transform">40+</span>
                             <p className="text-xs font-bold uppercase tracking-[0.2em] text-black group-hover:text-black">Projetos Entregues</p>
                         </div>
@@ -150,7 +150,7 @@ const AboutPage = () => {
 
                 {/* --- CTA FINAL (FUNDO ROSA BRUTALISTA) --- */}
                 <section className="py-24 container mx-auto px-4 border-t-2 border-black bg-dots-pattern">
-                    <div className="bg-primary selection:bg-neutral-900 selection:text-primary text-black rounded-2xl md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden
+                    <div className="bg-primary selection-inverty text-black rounded-2xl md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden
                         border-4 border-black
                         shadow-[14px_14px_0px_0px_#000000] /* Sombra preta para alto contraste */
                         transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">

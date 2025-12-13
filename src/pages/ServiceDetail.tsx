@@ -167,7 +167,7 @@ const ServiceDetail = () => {
 
                         {/* Coluna Direita (Sticky CTA) */}
                         <div className="lg:col-span-4 sticky top-28 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both fade-in">
-                            <div className="bg-primary selection:bg-neutral-900 selection:text-primary border-4 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_#000000] text-center">
+                            <div className="bg-primary selection-invert border-4 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_#000000] text-center">
 
                                 <h3 className="text-2xl font-black uppercase text-black mb-4">
                                     Curtiu a proposta?

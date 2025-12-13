@@ -208,7 +208,7 @@ const ServicesPage = () => {
                 </section>
 
                 <section className="py-24 container mx-auto px-4 text-center">
-                    <div className="bg-primary selection:bg-neutral-900 selection:text-primary border-4 border-black p-8 md:p-12 rounded-2xl md:rounded-3xl
+                    <div className="bg-primary selection-invert border-4 border-black p-8 md:p-12 rounded-2xl md:rounded-3xl
                                     shadow-[14px_14px_0px_0px_#000000] relative z-10
                                     transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
 
