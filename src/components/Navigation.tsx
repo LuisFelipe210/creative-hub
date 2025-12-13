@@ -45,7 +45,7 @@ const Navigation = () => {
         px-5 py-2 font-bold text-sm uppercase transition-all border-2 rounded-lg flex items-center gap-1
         ${isActive
         ? "bg-primary text-black border-primary shadow-none translate-y-[2px]"
-        : "bg-white text-black border-accent shadow-soft hover:shadow-soft-hover hover:-translate-y-1"
+        : "bg-white text-black border-black shadow-soft hover:shadow-soft-hover hover:-translate-y-1"
     }
     `;
 
