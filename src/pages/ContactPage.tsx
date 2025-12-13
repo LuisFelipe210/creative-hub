@@ -1,9 +1,12 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { ChevronRight, Home, HelpCircle, Quote, Send } from "lucide-react";
+import { ChevronRight, Home, HelpCircle, Quote, Mail, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { FaWhatsapp, FaEnvelope, FaArrowRight, FaPaperPlane } from "react-icons/fa";
+import { FaWhatsapp, FaEnvelope, FaArrowRight as FaArrowRightIcon } from "react-icons/fa"; // FaArrowRight renomeado
+
+// --- DADOS DO FORMULÁRIO (Exemplo de serviços) ---
+const servicesData = ["Branding", "Social Media", "Web Design", "Consultoria"];
 
 // --- ENVELOPE (Mantido, tá bonito) ---
 const EnvelopeCard = ({ name, role, text }: { name: string, role: string, text: string }) => {
@@ -26,50 +29,53 @@ const EnvelopeCard = ({ name, role, text }: { name: string, role: string, text: 
     );
 };
 
-// --- NOVO COMPONENTE DE FORMULÁRIO ---
+// --- NOVO COMPONENTE DE FORMULÁRIO COMPACTO BRUTALISTA ---
 const BriefingForm = () => {
 
-    const services = ["Branding", "Social Media", "Web Design", "Consultoria"];
-
     return (
-        <div className="bg-white p-6 md:p-8 rounded-2xl border-2 border-black shadow-[8px_8px_0px_0px_#EEACC5] relative overflow-hidden h-full">
-            <h3 className="text-2xl font-black uppercase text-black mb-6 flex items-center gap-3">
-                <span className="w-2 h-2 bg-primary rounded-full"></span>
+        // Container principal do formulário
+        <div className="bg-white p-6 md:p-8 rounded-2xl border-4 border-black shadow-[10px_10px_0px_0px_#EEACC5] relative overflow-hidden h-full">
+
+            {/* CABEÇALHO */}
+            <h3 className="text-2xl font-black uppercase text-black mb-5 flex items-center gap-3 border-b-2 border-primary pb-2">
+                <Mail size={24} className="text-black" />
                 Seu Projeto
             </h3>
 
-            <form className="space-y-6">
+            <form className="space-y-4 md:space-y-5">
 
-                {/* LINHA 1: NOME / EMAIL */}
+                {/* LINHA 1: NOME / EMAIL (Bordas de baixo mais finas: border-b-2) */}
                 <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Seu Nome</label>
+                    <div className="space-y-0.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-black/80">Seu Nome</label>
                         <input
                             type="text"
-                            className="w-full bg-white border-b-2 border-black rounded-none px-0 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all"
+                            // AQUI: Borda de baixo mais fina (border-b-2)
+                            className="w-full bg-white border-b-2 border-black rounded-none px-0 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all"
                             placeholder="Nome ou Empresa"
                         />
                     </div>
-                    <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Seu Email</label>
+                    <div className="space-y-0.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-black/80">Seu Email</label>
                         <input
                             type="email"
-                            className="w-full bg-white border-b-2 border-black rounded-none px-0 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all"
+                            // AQUI: Borda de baixo mais fina (border-b-2)
+                            className="w-full bg-white border-b-2 border-black rounded-none px-0 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all"
                             placeholder="contato@email.com"
                         />
                     </div>
                 </div>
 
                 {/* LINHA 2: SERVIÇO DE INTERESSE */}
-                <div className="space-y-3 pt-2">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 block">Serviço de Interesse</label>
+                <div className="space-y-2 pt-1">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-black/80 block">Serviço de Interesse</label>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                        {services.map((opt) => (
+                        {servicesData.map((opt) => (
                             <label key={opt} className="cursor-pointer">
                                 <input type="radio" name="service" className="peer sr-only" />
-                                <div className="text-center py-2.5 rounded-lg border-2 border-black text-black text-xs font-bold uppercase
+                                <div className="text-center py-2 rounded-lg border-2 border-black text-black text-xs font-black uppercase
                                     peer-checked:bg-black peer-checked:text-primary transition-all select-none
-                                    hover:bg-gray-100 hover:shadow-[1px_1px_0px_0px_#EEACC5]"
+                                    hover:bg-gray-50 hover:shadow-[2px_2px_0px_0px_#000000]"
                                 >
                                     {opt}
                                 </div>
@@ -79,20 +85,34 @@ const BriefingForm = () => {
                 </div>
 
                 {/* LINHA 3: MENSAGEM */}
-                <div className="space-y-1 pt-2">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Detalhes do Projeto</label>
+                <div className="space-y-0.5 pt-1">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-black/80">Detalhes do Projeto</label>
                     <textarea
-                        className="w-full bg-white border-2 border-black rounded-xl px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all min-h-[120px] resize-none shadow-[2px_2px_0px_0px_#EEACC5]"
+                        className="w-full bg-white border-2 border-black rounded-xl px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all min-h-[100px] resize-none shadow-[4px_4px_0px_0px_#EEACC5]"
                         placeholder="Descreva brevemente sua ideia e o que você espera..."
                     ></textarea>
+                </div>
+
+                {/* AVISO E CONSENTIMENTO LGPD */}
+                <div className="pt-2 border-t-2 border-gray-100">
+                    <div className="flex items-start mt-3">
+                        <input type="checkbox" id="consent" required className="mt-0.5 mr-2 appearance-none h-4 w-4 border-2 border-black bg-white checked:bg-primary checked:border-black transition-colors shrink-0 focus:ring-0"/>
+                        <label htmlFor="consent" className="text-[11px] text-gray-700 font-medium leading-relaxed">
+                            Eu li e concordo com o uso dos meus dados (Nome e Email) <strong> apenas para responder</strong> à minha solicitação de contato.
+                            <span className="font-bold text-black">(LGPD Aplicada)</span>
+                        </label>
+                    </div>
                 </div>
 
                 {/* BOTÃO SUBMIT */}
                 <button
                     type="submit"
-                    className="w-full bg-primary text-black py-4 rounded-xl font-black text-lg uppercase tracking-widest hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-3 mt-4 border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+                    className="w-full bg-black text-white py-3.5 rounded-xl font-black text-lg uppercase tracking-widest
+                               transition-all flex items-center justify-center gap-3 mt-4 border-2 border-black
+                               shadow-[6px_6px_0px_0px_#EEACC5] /* Sombra Rosa */
+                               hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transform-gpu"
                 >
-                    <FaPaperPlane size={16} />
+                    <ArrowRight size={20} />
                     Enviar Proposta
                 </button>
             </form>
@@ -156,7 +176,7 @@ const ContactPage = () => {
                                                     <p className="text-base font-black text-gray-900 group-hover:text-white">(74) 99139-4805</p>
                                                 </div>
                                             </div>
-                                            <FaArrowRight className="text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-transform" />
+                                            <FaArrowRightIcon className="text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </a>
                                     <a href="mailto:Trajanoiasmim9@gmail.com" className="group block bg-gray-50 border-2 border-gray-200 p-4 rounded-xl hover:border-primary hover:bg-black transition-all duration-300">
@@ -165,17 +185,17 @@ const ContactPage = () => {
                                                 <div className="bg-white p-2 rounded-full text-primary border-2 border-primary group-hover:bg-primary group-hover:text-black transition-colors"><FaEnvelope size={20} /></div>
                                                 <div>
                                                     <p className="text-[10px] font-bold uppercase text-gray-400 group-hover:text-gray-500">Email</p>
-                                                    <p className="text-base font-black text-gray-900 group-hover:text-white break-all text-xs md:text-base">Trajanoiasmim9@gmail.com</p>
+                                                    <p className="text-base font-black text-gray-900 group-hover:text-white break-all text-xs md:text-base">trajanoiasmim9@gmail.com</p>
                                                 </div>
                                             </div>
-                                            <FaArrowRight className="text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-transform" />
+                                            <FaArrowRightIcon className="text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        {/* LADO DIREITO: NOVO FORMULÁRIO */}
+                        {/* LADO DIREITO: FORMULÁRIO BRUTALISTA */}
                         <div className="lg:w-7/12 w-full animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
                             <BriefingForm />
                         </div>

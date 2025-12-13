@@ -8,7 +8,6 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LoadingScreen from "@/components/LoadingScreen";
-import CustomCursor from "@/components/CustomCursor";
 
 // ... Imports das páginas ...
 import Home from "./pages/Home";
@@ -38,9 +37,6 @@ const App = () => {
                 <div className="min-h-screen w-full relative z-0">
                     <Toaster />
                     <Sonner />
-
-                    {/* BOTA O CURSOR AQUI, PAI */}
-                    <CustomCursor />
 
                     <WhatsAppButton />
 

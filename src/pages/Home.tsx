@@ -152,41 +152,61 @@ const Home = () => {
 
             <Navigation />
 
-            {/* --- HERO RESPONSIVO --- */}
-            <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 min-h-[90vh] flex items-center bg-[#fffbff] overflow-hidden">
-                <div className="hidden md:block absolute top-0 right-0 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 z-0 pointer-events-none transform-gpu translate-z-0"></div>
+            <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 min-h-[90vh] flex items-center bg-[#fffbff] overflow-hidden border-b-2 border-black">
+
+                {/* Efeito de blur removido/simplificado */}
+                <div className="hidden md:block absolute top-0 right-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 z-0 pointer-events-none transform-gpu translate-z-0"></div>
 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                        {/* --- COLUNA DE TEXTO (lg:col-span-7) --- */}
                         <div className="lg:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left animate-in slide-in-from-left duration-1000 fade-in fill-mode-both">
+
+                            {/* TAG PADRONIZADA */}
                             <div className="flex justify-center lg:justify-start">
-                                <div className="inline-flex items-center gap-2 bg-white border-2 border-black text-black px-3 py-1.5 md:px-4 md:py-2 font-bold uppercase tracking-widest text-[14px] md:text-xs shadow-[2px_2px_0px_0px_#EEACC5] md:shadow-[4px_4px_0px_0px_#EEACC5] rounded-full mb-2">
-                                    Social Media & Design
+                                <div className="inline-flex items-center gap-2 bg-black text-primary border-2 border-primary px-3 py-1.5 md:px-4 md:py-2 font-black uppercase tracking-widest text-[14px] md:text-xs shadow-[4px_4px_0px_0px_#EEACC5] rounded-lg mb-2">
+                                    SOCIAL MEDIA | DESIGN
                                 </div>
                             </div>
+
+                            {/* TÍTULO */}
                             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase text-black leading-[0.9] tracking-tighter">
                                 Transforme o <br className="hidden md:block"/>
                                 <span className="text-primary" style={{ WebkitTextStroke: '1px black' }}>Comum</span> em <br className="hidden md:block"/>
                                 Extraordinário.
                             </h1>
+
+                            {/* DESCRIÇÃO */}
                             <p className="text-base sm:text-lg md:text-xl font-medium text-gray-700 leading-relaxed max-w-lg mx-auto lg:mx-0">
                                 Estratégia visual e design com propósito para marcas que cansaram de ser ignoradas.
                             </p>
+
+                            {/* BOTÕES COM EFEITO PUSH BRUTALISTA */}
                             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2">
-                                <Link to="/portfolio" className="px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black shadow-[2px_2px_0px_0px_#000000] md:shadow-[4px_4px_0px_0px_#000000] hover:bg-black hover:text-white hover:border-2 hover:border-black hover:shadow-none transition-all flex items-center justify-center gap-2 group">
+                                <Link to="/portfolio" className="px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:shadow-none transition-all flex items-center justify-center gap-2 group transform-gpu hover:translate-x-[2px] hover:translate-y-[2px]">
                                     Ver Trabalhos <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
-                                <Link to="/contato" className="bg-white text-black border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg shadow-[2px_2px_0px_0px_#000000] md:shadow-[4px_4px_0px_0px_#000000] uppercase rounded-xl hover:bg-gray-50 hover:shadow-none transition-all flex items-center justify-center">
+                                <Link to="/contato" className="bg-white text-black border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg shadow-[4px_4px_0px_0px_#000000] uppercase rounded-xl hover:bg-black hover:text-white hover:shadow-none transition-all flex items-center justify-center transform-gpu hover:translate-x-[2px] hover:translate-y-[2px]">
                                     Entrar em Contato
                                 </Link>
                             </div>
                         </div>
+
+                        {/* --- COLUNA DA IMAGEM (lg:col-span-5) - AGORA BRUTALISTA --- */}
                         <div className="lg:col-span-5 flex justify-center relative lg:justify-end mt-10 lg:mt-0 animate-in slide-in-from-right duration-1000 fade-in fill-mode-both">
-                            <div className="relative z-10 bg-white border-4 border-black p-8 md:p-12 rounded-3xl shadow-[8px_8px_0px_0px_#EEACC5] md:shadow-[14px_14px_0px_0px_#EEACC5] rotate-3 hover:rotate-0 transition-all duration-500 group w-full max-w-sm lg:max-w-md transform-gpu">
+
+                            {/* CAMADA PRINCIPAL: Bloco com Logo, Borda Grossa e Sombra ROSA MASSIVA */}
+                            <div className="relative z-10 bg-white border-4 border-black p-6 md:p-10 rounded-2xl shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[18px_18px_0px_0px_#EEACC5] rotate-1 hover:rotate-0 transition-all duration-500 group w-full max-w-sm lg:max-w-md transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px]">
                                 <img src="/logo2.svg" alt="Iasmim Trajano Logo" width={400} height={400} className="w-full h-auto object-contain" />
+
+                                {/* DETALHE BRUTALISTA: Selo Carimbado (Adiciona autenticidade) */}
+                                <div className="absolute -bottom-4 -left-4 bg-black text-primary px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 border-primary shadow-md rotate-3">
+                                    EXECUÇÃO IMEDIATA
+                                </div>
                             </div>
-                            <Star className="hidden md:block absolute -top-6 -right-6 text-black w-14 h-14 animate-spin-slow opacity-20" />
-                            <ArrowUpRight className="hidden md:block absolute -bottom-6 -left-8 text-black w-20 h-20 opacity-20" />
+
+                            {/* Efeitos extras removidos (Star, ArrowUpRight) para remover suavidade */}
                         </div>
                     </div>
                 </div>
@@ -301,21 +321,30 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SOBRE (BENTO SMALL) --- */}
+                {/* --- SOBRE --- */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
-                    {/* Alteração na sombra para destaque Rosa e bordas arredondadas menos suaves */}
                     <div className="bg-[#fffbff] border-4 border-black rounded-xl md:rounded-2xl p-6 md:p-12
-                                    shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5]
-                                    flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu">
+                    shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5]
+                    flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu">
 
-                        {/* IMAGEM: com borda dupla agressiva */}
-                        <div className="w-full md:w-1/3">
-                            <div className="aspect-square rounded-lg border-4 border-primary overflow-hidden relative shadow-lg">
-                                <ImageWithSkeleton src="/iasmim.png" alt="Iasmim" className="object-cover" />
+                        <div className="w-full md:w-1/3 relative">
+                            <div className="relative aspect-square rounded-lg border-4 border-black overflow-hidden shadow-[8px_8px_0px_0px_#EEACC5] rotate-1 hover:rotate-0 transition-all duration-500">
+
+                                <ImageWithSkeleton src="/iasmim.png" alt="Iasmim" className="object-cover w-full h-full" />
+
+                                <div className="absolute inset-4 border-2 border-primary pointer-events-none"></div>
+                            </div>
+
+                            <div className="absolute top-[-10px] right-[-10px] bg-primary text-black px-3 py-1 font-black text-xs uppercase rotate-3 shadow-[2px_2px_0px_0px_#000000] border-2 border-black z-20">
+                                IMPACTO VISUAL
+                            </div>
+
+                            <div className="absolute bottom-[-10px] left-[-10px] bg-black text-white px-3 py-1 font-black text-xs uppercase -rotate-3 border-2 border-primary shadow-md z-20">
+                                DESIGN DE PESO
                             </div>
                         </div>
+                        {/* --- FIM DO NOVO CARD --- */}
 
-                        {/* TEXTO: Alinhamento fixo na esquerda e título padronizado */}
                         <div className="w-full md:w-2/3 space-y-4 md:space-y-6 text-left">
 
                             <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-tight">
@@ -324,7 +353,7 @@ const Home = () => {
                             </h2>
 
                             <p className="text-gray-700 font-medium text-base md:text-lg leading-relaxed border-l-4 border-black pl-4">
-                                Prazer, **Iasmim**. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
+                                Prazer, <strong> Iasmim</strong>. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
                             </p>
 
                             <Link to="/sobre" className="inline-flex items-center gap-2 font-black uppercase border-b-2 border-black hover:text-primary hover:border-primary transition-colors pb-1 text-sm md:text-base">
@@ -333,11 +362,11 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-                {/* --- CTA FINAL (BRUTALISTA) --- */}
+
+                {/* --- CTA FINAL --- */}
                 <section className="py-16 md:py-20 container mx-auto px-4 text-center">
                     <div className="max-w-3xl mx-auto">
 
-                        {/* Título Padronizado */}
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
                             Pronto pra <span className="bg-primary px-2">Começar</span>?
                         </h2>
@@ -346,7 +375,6 @@ const Home = () => {
                             Vamos transformar suas ideias em uma marca forte e lucrativa.
                         </p>
 
-                        {/* BOTÃO FINAL BRUTALISTA (Sombra Dura e Efeito de Deslizamento) */}
                         <Link
                             to="/contato"
                             className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
