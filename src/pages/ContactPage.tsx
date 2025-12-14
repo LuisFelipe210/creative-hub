@@ -1,37 +1,83 @@
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { ChevronRight, Home, Quote, Mail, ArrowRight, Users, Target } from "lucide-react"; // Ícones atualizados
+import { ChevronRight, Home, Quote, Mail, ArrowRight, Users, Target, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FaWhatsapp, FaEnvelope, FaInstagram, FaArrowRight as FaArrowRightIcon } from "react-icons/fa";
+import { toast } from "sonner";
 
-// --- DADOS DO FORMULÁRIO (Exemplo de serviços) ---
+// --- DADOS DO FORMULÁRIO ---
 const servicesData = ["Branding", "Social Media", "Web Design", "Consultoria"];
 
-// --- ENVELOPE (Mantido, mas classe de espaçamento movida para o uso) ---
-const EnvelopeCard = ({ name, role, text }: { name: string, role: string, text: string }) => {
-    return (
-        // Removido espaçamento fixo para controle manual no ContactPage
-        <div className="relative bg-black w-full max-w-[320px] group transition-all duration-700 aspect-video flex items-end justify-center mx-auto shadow-[4px_4px_0px_0px_#EEACC5] overflow-visible cursor-pointer">
-            <div className="transition-all flex flex-col items-center p-4 justify-center duration-700 ease-out bg-white w-[90%] h-[95%] absolute bottom-0 border border-gray-200 shadow-sm z-10 translate-y-0 group-hover:-translate-y-24">
-                <Quote size={16} className="text-primary mb-2 opacity-50" fill="currentColor" />
-                <p className="text-[10px] font-medium text-gray-700 text-center leading-relaxed line-clamp-4 px-2">"{text}"</p>
-                <div className="mt-2 pt-2 border-t border-gray-100 w-full text-center">
-                    <p className="font-serif text-xs font-black uppercase text-black">{name}</p>
-                    <p className="font-sans text-[8px] text-primary font-bold uppercase tracking-widest">{role}</p>
-                </div>
-            </div>
-            <div className="absolute top-[38%] z-50 bg-[#EEACC5] text-black w-10 h-10 rounded-full flex items-center justify-center font-black text-[8px] border-2 border-black transition-all duration-500 group-hover:opacity-0 group-hover:scale-150 group-hover:rotate-180 shadow-md">ABRA</div>
-            <div className="transition-all duration-500 ease-in-out bg-neutral-800 absolute top-0 w-full h-full z-40 [clip-path:polygon(0_0,100%_0,50%_55%)] group-hover:[clip-path:polygon(0_0,100%_0,50%_0%)] origin-top"></div>
-            <div className="absolute w-full h-full bg-neutral-900 z-30 [clip-path:polygon(0_0,0%_100%,50%_50%)] pointer-events-none"></div>
-            <div className="absolute w-full h-full bg-neutral-800 z-30 [clip-path:polygon(100%_0,100%_100%,50%_50%)] pointer-events-none"></div>
-            <div className="absolute w-full h-full bg-neutral-900 z-30 [clip-path:polygon(0_100%,100%_100%,50%_50%)] pointer-events-none"></div>
-        </div>
-    );
-};
-
-// --- COMPONENTE DE FORMULÁRIO COMPACTO BRUTALISTA (MANTIDO) ---
+// --- COMPONENTE DE FORMULÁRIO COMPACTO BRUTALISTA ---
 const BriefingForm = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        service: "",
+        message: ""
+    });
+
+    // Atualiza o estado quando o usuário digita
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!formData.service) {
+            toast.error("Atenção", {
+                description: "Por favor, selecione um tipo de serviço para continuarmos."
+            });
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            // Tenta ler como texto primeiro pra não quebrar a aplicação
+            const text = await response.text();
+
+            // Tenta converter pra JSON
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (jsonError) {
+                console.error("Erro ao fazer parse do JSON. Resposta original:", text);
+                throw new Error("O servidor não retornou um JSON válido. Verifique se a API está rodando.");
+            }
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Erro ao enviar');
+            }
+
+            toast.success("Mensagem Recebida!", {
+                description: "Obrigada pelo contato. Analisarei seu projeto e retornarei em breve.",
+                style: { background: '#000', color: '#fff', border: '2px solid #EEACC5' }
+            });
+
+            setFormData({ name: "", email: "", service: "", message: "" });
+
+        } catch (error) {
+            console.error("Erro no envio:", error);
+
+            toast.error("Não foi possível enviar", {
+                description: "Erro técnico. Se persistir, me chame no WhatsApp.",
+                style: { background: '#000', color: '#fff', border: '2px solid #DC2626' }
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         // Container principal do formulário
@@ -43,15 +89,18 @@ const BriefingForm = () => {
                 Seu Projeto
             </h3>
 
-            <form className="space-y-4 md:space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
 
-                {/* LINHA 1: NOME / EMAIL (Bordas de baixo mais finas: border-b-2) */}
+                {/* LINHA 1: NOME / EMAIL */}
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-0.5">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-black/80">Seu Nome</label>
                         <input
                             type="text"
-                            // Borda de baixo mais fina (border-b-2)
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
                             className="w-full bg-white border-b-2 border-black rounded-none px-0 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all"
                             placeholder="Nome ou Empresa"
                         />
@@ -60,7 +109,10 @@ const BriefingForm = () => {
                         <label className="text-[10px] font-bold uppercase tracking-widest text-black/80">Seu Email</label>
                         <input
                             type="email"
-                            // Borda de baixo mais fina (border-b-2)
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
                             className="w-full bg-white border-b-2 border-black rounded-none px-0 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all"
                             placeholder="contato@email.com"
                         />
@@ -73,7 +125,14 @@ const BriefingForm = () => {
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                         {servicesData.map((opt) => (
                             <label key={opt} className="cursor-pointer">
-                                <input type="radio" name="service" className="peer sr-only" />
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    value={opt}
+                                    checked={formData.service === opt}
+                                    onChange={handleChange}
+                                    className="peer sr-only"
+                                />
                                 <div className="text-center py-2 rounded-lg border-2 border-black text-black text-xs font-black uppercase
                                     peer-checked:bg-black peer-checked:text-primary transition-all select-none
                                     hover:bg-gray-50 hover:shadow-[2px_2px_0px_0px_#000000]"
@@ -89,15 +148,18 @@ const BriefingForm = () => {
                 <div className="space-y-0.5 pt-1">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-black/80">Detalhes do Projeto</label>
                     <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
                         className="w-full bg-white border-2 border-black rounded-xl px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none appearance-none focus:ring-0 transition-all min-h-[100px] resize-none shadow-[4px_4px_0px_0px_#EEACC5]"
                         placeholder="Descreva brevemente sua ideia e o que você espera..."
                     ></textarea>
                 </div>
 
-                {/* AVISO E CONSENTIMENTO LGPD (COM ÍCONE CHECK SIMPLES) */}
+                {/* AVISO E CONSENTIMENTO LGPD */}
                 <div className="pt-2 border-t-2 border-gray-100">
                     <div className="flex items-start mt-3">
-                        {/* Checkbox Brutalista com ponto central */}
                         <input
                             type="checkbox"
                             id="consent"
@@ -118,13 +180,18 @@ const BriefingForm = () => {
                 {/* BOTÃO SUBMIT */}
                 <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full bg-primary text-black py-3.5 rounded-xl font-black text-lg uppercase tracking-widest
                                transition-all flex items-center justify-center gap-3 mt-4 border-2 border-black
-                               shadow-[6px_6px_0px_0px_#000000] /* Sombra Rosa */
-                               hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transform-gpu"
+                               shadow-[6px_6px_0px_0px_#000000]
+                               hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transform-gpu
+                               disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-[6px_6px_0px_0px_#000000] disabled:hover:translate-x-0 disabled:hover:translate-y-0"
                 >
-                    Enviar Proposta
-                    <ArrowRight size={20} />
+                    {isSubmitting ? (
+                        <>Enviando... <Loader2 className="animate-spin" size={20}/></>
+                    ) : (
+                        <>Enviar Proposta <ArrowRight size={20} /></>
+                    )}
                 </button>
             </form>
         </div>
@@ -236,7 +303,7 @@ const ContactPage = () => {
                             </div>
                         </div>
 
-                        {/* LADO DIREITO: FORMULÁRIO BRUTALISTA */}
+                        {/* LADO DIREITO: FORMULÁRIO BRUTALISTA COM A LÓGICA DE ENVIO */}
                         <div className="lg:w-7/12 w-full animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
                             <BriefingForm />
                         </div>
