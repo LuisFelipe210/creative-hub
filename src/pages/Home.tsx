@@ -202,7 +202,6 @@ const Home = () => {
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Serviços</span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">Minhas <span className="bg-primary px-2">Soluções</span></h2>
                     </div>
-                    {/* GRID DE 4 COLUNAS NO DESKTOP PARA CABER TUDO */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {allServices.slice(0, 4).map((item, index) => (
                             <Link
@@ -267,7 +266,7 @@ const Home = () => {
                                         image={featuredProject.image}
                                         isFeatured={true}
                                         customBg="bg-primary"
-                                        customShadow="shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#EEACC5] hover:-translate-x-1 hover:-translate-y-1"
+                                        customShadow="shadow-[8px_8px_0px_0px_#000000] hover:-translate-x-1 hover:-translate-y-1"
                                     />
                                 </div>
                             )}
