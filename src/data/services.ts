@@ -1,4 +1,4 @@
-import { Share2, PenTool, Layout, LucideIcon, Printer } from "lucide-react";
+import { Share2, PenTool, Layout, LucideIcon, Printer, TrendingUp} from "lucide-react";
 
 export interface Service {
     id: string;
@@ -86,18 +86,26 @@ export const allServices: Service[] = [
     },
     {
         id: "05",
-        icon: Printer,
-        slug: "teste",
-        title: "teste",
-        subtitle: "teste",
-        description: "teste",
-        longDescription: "teste",
-        tags: ["teste", "teste", "teste", "teste"],
-        includes: [ "teste" ],
-        link: "/servicos/teste",
+        icon: TrendingUp,
+        slug: "trafego-pago",
+        title: "Tráfego Pago",
+        subtitle: "Anúncios & Performance",
+        description: "Chega de depender da entrega orgânica. Com o tráfego pago, colocamos sua oferta na frente de quem quer comprar, na hora certa.",
+        longDescription: "O tráfego orgânico é ótimo, mas demora. No tráfego pago, compramos velocidade e previsibilidade. Criamos e gerenciamos campanhas estratégicas no Google e Meta (Facebook/Instagram) com foco total em ROI. Não é gasto, é investimento em dados e vendas.",
+        tags: ["Google Ads", "Meta Ads", "Performance", "ROI"],
+        includes: [
+            "Gestão de Campanhas (Meta e Google Ads)",
+            "Segmentação de Públicos Compradores",
+            "Instalação de Pixel e API de Conversão",
+            "Estratégias de Remarketing",
+            "Otimização Diária de Anúncios",
+            "Relatórios de Performance em Tempo Real"
+        ],
+        link: "/servicos/trafego-pago",
         faq: [
-            { question: "Isso é um teste?", answer: "Sim, isso é apenas um teste de funcionalidade." },
-            { question: "Funciona?", answer: "Se você está lendo isso, funciona pra caralho." }
+            { question: "Qual o investimento mínimo nos anúncios?", answer: "Recomendo iniciar com pelo menos R$ 20,00 a R$ 30,00 por dia para gerar dados suficientes para otimização." },
+            { question: "O valor da gestão inclui o saldo dos anúncios?", answer: "Não. O valor do meu serviço é pela estratégia e gerenciamento. O orçamento dos anúncios é pago diretamente para as plataformas (Google/Facebook)." },
+            { question: "Em quanto tempo vejo resultado?", answer: "O tráfego pago é mais rápido que o orgânico. Geralmente, nas primeiras semanas já conseguimos ver métricas relevantes e leads chegando." }
         ]
     }
 ];
