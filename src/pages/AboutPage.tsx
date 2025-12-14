@@ -4,13 +4,27 @@ import { ArrowRight, Star, Heart, Coffee, Layers, ChevronRight, Home } from "luc
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 
+const customStyles = `
+  @keyframes color-breathing {
+    0%, 49.9% { background-color: #EEACC5; } /* Fica ROSA estático metade do tempo */
+    50%, 100% { background-color: #a6a6a6; } /* Vira CINZA seco na outra metade */
+  }
+  .animate-breathing {
+    animation: color-breathing 7s steps(1) infinite; /* steps(1) garante que não tenha transição suave */
+    will-change: background-color;
+  }
+`;
+
 const AboutPage = () => {
     return (
         <main className="min-h-screen selection:bg-primary selection:text-black">
             <SEO title="Sobre" description="Conheça a mente por trás da criatividade e descubra como transformo ideias em marcas fortes." />
+            {/* Injetando os estilos da animação */}
+            <style>{customStyles}</style>
+
             <Navigation />
 
-            {/* --- HEADER SÓLIDA COM ANIMAÇÃO --- */}
+            {/* --- HEADER SÓLIDA --- */}
             <section className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="w-full h-0.5 bg-black mb-4 flex justify-between items-center">
@@ -18,10 +32,7 @@ const AboutPage = () => {
                         <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
 
-                    {/* CORREÇÃO AQUI: Usando items-start no mobile para garantir alinhamento à esquerda */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-
-                        {/* LADO ESQUERDO (Slide da Esquerda) */}
                         <div className="animate-in slide-in-from-left duration-700">
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
@@ -34,7 +45,6 @@ const AboutPage = () => {
                                 </span>
                             </div>
 
-                            {/* Garantindo text-left no h1 também */}
                             <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Criativa & <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
@@ -43,7 +53,6 @@ const AboutPage = () => {
                             </h1>
                         </div>
 
-                        {/* LADO DIREITO (Slide da Direita) */}
                         <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary animate-in slide-in-from-right duration-700">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Conheça a mente por trás da criatividade e descubra como transformo ideias em marcas fortes.
@@ -56,22 +65,35 @@ const AboutPage = () => {
             {/* --- CORPO COM BOLINHAS --- */}
             <div className="bg-dots-pattern w-full relative z-0">
 
-                {/* MANIFESTO */}
+                {/* --- SEÇÃO MANIFESTO + LOGO (GRID NOVO) --- */}
                 <section className="py-20 container mx-auto px-4">
-                    <div className="max-w-4xl bg-[#fffbff]/80 backdrop-blur-sm p-8 border-2 border-black rounded-2xl shadow-[8px_8px_0px_0px_#000000]">
-                        <h2 className="text-3xl md:text-5xl font-black uppercase leading-tight text-black mb-8">
-                            "Design sem estratégia é <span className="text-gray-400 line-through decoration-primary decoration-4">arte</span>. <br/>
-                            Com estratégia, é <span className="bg-primary px-2 text-black">negócio</span>."
-                        </h2>
-                        <p className="text-xl text-gray-800 font-medium max-w-3xl leading-relaxed">
-                            Oi! Me chamo <strong>Iasmim</strong>, tenho 24 anos e atuo como Social Media e Designer desde 2022, quando iniciei na Agência Echos. Desde então, venho unindo minhas duas grandes paixões: a criatividade e a estratégia.
-                        </p>
+                    <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+
+                        {/* COLUNA ESQUERDA: TEXTO MANIFESTO (2/3) */}
+                        <div className="lg:col-span-2 bg-[#fffbff]/90 backdrop-blur-sm p-8 md:p-12 border-2 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000000] animate-in slide-in-from-bottom duration-700">
+                            <h2 className="text-3xl md:text-5xl font-black uppercase leading-tight text-black mb-8">
+                                "Design sem estratégia é <span className="text-gray-400 line-through decoration-primary decoration-4">arte</span>. <br/>
+                                Com estratégia, é <span className="bg-primary px-2 text-black">negócio</span>."
+                            </h2>
+                            <p className="text-xl text-gray-800 font-medium leading-relaxed">
+                                Oi! Me chamo <strong>Iasmim</strong>, tenho 24 anos e atuo como Social Media e Designer desde 2022, quando iniciei na Agência Echos. Desde então, venho unindo minhas duas grandes paixões: a criatividade e a estratégia.
+                            </p>
+                        </div>
+
+                        <div className="lg:col-span-1 animate-breathing p-8 rounded-3xl border-2 border-black flex items-center justify-center shadow-[8px_8px_0px_0px_#000000] animate-in slide-in-from-bottom duration-700 delay-200">
+                            <img
+                                src="/logo.svg" // <--- GARANTA QUE ESTÁ USANDO O NOME CERTO DA SUA LOGO (logo.svg ou logo2.svg)
+                                alt="Logo Brand Criativo"
+                                // Removidos todos os efeitos de hover da imagem
+                                className="w-full max-w-[300px] h-auto object-contain"
+                            />
+                        </div>
+
                     </div>
                 </section>
 
-                {/* BENTO GRID */}
+                {/* --- BENTO GRID (O RESTO DAS INFORMAÇÕES) --- */}
                 <section className="pb-24 container mx-auto px-4">
-                    {/* Grid responsivo */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]">
 
                         {/* CARD 1: FOTO */}
@@ -142,13 +164,13 @@ const AboutPage = () => {
                                     Movida a café, <br/> dados e criatividade.
                                 </h3>
                             </div>
-                            <Coffee size={48} className="text-black/10" />
+                            <Coffee size={100} className="text-black/10" />
                         </div>
 
                     </div>
                 </section>
 
-                {/* --- CTA FINAL (FUNDO ROSA BRUTALISTA) --- */}
+                {/* --- CTA FINAL --- */}
                 <section className="py-24 container mx-auto px-4 border-t-2 border-black bg-dots-pattern">
                     <div className="bg-primary selection-invert text-black rounded-2xl md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden
                         border-4 border-black
@@ -170,7 +192,7 @@ const AboutPage = () => {
                                 className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
                                    rounded-xl bg-black text-white border-2 border-black
                                    px-8 py-4 md:px-10
-                                   shadow-[6px_6px_0px_0px_#EEACC5] /* Sombra Rosa */
+                                   shadow-[6px_6px_0px_0px_#EEACC5]
                                    hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
                                    transition-all active:scale-[0.98] transform-gpu"
                             >
