@@ -90,8 +90,6 @@ const AboutPage = () => {
                             </p>
                         </div>
 
-                        {/* COLUNA DIREITA: LOGO COM ANIMAÇÃO DE FUNDO E SOMBRA INVERTIDA */}
-                        {/* Removi a classe shadow-[...] fixa daqui, a animação cuida disso agora */}
                         <div className="lg:col-span-1 animate-breathing p-8 rounded-3xl flex items-center justify-center animate-in slide-in-from-bottom duration-700 delay-200">
                             <img
                                 src="/logo.svg"

@@ -4,15 +4,11 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { ArrowRight, Star, ArrowUpRight, Quote, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
-// --- SWIPER IMPORTS ---
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation as SwiperNavigation, Autoplay } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-// --- IMPORTANDO DADOS CENTRALIZADOS ---
 import { allProjects } from "@/data/projects";
 import { allServices } from "@/data/services"; // <--- ATUALIZADO AQUI
 import { testimonials } from "@/data/testimonials";
@@ -163,7 +159,7 @@ const Home = () => {
                                 <Link to="/portfolio" className="px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:shadow-none transition-all flex items-center justify-center gap-2 group transform-gpu hover:translate-x-[2px] hover:translate-y-[2px]">
                                     Ver Trabalhos <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
-                                <Link to="/contato" className="bg-white text-black border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg shadow-[4px_4px_0px_0px_#000000] uppercase rounded-xl hover:bg-black hover:text-white hover:shadow-none transition-all flex items-center justify-center transform-gpu hover:translate-x-[2px] hover:translate-y-[2px]">
+                                <Link to="/contato" className="bg-black text-primary border-2 border-black px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg shadow-[4px_4px_0px_0px_#EEACC5] uppercase rounded-xl  hover:shadow-none transition-all flex items-center justify-center transform-gpu hover:translate-x-[2px] hover:translate-y-[2px]">
                                     Entrar em Contato
                                 </Link>
                             </div>
