@@ -67,4 +67,18 @@ export const allProjects: Project[] = [
         challenge: "Engenharia é um nicho técnico e muitas vezes frio. Transformamos obras complexas em conteúdos digeríveis e cases de sucesso que atraíram investidores e parceiros grandes para a construtora.",
         gallery: ["/galinha.jpg", "/dog.jpg", "/iasmim.png", "/fundo.jpg"]
     },
+    {
+        id: 5,
+        slug: "teste",
+        client: "teste",
+        title: "teste",
+        category: "teste",
+        year: "0000",
+        image: "/placeholder.svg",
+        tags: ["teste", "teste", "teste"],
+        description: "teste",
+        challenge: "teste",
+        gallery: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"]
+    }
+
 ];
