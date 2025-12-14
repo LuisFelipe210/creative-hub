@@ -135,7 +135,7 @@ const ServicesPage = () => {
                                 Processo de <span className="text-primary" style={{ WebkitTextStroke: '1px #EEACC5' }}>Execução</span>
                             </h2>
                             <p className="text-gray-400 max-w-2xl mx-auto font-medium">
-                                Sem "achismo". Meu processo é baseado em pesquisa, estratégia e **execução impecável**.
+                                Sem "achismo". Meu processo é baseado em pesquisa, estratégia e <strong> execução impecável.</strong>
                             </p>
                         </div>
 
