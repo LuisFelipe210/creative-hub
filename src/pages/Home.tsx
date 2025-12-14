@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { ArrowRight, Star, ArrowUpRight, Quote, Share2, PenTool, Layout, ArrowLeft } from "lucide-react";
+import { ArrowRight, Star, ArrowUpRight, Quote, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // --- SWIPER IMPORTS ---
@@ -14,7 +14,7 @@ import 'swiper/css/navigation';
 
 // --- IMPORTANDO DADOS CENTRALIZADOS ---
 import { allProjects } from "@/data/projects";
-import { services } from "@/data/services";
+import { allServices } from "@/data/services"; // <--- ATUALIZADO AQUI
 import { testimonials } from "@/data/testimonials";
 
 // --- COMPONENTE DE IMAGEM COM SKELETON ---
@@ -77,7 +77,7 @@ const TestimonialCard = ({ name, role, text }: { name: string, role: string, tex
     return (
         <article className="group h-full flex flex-col items-start justify-between border-2 border-black bg-white p-6
                           shadow-[6px_6px_0_0_#EEACC5] transition-all duration-300 ease-in-out
-                          select-none cursor-grab active:cursor-grabbing">
+                          hover:shadow-[10px_10px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1 select-none cursor-grab active:cursor-grabbing">
 
             <div className="mb-4 flex items-center gap-x-2 text-[10px] font-black uppercase tracking-widest">
                 <span className="border-2 border-black bg-primary px-2 py-1 text-black">Feedback</span>
@@ -85,7 +85,7 @@ const TestimonialCard = ({ name, role, text }: { name: string, role: string, tex
             </div>
 
             <div className="relative flex-1">
-                <h3 className="mt-2 text-2xl font-black uppercase leading-none text-black">{name}</h3>
+                <h3 className="mt-2 text-2xl font-black uppercase leading-none text-black group-hover:text-primary transition-colors duration-300">{name}</h3>
                 <div className="mt-4 border-l-4 border-black pl-4">
                     <Quote size={24} className="text-gray-300 mb-2 rotate-180" fill="currentColor"/>
                     <p className="text-sm font-medium leading-relaxed text-gray-700 line-clamp-6">"{text}"</p>
@@ -196,23 +196,45 @@ const Home = () => {
 
             <div className="bg-dots-pattern w-full flex-1 relative z-0">
 
-                {/* SERVIÇOS */}
+                {/* SERVIÇOS (ATUALIZADO PARA USAR allServices e GRID MELHORADO) */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
                     <div className="text-center mb-10 md:mb-12">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Serviços</span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">Minhas <span className="bg-primary px-2">Soluções</span></h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {services.map((item, index) => (
-                            <Link key={index} to={item.link} className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-xl shadow-[6px_6px_0px_0px_#000000] hover:shadow-[10px_10px_0px_0px_#EEACC5] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-300 transform-gpu flex flex-col justify-start text-left">
-                                <div className="p-2 border-2 border-black mb-4 w-fit bg-primary text-black transition-colors">
-                                    <item.icon size={36} className="text-black" />
+                    {/* GRID DE 4 COLUNAS NO DESKTOP PARA CABER TUDO */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {allServices.slice(0, 4).map((item, index) => (
+                            <Link
+                                key={item.id}
+                                to={item.link}
+                                className="group flex flex-col h-full bg-[#fffbff]
+                                         border-4 border-black p-6 rounded-2xl
+                                         shadow-[8px_8px_0px_0px_#EEACC5]
+                                         hover:shadow-[12px_12px_0px_0px_#000000] hover:-translate-x-1 hover:-translate-y-1
+                                         transition-all duration-300 transform-gpu justify-between"
+                            >
+                                <div>
+                                    {/* ÍCONE BRUTALISTA COM FUNDO */}
+                                    <div className="mb-6 p-4 bg-primary border-2 border-black w-fit rounded-xl group-hover:rotate-6 transition-transform duration-300 shadow-[4px_4px_0px_0px_#000]">
+                                        <item.icon size={32} className="text-black" strokeWidth={2.5} />
+                                    </div>
+
+                                    <h3 className="text-2xl font-black uppercase mb-3 text-black group-hover:text-primary transition-colors">
+                                        {item.title}
+                                    </h3>
+
+                                    {/* Descrição limitada para não quebrar o layout */}
+                                    <p className="text-gray-700 font-medium text-sm leading-relaxed mb-6 line-clamp-3">
+                                        {item.description}
+                                    </p>
                                 </div>
-                                <h3 className="text-2xl font-black uppercase mb-3 text-black group-hover:text-primary transition-colors">{item.title}</h3>
-                                <p className="text-gray-700 font-medium text-base mb-6">{item.desc}</p>
-                                <span className="mt-auto text-sm font-bold uppercase text-black border-b-2 border-black pb-1 group-hover:text-primary group-hover:border-primary transition-colors flex items-center gap-2">
-                                    Explorar Serviço <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                                </span>
+
+                                <div className="pt-4 border-t-2 border-dashed border-gray-300 w-full">
+                                    <span className="inline-flex items-center gap-2 font-black uppercase text-xs tracking-wider group-hover:text-primary transition-colors">
+                                        Explorar <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                </div>
                             </Link>
                         ))}
                     </div>
@@ -269,7 +291,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SEÇÃO DE DEPOIMENTOS (SWIPER CENTRALIZADO) --- */}
+                {/* --- SEÇÃO DE DEPOIMENTOS (SWIPER COM AS SETAS NOVAS) --- */}
                 <section className="py-20 border-b-2 border-black bg-[#fffbff] overflow-hidden relative">
                     <div className="container mx-auto px-4 mb-10 text-center">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Feedback</span>
@@ -278,21 +300,18 @@ const Home = () => {
                         </h2>
                     </div>
 
-                    {/* CONTAINER DO CARROSSEL */}
                     <div className="w-full relative group/carousel">
 
-                        {/* SETAS FLUTUANTES (SOLTAS DO CONTAINER, ALINHADAS A TELA/CARROSSEL) */}
                         <BrutalistArrow direction="left" onClick={() => swiperRef?.slidePrev()} />
                         <BrutalistArrow direction="right" onClick={() => swiperRef?.slideNext()} />
 
-                        {/* SWIPER - SEM CONTAINER PARA PEGAR LARGURA TOTAL SE QUISER, OU COM CONTAINER FLUIDO */}
                         <div className="w-full">
                             <Swiper
                                 modules={[SwiperNavigation, Autoplay]}
                                 onBeforeInit={(swiper) => setSwiperRef(swiper)}
                                 centeredSlides={true}
                                 loop={true}
-                                spaceBetween={20}
+                                spaceBetween={24}
                                 slidesPerView={1.25}
                                 autoplay={{
                                     delay: 5000,
