@@ -4,14 +4,24 @@ import { ArrowRight, Star, Heart, Coffee, Layers, ChevronRight, Home } from "luc
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 
+// --- ESTILOS CUSTOMIZADOS ATUALIZADOS ---
 const customStyles = `
-  @keyframes color-breathing {
-    0%, 49.9% { background-color: #EEACC5; } /* Fica ROSA estático metade do tempo */
-    50%, 100% { background-color: #a6a6a6; } /* Vira CINZA seco na outra metade */
+  @keyframes shadow-breathing {
+    /* Metade 1: Fundo ROSA (#EEACC5), Sombra CINZA (#a6a6a6) */
+    0%, 49.9% {
+        background-color: #EEACC5;
+        box-shadow: 8px 8px 0px 0px #a6a6a6;
+    }
+    /* Metade 2: Fundo CINZA (#a6a6a6), Sombra ROSA (#EEACC5) */
+    50%, 100% {
+        background-color: #a6a6a6;
+        box-shadow: 8px 8px 0px 0px #EEACC5;
+    }
   }
   .animate-breathing {
-    animation: color-breathing 7s steps(1) infinite; /* steps(1) garante que não tenha transição suave */
-    will-change: background-color;
+    /* Mantendo 7s e steps(1) como você pediu */
+    animation: shadow-breathing 7s steps(1) infinite;
+    will-change: background-color, box-shadow;
   }
 `;
 
@@ -80,11 +90,12 @@ const AboutPage = () => {
                             </p>
                         </div>
 
-                        <div className="lg:col-span-1 animate-breathing p-8 rounded-3xl border-2 border-black flex items-center justify-center shadow-[8px_8px_0px_0px_#000000] animate-in slide-in-from-bottom duration-700 delay-200">
+                        {/* COLUNA DIREITA: LOGO COM ANIMAÇÃO DE FUNDO E SOMBRA INVERTIDA */}
+                        {/* Removi a classe shadow-[...] fixa daqui, a animação cuida disso agora */}
+                        <div className="lg:col-span-1 animate-breathing p-8 rounded-3xl flex items-center justify-center animate-in slide-in-from-bottom duration-700 delay-200">
                             <img
-                                src="/logo.svg" // <--- GARANTA QUE ESTÁ USANDO O NOME CERTO DA SUA LOGO (logo.svg ou logo2.svg)
+                                src="/logo.svg"
                                 alt="Logo Brand Criativo"
-                                // Removidos todos os efeitos de hover da imagem
                                 className="w-full max-w-[300px] h-auto object-contain"
                             />
                         </div>
