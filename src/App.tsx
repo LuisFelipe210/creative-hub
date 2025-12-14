@@ -60,7 +60,7 @@ const App = () => {
                     <LoadingScreen onComplete={() => setIsLoading(false)} />
                 )}
 
-                <div className="min-h-screen w-full relative z-0 bg-background text-foreground">
+                <div className="min-h-screen w-full relative z-0 bg-[fffbff] text-foreground">
                     {/* TOASTERS (Notificações) */}
                     <Toaster />
                     <Sonner />
