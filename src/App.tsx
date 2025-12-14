@@ -8,8 +8,6 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LoadingScreen from "@/components/LoadingScreen";
-
-// --- IMPORTS DAS PÁGINAS ---
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import PortfolioPage from "./pages/PortfolioPage";
@@ -23,7 +21,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            refetchOnWindowFocus: false, // Evita refetch chato quando troca de aba
+            refetchOnWindowFocus: false,
             retry: false,
         },
     },
@@ -73,17 +71,13 @@ const App = () => {
                         <ScrollToTop />
 
                         <Routes>
-                            <Route
-                                path="/"
-                                element={<Home key={isLoading ? 'loading' : 'loaded'} />}
-                            />
+                            <Route path="/" element={<Home />} />
                             <Route path="/sobre" element={<AboutPage />} />
                             <Route path="/portfolio" element={<PortfolioPage />} />
                             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
                             <Route path="/servicos" element={<ServicesPage />} />
                             <Route path="/servicos/:slug" element={<ServiceDetail />} />
                             <Route path="/contato" element={<ContactPage />} />
-                            {/* Rota 404 para qualquer link quebrado */}
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </BrowserRouter>

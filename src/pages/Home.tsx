@@ -10,7 +10,7 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { allProjects } from "@/data/projects";
-import { allServices } from "@/data/services"; // <--- ATUALIZADO AQUI
+import { allServices } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
 
 // --- COMPONENTE DE IMAGEM COM SKELETON ---
@@ -105,7 +105,6 @@ const TestimonialCard = ({ name, role, text }: { name: string, role: string, tex
     );
 };
 
-// --- SETA BRUTALISTA SIMPLES ---
 const BrutalistArrow = ({ direction, onClick }: { direction: 'left' | 'right', onClick: () => void }) => {
     const Icon = direction === 'left' ? ArrowLeft : ArrowRight;
     return (
