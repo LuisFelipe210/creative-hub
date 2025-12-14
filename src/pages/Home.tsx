@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { ArrowRight, Star, ArrowUpRight, Quote, Share2, PenTool, Layout} from "lucide-react";
+import { ArrowRight, Star, ArrowUpRight, Quote, Share2, PenTool, Layout, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+
+// --- SWIPER IMPORTS ---
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation as SwiperNavigation, Autoplay } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+// --- IMPORTANDO DADOS CENTRALIZADOS ---
+import { allProjects } from "@/data/projects";
+import { services } from "@/data/services";
+import { testimonials } from "@/data/testimonials";
 
 // --- COMPONENTE DE IMAGEM COM SKELETON ---
 const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
@@ -28,29 +40,23 @@ const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttri
     );
 };
 
-// --- NOVO COMPONENTE DE ITEM DE CASE ---
+// --- COMPONENTE DE ITEM DE CASE ---
 const CaseGridItem = ({ title, service, link, image, isFeatured, customBg, customShadow }: { title: string, service: string, link: string, image: string, isFeatured?: boolean, customBg?: string, customShadow?: string }) => {
 
-    // Configurações Brutalistas
     const baseClasses = "group block border-4 border-black transition-all duration-300 transform-gpu";
 
-    // Usa customShadow se fornecido, senão usa o padrão.
     const shadowClass = customShadow ? customShadow : (
         isFeatured ? "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[6px_6px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1" : "shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[1px] hover:translate-y-[1px]"
     );
 
-    // Usa customBg se fornecido, senão usa o padrão.
     const bgClass = customBg ? customBg : "bg-neutral-800";
-
-    // Define a cor do texto principal baseada no background
     const textColor = customBg === 'bg-primary' ? 'text-black' : 'text-white';
     const serviceColor = customBg === 'bg-primary' ? 'text-black/80' : 'text-primary';
-
     const paddingClass = isFeatured ? "p-6 md:p-8" : "p-4";
 
     return (
         <Link to={link} className={`${baseClasses} ${shadowClass}`}>
-            <div className={`${paddingClass} ${bgClass} relative overflow-hidden`}>
+            <div className={`${paddingClass} ${bgClass} relative overflow-hidden h-full`}>
                 <div className={`${isFeatured ? "aspect-[5/3] md:aspect-[16/9]" : "aspect-[4/3]"} rounded-lg overflow-hidden mb-4 relative`}>
                     <ImageWithSkeleton src={image} alt={title} className="group-hover:scale-[1.03] transition-transform duration-700" />
                     <div className="absolute top-3 right-3 bg-primary text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20 shadow-md">
@@ -66,61 +72,26 @@ const CaseGridItem = ({ title, service, link, image, isFeatured, customBg, custo
     );
 };
 
-// --- DADOS DOS CASES (AUMENTEI PRA TER 3) ---
-const caseData = [
-    {
-        title: "Gabrielle Weiss",
-        service: "Branding e Design Web",
-        link: "/portfolio/gabrielle-weiss",
-        image: "/fundo.jpg", // Substituir pelo path real
-        isFeatured: true, // Este será o maior
-    },
-    {
-        title: "Wyate Boutique",
-        service: "Estratégia Social Media",
-        link: "/portfolio/wyate-boutique",
-        image: "/dog.jpg", // Substituir pelo path real
-        isFeatured: false,
-    },
-    {
-        title: "Up Engenharia",
-        service: "Identidade Visual",
-        link: "/portfolio/up-engenharia",
-        image: "/dog.jpg", // Substituir pelo path real
-        isFeatured: false,
-    },
-];
-
-// --- NOVO CARD BRUTALISTA (ADAPTADO) ---
+// --- CARD DE DEPOIMENTO ---
 const TestimonialCard = ({ name, role, text }: { name: string, role: string, text: string }) => {
     return (
-        <article className="flex w-full h-full flex-col items-start justify-between border-2 border-black bg-white p-6 shadow-[8px_8px_0_0_#EEACC5] transition-all duration-300 ease-in-out hover:shadow-[12px_12px_0_0_#000] hover:-translate-y-1 hover:-translate-x-1">
+        <article className="group h-full flex flex-col items-start justify-between border-2 border-black bg-white p-6
+                          shadow-[6px_6px_0_0_#EEACC5] transition-all duration-300 ease-in-out
+                          select-none cursor-grab active:cursor-grabbing">
 
-            {/* TAGS DO TOPO */}
             <div className="mb-4 flex items-center gap-x-2 text-[10px] font-black uppercase tracking-widest">
-                <span className="border-2 border-black bg-primary px-2 py-1 text-black">
-                    Feedback
-                </span>
-                <span className="border-2 border-black bg-black px-2 py-1 text-white">
-                    {role}
-                </span>
+                <span className="border-2 border-black bg-primary px-2 py-1 text-black">Feedback</span>
+                <span className="border-2 border-black bg-black px-2 py-1 text-white">{role}</span>
             </div>
 
-            {/* CONTEÚDO */}
-            <div className="group relative flex-1">
-                <h3 className="mt-2 text-2xl font-black uppercase leading-none text-black group-hover:text-primary transition-colors">
-                    {name}
-                </h3>
-
+            <div className="relative flex-1">
+                <h3 className="mt-2 text-2xl font-black uppercase leading-none text-black">{name}</h3>
                 <div className="mt-4 border-l-4 border-black pl-4">
                     <Quote size={24} className="text-gray-300 mb-2 rotate-180" fill="currentColor"/>
-                    <p className="text-sm font-medium leading-relaxed text-gray-700">
-                        "{text}"
-                    </p>
+                    <p className="text-sm font-medium leading-relaxed text-gray-700 line-clamp-6">"{text}"</p>
                 </div>
             </div>
 
-            {/* FOOTER DO CARD */}
             <div className="relative mt-6 flex items-center gap-x-2 w-full pt-4 border-t-2 border-gray-100">
                 <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white font-bold text-xs uppercase border-2 border-primary">
@@ -138,63 +109,56 @@ const TestimonialCard = ({ name, role, text }: { name: string, role: string, tex
     );
 };
 
-// --- DADOS REAIS ---
-const testimonials = [
-    {
-        name: "Alegra Sonhos",
-        role: "Festa do Pijama",
-        text: "A Iasmim entendeu perfeitamente o perfil da nossa empresa e entregou um trabalho incrível com a logomarca e identidade. Sempre atenciosa, aberta a ajustes e com ótimas sugestões. Indicamos para outras empresas!"
-    },
-    {
-        name: "Wyate Boutique",
-        role: "Moda Feminina",
-        text: "Fiquei extremamente satisfeita com o resultado! Agradeço de coração pelo carinho, paciência e profissionalismo ao longo de todo o processo. Acredito que seu trabalho realmente merece todo reconhecimento."
-    },
-    {
-        name: "Up Engenharia",
-        role: "Engenharia Civil",
-        text: "A organização do feed e a estratégia visual mudaram a percepção da nossa marca. A Iasmim conseguiu traduzir obras técnicas em conteúdo atrativo e profissional."
-    }
-];
+// --- SETA BRUTALISTA SIMPLES ---
+const BrutalistArrow = ({ direction, onClick }: { direction: 'left' | 'right', onClick: () => void }) => {
+    const Icon = direction === 'left' ? ArrowLeft : ArrowRight;
+    return (
+        <button
+            onClick={onClick}
+            className={`absolute top-1/2 -translate-y-1/2 z-20 
+                        p-3 bg-white border-2 border-black text-black 
+                        shadow-[4px_4px_0px_0px_#000000] 
+                        hover:bg-primary transition-all duration-200 
+                        active:shadow-none active:translate-x-[2px] active:translate-y-[2px]
+                        opacity-0 group-hover/carousel:opacity-100
+                        ${direction === 'left' ? 'left-4 md:left-8' : 'right-4 md:right-8'}`}
+        >
+            <Icon size={24} strokeWidth={2.5} />
+        </button>
+    );
+}
 
 const Home = () => {
+    const featuredProject = allProjects[0];
+    const secondaryProjects = allProjects.slice(1, 3);
+
+    const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
+
     return (
         <main className="min-h-screen flex flex-col selection:bg-primary selection:text-black overflow-x-hidden">
             <SEO title="Home" description="Estratégia visual e design com propósito para marcas que cansaram de ser ignoradas." />
 
             <Navigation />
 
+            {/* HERO SECTION */}
             <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 min-h-[90vh] flex items-center bg-[#fffbff] overflow-hidden border-b-2 border-black">
-
-                {/* Efeito de blur removido/simplificado */}
                 <div className="hidden md:block absolute top-0 right-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 z-0 pointer-events-none transform-gpu translate-z-0"></div>
-
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-
-                        {/* --- COLUNA DE TEXTO (lg:col-span-7) --- */}
                         <div className="lg:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left animate-in slide-in-from-left duration-1000 fade-in fill-mode-both">
-
-                            {/* TAG PADRONIZADA */}
                             <div className="flex justify-center lg:justify-start">
                                 <div className="inline-flex items-center gap-2 bg-black text-primary border-2 border-primary px-3 py-1.5 md:px-4 md:py-2 font-black uppercase tracking-widest text-[14px] md:text-xs shadow-[4px_4px_0px_0px_#EEACC5] rounded-lg mb-2">
                                     SOCIAL MEDIA | DESIGN
                                 </div>
                             </div>
-
-                            {/* TÍTULO */}
                             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase text-black leading-[0.9] tracking-tighter">
                                 Transforme o <br className="hidden md:block"/>
                                 <span className="text-primary" style={{ WebkitTextStroke: '1px black' }}>Comum</span> em <br className="hidden md:block"/>
                                 Extraordinário.
                             </h1>
-
-                            {/* DESCRIÇÃO */}
                             <p className="text-base sm:text-lg md:text-xl font-medium text-gray-700 leading-relaxed max-w-lg mx-auto lg:mx-0">
                                 Estratégia visual e design com propósito para marcas que cansaram de ser ignoradas.
                             </p>
-
-                            {/* BOTÕES COM EFEITO PUSH BRUTALISTA */}
                             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2">
                                 <Link to="/portfolio" className="px-6 py-3 md:px-8 md:py-4 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:shadow-none transition-all flex items-center justify-center gap-2 group transform-gpu hover:translate-x-[2px] hover:translate-y-[2px]">
                                     Ver Trabalhos <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -204,27 +168,19 @@ const Home = () => {
                                 </Link>
                             </div>
                         </div>
-
-                        {/* --- COLUNA DA IMAGEM (lg:col-span-5) - AGORA BRUTALISTA --- */}
                         <div className="lg:col-span-5 flex justify-center relative lg:justify-end mt-10 lg:mt-0 animate-in slide-in-from-right duration-1000 fade-in fill-mode-both">
-
-                            {/* CAMADA PRINCIPAL: Bloco com Logo, Borda Grossa e Sombra ROSA MASSIVA */}
                             <div className="relative z-10 bg-white border-4 border-black p-6 md:p-10 rounded-2xl shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[18px_18px_0px_0px_#EEACC5] rotate-1 hover:rotate-0 transition-all duration-500 group w-full max-w-sm lg:max-w-md transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px]">
                                 <img src="/logo2.svg" alt="Iasmim Trajano Logo" width={400} height={400} className="w-full h-auto object-contain" />
-
-                                {/* DETALHE BRUTALISTA: Selo Carimbado (Adiciona autenticidade) */}
                                 <div className="absolute -bottom-4 -left-4 bg-black text-primary px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 border-primary shadow-md rotate-3">
                                     EXECUÇÃO IMEDIATA
                                 </div>
                             </div>
-
-                            {/* Efeitos extras removidos (Star, ArrowUpRight) para remover suavidade */}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* --- MARQUEE SUPERIOR --- */}
+            {/* MARQUEE */}
             <div className="bg-accent border-y-2 border-black overflow-hidden py-3 relative z-20 shadow-sm">
                 <div className="flex animate-marquee whitespace-nowrap will-change-transform transform-gpu">
                     {[1, 2, 3, 4].map((i) => (
@@ -238,37 +194,22 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* --- CORPO DA PÁGINA --- */}
             <div className="bg-dots-pattern w-full flex-1 relative z-0">
 
-                {/* --- SEÇÃO SERVIÇOS --- */}
+                {/* SERVIÇOS */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
                     <div className="text-center mb-10 md:mb-12">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Serviços</span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">Minhas <span className="bg-primary px-2">Soluções</span></h2>
                     </div>
-
-                    {/* GRID DE SERVIÇOS: 3 COLUNAS BRUTALISTAS */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            { icon: Share2, title: "Social Media", desc: "Gestão completa, planejamento estratégico e conteúdo visual que gera engajamento e vendas.", link: "/servicos/social-media" },
-                            { icon: PenTool, title: "Identidade Visual", desc: "Criação de marcas inesquecíveis: logo, paleta, tipografia e manuais de uso para autoridade.", link: "/servicos/identidade-visual" },
-                            { icon: Layout, title: "Web Design", desc: "Sites institucionais e landing pages de alta conversão, rápidos e otimizados para o Google.", link: "/servicos/web-design" }
-                        ].map((item, index) => (
-                            <Link
-                                key={index}
-                                to={item.link}
-                                className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-xl
-                                           shadow-[6px_6px_0px_0px_#000000] hover:shadow-[10px_10px_0px_0px_#EEACC5]
-                                           hover:-translate-x-[2px] hover:-translate-y-[2px]
-                                           transition-all duration-300 transform-gpu flex flex-col justify-start text-left"
-                            >
+                        {services.map((item, index) => (
+                            <Link key={index} to={item.link} className="group bg-[#fffbff] border-2 border-black p-6 md:p-8 rounded-xl shadow-[6px_6px_0px_0px_#000000] hover:shadow-[10px_10px_0px_0px_#EEACC5] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-300 transform-gpu flex flex-col justify-start text-left">
                                 <div className="p-2 border-2 border-black mb-4 w-fit bg-primary text-black transition-colors">
                                     <item.icon size={36} className="text-black" />
                                 </div>
                                 <h3 className="text-2xl font-black uppercase mb-3 text-black group-hover:text-primary transition-colors">{item.title}</h3>
                                 <p className="text-gray-700 font-medium text-base mb-6">{item.desc}</p>
-
                                 <span className="mt-auto text-sm font-bold uppercase text-black border-b-2 border-black pb-1 group-hover:text-primary group-hover:border-primary transition-colors flex items-center gap-2">
                                     Explorar Serviço <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                 </span>
@@ -282,7 +223,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SEÇÃO DESTAQUES (AJUSTE AQUI) --- */}
+                {/* CASES DE IMPACTO */}
                 <section className="py-16 md:py-20 bg-black text-white rounded-t-[2.5rem] md:rounded-t-[3rem] relative overflow-hidden border-t-4 border-primary animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
                     <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
                     <div className="container mx-auto px-4 relative z-10">
@@ -294,20 +235,31 @@ const Home = () => {
                             <Link to="/portfolio" className="border-2 border-primary text-primary px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-black transition-all">Ver Portfólio Completo</Link>
                         </div>
 
-                        {/* NOVO GRID ASSIMÉTRICO */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            <div className="lg:col-span-2">
-                                <CaseGridItem
-                                    {...caseData[0]}
-                                    customBg="bg-primary" // Fundo Rosa
-                                    customShadow=" hover:-translate-x-1 hover:-translate-y-1"
-                                />
-                            </div>
-
-                            {/* Itens Menores (Col-Span 1) */}
+                            {featuredProject && (
+                                <div className="lg:col-span-2">
+                                    <CaseGridItem
+                                        title={featuredProject.client}
+                                        service={featuredProject.category}
+                                        link={`/portfolio/${featuredProject.slug}`}
+                                        image={featuredProject.image}
+                                        isFeatured={true}
+                                        customBg="bg-primary"
+                                        customShadow="shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#EEACC5] hover:-translate-x-1 hover:-translate-y-1"
+                                    />
+                                </div>
+                            )}
                             <div className="lg:col-span-1 space-y-8">
-                                <CaseGridItem {...caseData[1]} />
-                                <CaseGridItem {...caseData[2]} />
+                                {secondaryProjects.map((project) => (
+                                    <CaseGridItem
+                                        key={project.id}
+                                        title={project.client}
+                                        service={project.category}
+                                        link={`/portfolio/${project.slug}`}
+                                        image={project.image}
+                                        isFeatured={false}
+                                    />
+                                ))}
                             </div>
                         </div>
 
@@ -317,60 +269,78 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- SEÇÃO DE DEPOIMENTOS (CARD BRUTALISTA) --- */}
-                <section className="py-20 border-b-2 border-black bg-[#fffbff] overflow-hidden">
-                    <div className="container mx-auto px-4 mb-16 text-center">
+                {/* --- SEÇÃO DE DEPOIMENTOS (SWIPER CENTRALIZADO) --- */}
+                <section className="py-20 border-b-2 border-black bg-[#fffbff] overflow-hidden relative">
+                    <div className="container mx-auto px-4 mb-10 text-center">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Feedback</span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">
                             <span className="bg-primary px-2">Quem</span> Confia
                         </h2>
                     </div>
 
-                    {/* GRID DE CARDS */}
-                    <div className="container mx-auto px-4">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {testimonials.map((t, i) => (
-                                <TestimonialCard key={i} name={t.name} role={t.role} text={t.text} />
-                            ))}
+                    {/* CONTAINER DO CARROSSEL */}
+                    <div className="w-full relative group/carousel">
+
+                        {/* SETAS FLUTUANTES (SOLTAS DO CONTAINER, ALINHADAS A TELA/CARROSSEL) */}
+                        <BrutalistArrow direction="left" onClick={() => swiperRef?.slidePrev()} />
+                        <BrutalistArrow direction="right" onClick={() => swiperRef?.slideNext()} />
+
+                        {/* SWIPER - SEM CONTAINER PARA PEGAR LARGURA TOTAL SE QUISER, OU COM CONTAINER FLUIDO */}
+                        <div className="w-full">
+                            <Swiper
+                                modules={[SwiperNavigation, Autoplay]}
+                                onBeforeInit={(swiper) => setSwiperRef(swiper)}
+                                centeredSlides={true}
+                                loop={true}
+                                spaceBetween={20}
+                                slidesPerView={1.25}
+                                autoplay={{
+                                    delay: 5000,
+                                    disableOnInteraction: false,
+                                }}
+                                breakpoints={{
+                                    640: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 30,
+                                    },
+                                    1024: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 40,
+                                    },
+                                }}
+                                className="!pb-12 !px-0"
+                            >
+                                {testimonials.map((t, i) => (
+                                    <SwiperSlide key={i} className="h-auto">
+                                        <div className="h-full pt-2">
+                                            <TestimonialCard name={t.name} role={t.role} text={t.text} />
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
                     </div>
                 </section>
 
-                {/* --- SOBRE --- */}
+                {/* SOBRE */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
-                    <div className="bg-[#fffbff] border-4 border-black rounded-xl md:rounded-2xl p-6 md:p-12
-                    shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5]
-                    flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu">
-
+                    <div className="bg-[#fffbff] border-4 border-black rounded-xl md:rounded-2xl p-6 md:p-12 shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5] flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu">
                         <div className="w-full md:w-1/3 relative">
                             <div className="relative aspect-square rounded-lg border-4 border-black overflow-hidden shadow-[8px_8px_0px_0px_#EEACC5] rotate-1 hover:rotate-0 transition-all duration-500">
-
                                 <ImageWithSkeleton src="/iasmim.png" alt="Iasmim" className="object-cover w-full h-full" />
-
                                 <div className="absolute inset-4 border-2 border-primary pointer-events-none"></div>
                             </div>
-
-                            <div className="absolute top-[-10px] right-[-10px] bg-primary text-black px-3 py-1 font-black text-xs uppercase rotate-3 shadow-[2px_2px_0px_0px_#000000] border-2 border-black z-20">
-                                IMPACTO VISUAL
-                            </div>
-
-                            <div className="absolute bottom-[-10px] left-[-10px] bg-black text-white px-3 py-1 font-black text-xs uppercase -rotate-3 border-2 border-primary shadow-md z-20">
-                                DESIGN DE PESO
-                            </div>
+                            <div className="absolute top-[-10px] right-[-10px] bg-primary text-black px-3 py-1 font-black text-xs uppercase rotate-3 shadow-[2px_2px_0px_0px_#000000] border-2 border-black z-20">IMPACTO VISUAL</div>
+                            <div className="absolute bottom-[-10px] left-[-10px] bg-black text-white px-3 py-1 font-black text-xs uppercase -rotate-3 border-2 border-primary shadow-md z-20">DESIGN DE PESO</div>
                         </div>
-                        {/* --- FIM DO NOVO CARD --- */}
-
                         <div className="w-full md:w-2/3 space-y-4 md:space-y-6 text-left">
-
                             <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-tight">
                                 Design com <br className="hidden md:block"/>
                                 <span className="bg-primary px-2">Propósito</span>.
                             </h2>
-
                             <p className="text-gray-700 font-medium text-base md:text-lg leading-relaxed border-l-4 border-black pl-4">
-                                Prazer, **Iasmim**. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
+                                Prazer, <strong> Iasmim</strong>. Designer e Social Media focada em tirar marcas da mesmice. Se você busca estética aliada a resultado, a gente vai se dar bem.
                             </p>
-
                             <Link to="/sobre" className="inline-flex items-center gap-2 font-black uppercase border-b-2 border-black hover:text-primary hover:border-primary transition-colors pb-1 text-sm md:text-base">
                                 Conhecer minha história <ArrowRight size={16} />
                             </Link>
@@ -378,27 +348,16 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* --- CTA FINAL --- */}
+                {/* CTA */}
                 <section className="py-16 md:py-20 container mx-auto px-4 text-center">
                     <div className="max-w-3xl mx-auto">
-
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
                             Pronto pra <span className="bg-primary px-2">Começar</span>?
                         </h2>
-
                         <p className="text-gray-700 font-bold text-base md:text-lg mb-10">
                             Vamos transformar suas ideias em uma marca forte e lucrativa.
                         </p>
-
-                        <Link
-                            to="/contato"
-                            className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase
-                                       rounded-xl bg-primary text-black border-2 border-black
-                                       px-8 py-4 md:px-10
-                                       shadow-[6px_6px_0px_0px_#000000]
-                                       hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
-                                       transition-all active:scale-[0.98] transform-gpu"
-                        >
+                        <Link to="/contato" className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black px-8 py-4 md:px-10 shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all active:scale-[0.98] transform-gpu">
                             Solicitar Orçamento <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>

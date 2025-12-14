@@ -2,45 +2,30 @@ import { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Check, ChevronRight, Home, HelpCircle, ArrowRight } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Home, HelpCircle } from "lucide-react";
 import SEO from "@/components/SEO";
 
-// --- DADOS DOS SERVIÇOS ---
-const servicesData: Record<string, { title: string; subtitle: string; description: string; includes: string[] }> = {
-    "social-media": {
-        title: "Social Media",
-        subtitle: "Gestão & Estratégia",
-        description: "Postar por postar não paga boleto. Aqui o buraco é mais embaixo: criamos narrativas que prendem, engajam e vendem. Deixe a parte chata comigo e foque no seu negócio.",
-        includes: [ "Planejamento Estratégico de Conteúdo", "Criação de Artes e Legendas (Copy)", "Edição de Reels/TikTok (CapCut)", "Agendamento e Publicação", "Análise Mensal de Métricas", "Gestão de Tráfego Pago (Opcional)" ]
-    },
-    "identidade-visual": {
-        title: "Identidade Visual",
-        subtitle: "Branding & Logos",
-        description: "Sua marca fala antes de você abrir a boca. Crio sistemas visuais completos que transmitem autoridade, valor e ficam na cabeça do cliente.",
-        includes: [ "Logotipo Principal e Variações", "Paleta de Cores Estratégica", "Tipografia Exclusiva", "Elementos de Apoio e Estampas", "Manual da Marca (Brandbook)", "Aplicações (Cartão, Crachá, etc)" ]
-    },
-    "web-design": {
-        title: "Web Design",
-        subtitle: "Sites & Landing Pages",
-        description: "Seu Instagram pode cair amanhã. Seu site é seu terreno próprio. Desenvolvo páginas rápidas, bonitas e feitas pra converter visitante em cliente.",
-        includes: [ "Layout Exclusivo (UI Design)", "Desenvolvimento (Code ou No-Code)", "Otimização para Celular (Responsivo)", "Configuração de SEO Básico", "Integração com Pixel e Analytics", "Treinamento para atualizações" ]
-    },
-    "design-grafico": {
-        title: "Design Gráfico",
-        subtitle: "Offline & Impressos",
-        description: "O digital é rei, mas o impresso é a coroa. Materiais físicos tangibilizam o valor da sua marca. Do cartão de visita ao outdoor, tudo tem que estar impecável.",
-        includes: [ "Cartões de Visita e Papelaria", "Diagramação de E-books e Apostilas", "Embalagens e Rótulos", "Banners e Outdoors", "Cardápios e Catálogos", "Materiais para Eventos" ]
-    }
-};
+// --- IMPORTANDO DADOS CENTRALIZADOS ---
+import { allServices } from "@/data/services";
 
 const ServiceDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
-    const service = slug ? servicesData[slug] : null;
+
+    // Busca o serviço no arquivo centralizado pelo slug da URL
+    const service = allServices.find((s) => s.slug === slug);
 
     useEffect(() => {
-        if (!service) navigate("/servicos");
-    }, [slug, service, navigate]);
+        // Se não achar o serviço (ex: digitou url errada), manda pra lista
+        if (!service) {
+            navigate("/servicos");
+        }
+    }, [service, navigate, slug]); // Adicionei slug na dependência pra garantir
+
+    // Rola pro topo sempre que mudar de serviço
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [slug]);
 
     if (!service) return null;
 
@@ -52,7 +37,7 @@ const ServiceDetail = () => {
             />
             <Navigation />
 
-            {/* --- HEADER SÓLIDA (PADRÃO BRUTALISTA ESQUERDA) --- */}
+            {/* --- HEADER SÓLIDA --- */}
             <section
                 key={`header-${slug}`}
                 className="pt-32 pb-8 w-full relative bg-[#fffbff] border-b-2 border-black z-10"
@@ -66,7 +51,7 @@ const ServiceDetail = () => {
 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
 
-                        {/* LADO ESQUERDO (Slide da Esquerda) */}
+                        {/* LADO ESQUERDO */}
                         <div className="animate-in slide-in-from-left duration-700 fade-in w-full md:w-auto">
 
                             {/* BREADCRUMB */}
@@ -93,9 +78,8 @@ const ServiceDetail = () => {
                             </h1>
                         </div>
 
-                        {/* LADO DIREITO (Voltar e Destaque) */}
+                        {/* LADO DIREITO */}
                         <div className="md:max-w-sm mb-2 animate-in slide-in-from-right duration-700 fade-in w-full md:w-auto mt-4 md:mt-0">
-                            {/* Coluna 'Voltar' alinhada à esquerda no mobile */}
                             <Link to="/servicos" className="inline-flex items-center gap-2 text-xs text-black font-bold uppercase hover:text-primary hover:border-primary transition-colors pb-1">
                                 <ArrowLeft size={12} /> Voltar para Serviços
                             </Link>
@@ -104,7 +88,7 @@ const ServiceDetail = () => {
                 </div>
             </section>
 
-            {/* CORPO DE BOLINHAS - key={slug} aqui também */}
+            {/* CORPO DE BOLINHAS */}
             <div
                 key={`body-${slug}`}
                 className="bg-dots-pattern w-full relative z-0 flex-1 flex flex-col justify-between"
@@ -116,14 +100,16 @@ const ServiceDetail = () => {
 
                         {/* Coluna Esquerda: Detalhes do Serviço */}
                         <div className="lg:col-span-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
+
+                            {/* DESCRIÇÃO LONGA */}
                             <div className="bg-[#fffbff] border-2 border-black p-8 md:p-12 rounded-3xl shadow-[8px_8px_0px_0px_#000000] mb-12">
                                 <h2 className="text-3xl font-black uppercase mb-6">O que é?</h2>
                                 <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
-                                    {service.description}
+                                    {service.longDescription}
                                 </p>
                             </div>
 
-                            {/* BOX INCLUSO - Brutalista */}
+                            {/* BOX INCLUSO - MAPEADO DO ARRAY includes */}
                             <div className="bg-black text-white p-8 md:p-12 rounded-3xl border-2 border-primary shadow-[8px_8px_0px_0px_#EEACC5] relative overflow-hidden mb-12">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
 
@@ -132,7 +118,7 @@ const ServiceDetail = () => {
                                 </h2>
 
                                 <div className="grid md:grid-cols-2 gap-y-6 gap-x-12 relative z-10">
-                                    {service.includes.map((item, index) => (
+                                    {service.includes?.map((item, index) => (
                                         <div key={index} className="flex items-start gap-4 group">
                                             <div className="bg-primary/20 p-1 rounded-full mt-1 group-hover:bg-primary group-hover:text-black transition-colors">
                                                 <Check size={16} className="text-primary group-hover:text-black" />
@@ -143,25 +129,23 @@ const ServiceDetail = () => {
                                 </div>
                             </div>
 
-                            {/* FAQ */}
+                            {/* FAQ - MAPEADO DINAMICAMENTE AQUI, PORRA */}
                             <div className="space-y-6">
                                 <h3 className="text-2xl font-black uppercase flex items-center gap-2">
                                     <HelpCircle className="text-black" /> Dúvidas Comuns
                                 </h3>
 
-                                <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[4px_4px_0px_0px_#EEACC5]">
-                                    <h4 className="font-black uppercase mb-2">Quanto tempo demora?</h4>
-                                    <p className="text-gray-600 text-sm font-medium">
-                                        Depende da complexidade. Tudo será alinhado no contrato.
-                                    </p>
-                                </div>
-
-                                <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[4px_4px_0px_0px_#EEACC5]">
-                                    <h4 className="font-black uppercase mb-2">Quais as formas de pagamento?</h4>
-                                    <p className="text-gray-600 text-sm font-medium">
-                                        Aceito PIX (com desconto de 5%), Cartão de Crédito em até 12x ou Boleto.
-                                    </p>
-                                </div>
+                                {service.faq?.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[4px_4px_0px_0px_#EEACC5] hover:shadow-[6px_6px_0px_0px_#000] hover:-translate-y-[1px] transition-all duration-300"
+                                    >
+                                        <h4 className="font-black uppercase mb-2">{item.question}</h4>
+                                        <p className="text-gray-600 text-sm font-medium">
+                                            {item.answer}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 

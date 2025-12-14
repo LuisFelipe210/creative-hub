@@ -2,11 +2,21 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 
+// --- IMPORTANDO DADOS CENTRALIZADOS ---
+import { allServices } from "@/data/services";
+
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const location = useLocation();
+
+    // --- CRIAÇÃO AUTOMÁTICA DOS LINKS DE SERVIÇO ---
+    // Pega o título e o slug do arquivo central e monta o array de links
+    const serviceLinks = allServices.map((service) => ({
+        name: service.title,
+        path: `/servicos/${service.slug}`
+    }));
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,13 +44,6 @@ const Navigation = () => {
         setIsOpen(false);
     };
 
-    const serviceLinks = [
-        { name: "Social Media", path: "/servicos/social-media" },
-        { name: "Identidade Visual", path: "/servicos/identidade-visual" },
-        { name: "Web Design", path: "/servicos/web-design" },
-        { name: "Design Gráfico", path: "/servicos/design-grafico" },
-    ];
-
     const btnClass = (isActive: boolean) => `
         px-5 py-2 font-bold text-sm uppercase transition-all border-2 rounded-lg flex items-center gap-1
         ${isActive
@@ -50,10 +53,9 @@ const Navigation = () => {
     `;
 
     const mobileLinkClass = (path: string) => {
-        // Lógica do Mobile também precisa ajustar pro Portfolio
         const isActive = path === '/'
             ? location.pathname === '/'
-            : location.pathname.startsWith(path); // Aqui já tava meio caminho andado
+            : location.pathname.startsWith(path);
 
         return `text-4xl font-black uppercase tracking-tighter transition-colors ${
             isActive ? "text-primary" : "text-black hover:text-primary"
@@ -103,12 +105,12 @@ const Navigation = () => {
                     <div className="relative group">
                         <Link
                             to="/servicos"
-                            // MUDANÇA AQUI: Usa includes pra pegar sub-rotas
                             className={btnClass(location.pathname.includes('/servicos'))}
                         >
                             Serviços
                         </Link>
 
+                        {/* DROPDOWN AUTOMÁTICO */}
                         <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 w-56">
                             <div className="bg-white border-2 border-accent shadow-soft rounded-xl overflow-hidden p-2 flex flex-col gap-1">
                                 {serviceLinks.map((subLink) => (
@@ -189,6 +191,7 @@ const Navigation = () => {
                                 </button>
                             </div>
 
+                            {/* DROPDOWN MOBILE AUTOMÁTICO */}
                             {isServicesOpen && (
                                 <div className="flex flex-col gap-3 mt-4 bg-white/50 w-full rounded-xl p-4 border-2 border-accent/20">
                                     {serviceLinks.map((subLink) => (

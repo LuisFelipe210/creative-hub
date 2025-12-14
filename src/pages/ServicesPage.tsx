@@ -5,40 +5,8 @@ import { ArrowRight, Sparkles, Target, Zap, Layers, ChevronRight, Home, Hammer }
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 
-const services = [
-    {
-        id: "01",
-        title: "Social Media",
-        subtitle: "Gestão & Estratégia",
-        description: "Não é sobre postar todo dia, é sobre postar o que funciona. Planejamento, criação de conteúdo e análise de dados para fazer seu perfil virar máquina de vendas.",
-        tags: ["Planejamento", "Copywriting", "Design", "Tráfego"],
-        link: "/servicos/social-media"
-    },
-    {
-        id: "02",
-        title: "Identidade Visual",
-        subtitle: "Branding & Logos",
-        description: "Sua marca fala antes de você abrir a boca. Crio sistemas visuais completos que transmitem autoridade, valor e ficam na cabeça do cliente.",
-        tags: ["Logo", "Paleta de Cores", "Tipografia", "Brandbook"],
-        link: "/servicos/identidade-visual"
-    },
-    {
-        id: "03",
-        title: "Web Design",
-        subtitle: "Sites & Landing Pages",
-        description: "Seu terreno próprio na internet. Sites rápidos, bonitos e otimizados para conversão. Pare de perder venda por site feio ou lento.",
-        tags: ["UI/UX", "Wordpress/React", "SEO", "Responsivo"],
-        link: "/servicos/web-design"
-    },
-    {
-        id: "04",
-        title: "Design Gráfico",
-        subtitle: "Offline & Impressos",
-        description: "Do cartão de visita ao outdoor. Materiais gráficos que tangibilizam a qualidade do seu serviço no mundo real.",
-        tags: ["Papelaria", "Embalagens", "Editoriais", "Merch"],
-        link: "/servicos/design-grafico"
-    }
-];
+// IMPORTANDO DADOS CENTRALIZADOS
+import { allServices } from "@/data/services";
 
 const ServicesPage = () => {
     const [activeService, setActiveService] = useState<string | null>(null);
@@ -90,10 +58,10 @@ const ServicesPage = () => {
             {/* --- CORPO DA PÁGINA --- */}
             <div className="bg-dots-pattern w-full relative z-0">
 
-                {/* LISTA DE SERVIÇOS - Animando de baixo pra cima */}
+                {/* LISTA DE SERVIÇOS - USANDO DADOS CENTRALIZADOS */}
                 <section className="py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
                     <div className="flex flex-col bg-white backdrop-blur-sm border-2 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
-                        {services.map((service) => (
+                        {allServices.map((service) => (
                             <div
                                 key={service.id}
                                 onMouseEnter={() => setActiveService(service.id)}
@@ -111,8 +79,8 @@ const ServicesPage = () => {
                                             <span className={`block text-xs font-black uppercase tracking-widest mb-2 transition-colors ${
                                                 activeService === service.id ? "text-black" : "text-black md:text-primary"
                                             }`}>
-                                {service.id} — {service.subtitle}
-                            </span>
+                                                {service.id} — {service.subtitle}
+                                            </span>
                                             <h2 className={`text-3xl md:text-5xl font-black uppercase leading-none transition-colors ${
                                                 activeService === service.id ? "text-black" : "text-black"
                                             }`}>
@@ -122,7 +90,7 @@ const ServicesPage = () => {
 
                                         <div className="md:col-span-5">
                                             <p className={`text-lg font-medium leading-relaxed transition-colors ${
-                                                activeService === service.id ? "text-black" : "text-black md:text-gray-700" 
+                                                activeService === service.id ? "text-black" : "text-black md:text-gray-700"
                                             }`}>
                                                 {service.description}
                                             </p>
@@ -133,18 +101,17 @@ const ServicesPage = () => {
                                                             "bg-black text-white border-black" :
                                                             "bg-black text-white border-black md:bg-black md:text-primary"
                                                     }`}>
-                                        {tag}
-                                    </span>
+                                                        {tag}
+                                                    </span>
                                                 ))}
                                             </div>
                                         </div>
 
                                         <div className="md:col-span-2 flex justify-end">
-                                            {/* 6. SETA: NO MOBILE VAI FICAR COM AS PROPRIEDADES DO HOVER */}
                                             <ArrowRight
                                                 size={40}
                                                 className={`transform transition-all duration-500 ${
-                                                    activeService === service.id ? "rotate-0 translate-x-2 text-black" : "rotate-0 translate-x-2 md:-rotate-45 text-black" // <-- MUDANÇA AQUI
+                                                    activeService === service.id ? "rotate-0 translate-x-2 text-black" : "rotate-0 translate-x-2 md:-rotate-45 text-black"
                                                 }`}
                                             />
                                         </div>
