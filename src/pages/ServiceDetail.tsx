@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Check, ChevronRight, Home, HelpCircle } from "lucide-react";
 import SEO from "@/components/SEO";
+import ButterflyLogo from "@/components/ButterflyLogo"; // <--- IMPORTAÇÃO AQUI
 
 // --- IMPORTANDO DADOS CENTRALIZADOS ---
 import { allServices } from "@/data/services";
@@ -20,7 +21,7 @@ const ServiceDetail = () => {
         if (!service) {
             navigate("/servicos");
         }
-    }, [service, navigate, slug]); // Adicionei slug na dependência pra garantir
+    }, [service, navigate, slug]);
 
     // Rola pro topo sempre que mudar de serviço
     useEffect(() => {
@@ -73,9 +74,17 @@ const ServiceDetail = () => {
                             <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">
                                 {service.subtitle}
                             </span>
-                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter">
-                                {service.title}
-                            </h1>
+
+                            {/* BORBOLETA 1: NO TÍTULO */}
+                            <div className="relative inline-block">
+                                <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter relative z-10">
+                                    {service.title}
+                                </h1>
+                                <ButterflyLogo
+                                    className="absolute -top-6 -right-10 w-16 h-16 text-black rotate-12 z-0 hidden md:block"
+                                    opacity={0.8}
+                                />
+                            </div>
                         </div>
 
                         {/* LADO DIREITO */}
@@ -102,9 +111,16 @@ const ServiceDetail = () => {
                         <div className="lg:col-span-8 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
 
                             {/* DESCRIÇÃO LONGA */}
-                            <div className="bg-[#fffbff] border-2 border-black p-8 md:p-12 rounded-3xl shadow-[8px_8px_0px_0px_#000000] mb-12">
-                                <h2 className="text-3xl font-black uppercase mb-6">O que é?</h2>
-                                <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
+                            <div className="bg-[#fffbff] border-2 border-black p-8 md:p-12 rounded-3xl shadow-[8px_8px_0px_0px_#000000] mb-12 relative">
+
+                                {/* BORBOLETA 2: SAINDO DO CARD BRANCO */}
+                                <ButterflyLogo
+                                    className="absolute -top-6 -right-6 w-24 h-24 text-primary rotate-[-15deg] drop-shadow-sm pointer-events-none"
+                                    opacity={1}
+                                />
+
+                                <h2 className="text-3xl font-black uppercase mb-6 relative z-10">O que é?</h2>
+                                <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed relative z-10">
                                     {service.longDescription}
                                 </p>
                             </div>
@@ -112,6 +128,11 @@ const ServiceDetail = () => {
                             {/* BOX INCLUSO - MAPEADO DO ARRAY includes */}
                             <div className="bg-black text-white p-8 md:p-12 rounded-3xl border-2 border-primary shadow-[8px_8px_0px_0px_#EEACC5] relative overflow-hidden mb-12">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
+
+                                {/* BORBOLETA 3: GIGANTE FANTASMA NO CARD PRETO */}
+                                <div className="absolute -bottom-20 -left-20 pointer-events-none opacity-[0.13]">
+                                    <ButterflyLogo className="w-96 h-96 text-primary -rotate-12" />
+                                </div>
 
                                 <h2 className="text-3xl font-black uppercase mb-8 relative z-10">
                                     O que está <span className="text-primary">Incluso</span>?
@@ -129,7 +150,7 @@ const ServiceDetail = () => {
                                 </div>
                             </div>
 
-                            {/* FAQ - MAPEADO DINAMICAMENTE AQUI, PORRA */}
+                            {/* FAQ */}
                             <div className="space-y-6">
                                 <h3 className="text-2xl font-black uppercase flex items-center gap-2">
                                     <HelpCircle className="text-black" /> Dúvidas Comuns
@@ -151,16 +172,22 @@ const ServiceDetail = () => {
 
                         {/* Coluna Direita (Sticky CTA) */}
                         <div className="lg:col-span-4 sticky top-28 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both fade-in">
-                            <div className="bg-primary selection-invert border-4 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_#000000] text-center">
+                            <div className="bg-primary selection-invert border-4 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_#000000] text-center relative overflow-hidden">
 
-                                <h3 className="text-2xl font-black uppercase text-black mb-4">
+                                {/* BORBOLETA 4: DISCRETA NO CTA */}
+                                <ButterflyLogo
+                                    className="absolute -bottom-4 -right-4 w-20 h-20 text-black rotate-45 pointer-events-none"
+                                    opacity={0.05}
+                                />
+
+                                <h3 className="text-2xl font-black uppercase text-black mb-4 relative z-10">
                                     Curtiu a proposta?
                                 </h3>
-                                <p className="text-black/80 font-bold text-sm mb-8">
+                                <p className="text-black/80 font-bold text-sm mb-8 relative z-10">
                                     Vamos personalizar esse pacote para a necessidade exata da sua marca.
                                 </p>
 
-                                <div className="space-y-4">
+                                <div className="space-y-4 relative z-10">
                                     <Link
                                         to="/contato"
                                         className="w-full inline-flex justify-center items-center gap-2

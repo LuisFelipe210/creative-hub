@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Star, Heart, Coffee, Layers, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import ButterflyLogo from "@/components/ButterflyLogo";
 
 // --- ESTILOS CUSTOMIZADOS ATUALIZADOS ---
 const customStyles = `
@@ -29,7 +30,6 @@ const AboutPage = () => {
     return (
         <main className="min-h-screen selection:bg-primary selection:text-black">
             <SEO title="Sobre" description="Conheça a mente por trás da criatividade e descubra como transformo ideias em marcas fortes." />
-            {/* Injetando os estilos da animação */}
             <style>{customStyles}</style>
 
             <Navigation />
@@ -43,7 +43,8 @@ const AboutPage = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-                        <div className="animate-in slide-in-from-left duration-700">
+                        <div className="animate-in slide-in-from-left duration-700 relative">
+
                             <div className="flex items-center gap-3 mb-4 text-xs font-bold uppercase tracking-widest">
                                 <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors">
                                     <Home size={12} className="mb-0.5" />
@@ -55,8 +56,15 @@ const AboutPage = () => {
                                 </span>
                             </div>
 
-                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
-                                Criativa & <br />
+                            <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left relative z-10">
+                                {/* BORBOLETA 1: TÍTULO */}
+                                <span className="relative inline-block">
+                                    Criativa
+                                    <ButterflyLogo
+                                        className="absolute -top-6 -right-10 w-12 h-12 md:w-16 md:h-16 text-black rotate-[25deg]"
+                                        opacity={1}
+                                    />
+                                </span> & <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
                                     Estrategista
                                 </span>.
@@ -75,17 +83,26 @@ const AboutPage = () => {
             {/* --- CORPO COM BOLINHAS --- */}
             <div className="bg-dots-pattern w-full relative z-0">
 
-                {/* --- SEÇÃO MANIFESTO + LOGO (GRID NOVO) --- */}
+                {/* --- SEÇÃO MANIFESTO + LOGO --- */}
                 <section className="py-20 container mx-auto px-4">
                     <div className="grid lg:grid-cols-3 gap-8 items-stretch">
 
                         {/* COLUNA ESQUERDA: TEXTO MANIFESTO (2/3) */}
-                        <div className="lg:col-span-2 bg-[#fffbff]/90 backdrop-blur-sm p-8 md:p-12 border-2 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000000] animate-in slide-in-from-bottom duration-700">
-                            <h2 className="text-3xl md:text-5xl font-black uppercase leading-tight text-black mb-8">
+                        {/* COLUNA ESQUERDA: TEXTO MANIFESTO (2/3) */}
+                        <div className="lg:col-span-2 bg-[#fffbff]/90 backdrop-blur-sm p-8 md:p-12 border-2 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000000] animate-in slide-in-from-bottom duration-700 relative">
+
+                            {/* --- BORBOLETA 1: DECORAÇÃO NO CANTO DO TEXTO --- */}
+                            <ButterflyLogo
+                                className="absolute -top-8 -left-8 w-24 h-24 md:w-32 md:h-32 text-primary rotate-[-15deg] drop-shadow-lg z-10"
+                                color="#EEACC5"
+                                opacity={1}
+                            />
+
+                            <h2 className="text-3xl md:text-5xl font-black uppercase leading-tight text-black mb-8 relative z-10">
                                 "Design sem estratégia é <span className="text-gray-400 line-through decoration-primary decoration-4">arte</span>. <br/>
                                 Com estratégia, é <span className="bg-primary px-2 text-black">negócio</span>."
                             </h2>
-                            <p className="text-xl text-gray-800 font-medium leading-relaxed">
+                            <p className="text-xl text-gray-800 font-medium leading-relaxed relative z-10">
                                 Oi! Me chamo <strong>Iasmim</strong>, tenho 24 anos e atuo como Social Media e Designer desde 2022, quando iniciei na Agência Echos. Desde então, venho unindo minhas duas grandes paixões: a criatividade e a estratégia.
                             </p>
                         </div>
@@ -101,7 +118,7 @@ const AboutPage = () => {
                     </div>
                 </section>
 
-                {/* --- BENTO GRID (O RESTO DAS INFORMAÇÕES) --- */}
+                {/* --- BENTO GRID --- */}
                 <section className="pb-24 container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]">
 
@@ -112,6 +129,15 @@ const AboutPage = () => {
                                 alt="Iasmim Trajano"
                                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                             />
+                            {/* BORBOLETA 3: SOBRE A FOTO (BRANCA) */}
+                            <div className="absolute top-4 right-4 z-20 mix-blend-overlay">
+                                <ButterflyLogo
+                                    className="w-20 h-20 rotate-12 text-white"
+                                    color="#ffffff"
+                                    opacity={0.6}
+                                />
+                            </div>
+
                             <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
                                 <span className="text-primary font-bold uppercase tracking-widest text-xs">Founder</span>
                                 <h3 className="text-white font-black text-2xl uppercase">Iasmim Trajano</h3>
@@ -120,10 +146,15 @@ const AboutPage = () => {
 
                         {/* CARD 2: BIO */}
                         <div className="md:col-span-2 bg-black text-white p-8 rounded-3xl flex flex-col justify-center relative overflow-hidden border-2 border-black shadow-[8px_8px_0px_0px_#EEACC5]">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[80px] opacity-20"></div>
-                            <h3 className="text-2xl font-black uppercase mb-4 text-primary">Minha História</h3>
 
-                            <div className="font-medium text-gray-300 text-base md:text-lg leading-relaxed space-y-4 md:overflow-y-auto md:max-h-[220px] pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-primary">
+                            {/* BORBOLETA 4: FUNDO GIGANTE PRETO NO PRETO (JÁ TINHA, AUMENTEI) */}
+                            <div className="absolute -right-24 -bottom-32 w-96 h-96 opacity-[0.2] pointer-events-none rotate-[20deg]">
+                                <ButterflyLogo color="#EEACC5" className="w-full h-full" />
+                            </div>
+
+                            <h3 className="text-2xl font-black uppercase mb-4 text-primary relative z-10">Minha História</h3>
+
+                            <div className="font-medium text-gray-300 text-base md:text-lg leading-relaxed space-y-4 md:overflow-y-auto md:max-h-[220px] pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-primary relative z-10">
                                 <p>
                                     Desde pequena, sempre fui envolvida com o mundo das artes, e hoje transformo isso em projetos visuais que comunicam com propósito. Sou detalhista, perfeccionista e tenho um olhar apurado, o que me permite entregar trabalhos com identidade e qualidade.
                                 </p>
@@ -140,12 +171,18 @@ const AboutPage = () => {
                         </div>
 
                         {/* CARD 4: FERRAMENTAS */}
-                        <div className="bg-white p-8 rounded-3xl border-2 border-black flex flex-col justify-between shadow-[8px_8px_0px_0px_#000000] gap-4">
-                            <div className="flex items-center gap-2 mb-0 md:mb-4">
+                        <div className="bg-white p-8 rounded-3xl border-2 border-black flex flex-col justify-between shadow-[8px_8px_0px_0px_#000000] gap-4 relative overflow-hidden">
+                            {/* BORBOLETA 5: PEQUENA NO CARD DE FERRAMENTAS */}
+                            <ButterflyLogo
+                                className="absolute -bottom-6 -right-6 w-24 h-24 text-gray-200 -rotate-12 pointer-events-none"
+                                color="#e5e7eb"
+                            />
+
+                            <div className="flex items-center gap-2 mb-0 md:mb-4 relative z-10">
                                 <Layers className="text-primary" />
                                 <h3 className="font-black uppercase text-lg">Ferramentas</h3>
                             </div>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-2 relative z-10">
                                 {["Photoshop", "Canva", "Figma", "CapCut", "Trello"].map(tool => (
                                     <span key={tool} className="px-3 py-1 border border-gray-300 rounded-full bg-black text-primary text-xs font-bold uppercase hover:bg-primary hover:border-black hover:text-black transition-colors cursor-default">
                                         {tool}
@@ -157,8 +194,8 @@ const AboutPage = () => {
                         {/* CARD 5: FILOSOFIA */}
                         <div className="md:col-span-1 bg-[#fdf2f8] p-8 rounded-3xl border-2 border-primary flex flex-col justify-center relative overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
                             <Heart className="absolute -bottom-4 -right-4 w-32 h-32 text-primary/10" />
-                            <h3 className="font-black uppercase text-lg mb-4">O que esperar?</h3>
-                            <ul className="space-y-3 font-bold text-sm text-gray-700">
+                            <h3 className="font-black uppercase text-lg mb-4 relative z-10">O que esperar?</h3>
+                            <ul className="space-y-3 font-bold text-sm text-gray-700 relative z-10">
                                 <li className="flex items-center gap-2"><Star size={14} className="text-primary"/> Atendimento próximo</li>
                                 <li className="flex items-center gap-2"><Star size={14} className="text-primary"/> Prazos cumpridos</li>
                                 <li className="flex items-center gap-2"><Star size={14} className="text-primary"/> Foco em conversão</li>
@@ -186,8 +223,16 @@ const AboutPage = () => {
                         shadow-[14px_14px_0px_0px_#000000]
                         transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
 
-                        <div className="relative z-10">
+                        {/* BORBOLETA 6: FUNDO DO CTA */}
+                        <div className="absolute -bottom-20 -left-20 pointer-events-none">
+                            <ButterflyLogo
+                                className="w-80 h-80 rotate-45"
+                                color="#000000"
+                                opacity={0.05}
+                            />
+                        </div>
 
+                        <div className="relative z-10">
                             <h2 className="text-4xl md:text-6xl font-black uppercase mb-6 leading-none">
                                 Chega de <span className="bg-black text-white px-2">Perder</span> Tempo
                             </h2>

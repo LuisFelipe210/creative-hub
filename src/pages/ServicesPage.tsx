@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Sparkles, Target, Zap, Layers, ChevronRight, Home, Hammer } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import ButterflyLogo from "@/components/ButterflyLogo"; // <--- NÃO ESQUECE DE IMPORTAR ESSA DESGRAÇA
 
 // IMPORTANDO DADOS CENTRALIZADOS
 import { allServices } from "@/data/services";
@@ -39,8 +40,13 @@ const ServicesPage = () => {
 
                             <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Soluções <br />
-                                <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
+                                {/* BORBOLETA 1: POUSADA NO TÍTULO */}
+                                <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '2px black' }}>
                                     Criativas
+                                    <ButterflyLogo
+                                        className="absolute -top-8 -right-8 w-16 h-16 text-black rotate-12 drop-shadow-sm pointer-events-none"
+                                        opacity={1}
+                                    />
                                 </span>.
                             </h1>
                         </div>
@@ -58,17 +64,23 @@ const ServicesPage = () => {
             <div className="bg-dots-pattern w-full relative z-0">
 
                 {/* LISTA DE SERVIÇOS */}
-                <section className="py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
-                    <div className="flex flex-col bg-white backdrop-blur-sm border-2 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
+                <section className="py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in relative">
+
+                    {/* BORBOLETA 2: GIGANTE ATRÁS DA LISTA (DECORATIVA) */}
+                    <div className="absolute top-10 -left-10 z-0 pointer-events-none hidden md:block">
+                        <ButterflyLogo
+                            className="w-64 h-64 text-primary rotate-[-15deg]"
+                            opacity={0.6}
+                        />
+                    </div>
+
+                    <div className="flex flex-col bg-white backdrop-blur-sm border-2 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_#000000] relative z-10">
                         {allServices.map((service, index) => (
                             <div
                                 key={service.id}
                                 onMouseEnter={() => setActiveService(service.id)}
                                 onMouseLeave={() => setActiveService(null)}
                                 // LÓGICA DO FUNDO INVERTIDA:
-                                // Index 0 (1º item) = Par = bg-primary (Rosa)
-                                // Index 1 (2º item) = Ímpar = bg-white (Branco)
-                                // Desktop (md:) = Sempre bg-white
                                 className={`group border-b-2 border-black last:border-b-0 relative transition-all duration-500 ${
                                     index % 2 === 0 ? 'bg-primary md:bg-white' : 'bg-white'
                                 }`}
@@ -132,6 +144,14 @@ const ServicesPage = () => {
                 <section className="py-24 bg-black text-white relative overflow-hidden border-y-4 border-primary">
                     <div className="absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0"></div>
 
+                    {/* BORBOLETA 3: BACKGROUND SUTIL NO PRETO */}
+                    <div className="absolute -left-20 top-20 pointer-events-none z-0">
+                        <ButterflyLogo
+                            className="w-[500px] h-[500px] text-white rotate-45"
+                            opacity={0.05}
+                        />
+                    </div>
+
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="text-center mb-20">
                             <h2 className="text-4xl md:text-6xl font-black uppercase mb-4 leading-none">
@@ -176,6 +196,12 @@ const ServicesPage = () => {
                     <div className="bg-primary selection-invert border-4 border-black p-8 md:p-12 rounded-2xl md:rounded-3xl
                                     shadow-[14px_14px_0px_0px_#000000] relative z-10
                                     transition-all duration-300 transform-gpu hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[12px_12px_0px_0px_#000000]">
+
+                        {/* BORBOLETA 4: POUSADA NA BORDA DO CTA */}
+                        <ButterflyLogo
+                            className="absolute -top-6 -left-6 w-20 h-20 text-black -rotate-12 pointer-events-none"
+                            opacity={1}
+                        />
 
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
                             Agendar <span className="bg-black text-white px-2">Conversa</span> Gratuita

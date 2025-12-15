@@ -6,6 +6,7 @@ import { ChevronRight, Home, Quote, Mail, ArrowRight, Users, Target, Loader2 } f
 import { Link } from "react-router-dom";
 import { FaWhatsapp, FaEnvelope, FaInstagram, FaArrowRight as FaArrowRightIcon } from "react-icons/fa";
 import { toast } from "sonner";
+import ButterflyLogo from "@/components/ButterflyLogo"; // <--- IMPORTAÇÃO AQUI
 
 // --- DADOS DO FORMULÁRIO ---
 const servicesData = ["Branding", "Social Media", "Web Design", "Consultoria"];
@@ -77,13 +78,18 @@ const BriefingForm = () => {
         // Container principal do formulário
         <div className="bg-white p-6 md:p-8 rounded-2xl border-4 border-black shadow-[10px_10px_0px_0px_#EEACC5] relative overflow-hidden h-full">
 
+            {/* BORBOLETA 1: MARCA D'ÁGUA NO FORMULÁRIO */}
+            <ButterflyLogo
+                className="absolute -top-6 -right-6 w-32 h-32 text-primary opacity-20 rotate-12 pointer-events-none"
+            />
+
             {/* CABEÇALHO */}
-            <h3 className="text-2xl font-black uppercase text-black mb-5 flex items-center gap-3 border-b-2 border-primary pb-2">
+            <h3 className="text-2xl font-black uppercase text-black mb-5 flex items-center gap-3 border-b-2 border-primary pb-2 relative z-10">
                 <Mail size={24} className="text-black" />
                 Seu Projeto
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5 relative z-10">
 
                 {/* LINHA 1: NOME / EMAIL / WHATSAPP (Agora em 3 colunas) */}
                 <div className="grid md:grid-cols-3 gap-4">
@@ -234,7 +240,15 @@ const ContactPage = () => {
                                 <span className="bg-black text-white px-3 py-1 rounded-md shadow-[2px_2px_0px_0px_#EEACC5]">Contato</span>
                             </div>
                             <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
-                                Vamos <br /> <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>Conversar</span>?
+                                Vamos <br />
+                                {/* BORBOLETA 2: NO TÍTULO */}
+                                <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '2px black' }}>
+                                    Conversar
+                                    <ButterflyLogo
+                                        className="absolute -top-6 -right-10 w-16 h-16 text-black rotate-[20deg] pointer-events-none"
+                                        opacity={1}
+                                    />
+                                </span>?
                             </h1>
                         </div>
                         <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left animate-in slide-in-from-right duration-700">
@@ -250,8 +264,14 @@ const ContactPage = () => {
                     <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-stretch mb-16">
 
                         {/* INFO LATERAL (MANTIDO) */}
-                        <div className="lg:w-5/12 flex flex-col gap-4 w-full animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
-                            <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[8px_8px_0px_0px_#000000] flex flex-col justify-between">
+                        <div className="lg:w-5/12 flex flex-col gap-4 w-full animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both relative">
+
+                            {/* BORBOLETA 3: GIGANTE ATRÁS DA SIDEBAR */}
+                            <ButterflyLogo
+                                className="absolute top-10 -left-20 w-80 h-80 text-primary opacity-30 rotate-[-15deg] pointer-events-none z-0"
+                            />
+
+                            <div className="bg-[#fffbff] border-2 border-black p-6 rounded-2xl shadow-[8px_8px_0px_0px_#000000] flex flex-col justify-between relative z-10">
 
                                 <div>
                                     <h2 className="text-3xl font-black uppercase text-gray-900 mb-2 leading-none">Canais <br/> <span className="text-primary">Diretos</span></h2>
@@ -319,9 +339,15 @@ const ContactPage = () => {
                         </div>
                     </div>
 
-                    <div className="border-t-2 border-black pt-12 animate-in slide-in-from-bottom duration-700 delay-500 fill-mode-both">
-                        <h3 className="text-3xl font-black uppercase mb-8 text-center">Antes de enviar...</h3>
-                        <div className="grid md:grid-cols-3 gap-6">
+                    <div className="border-t-2 border-black pt-12 animate-in slide-in-from-bottom duration-700 delay-500 fill-mode-both relative">
+
+                        {/* BORBOLETA 4: RODAPÉ */}
+                        <ButterflyLogo
+                            className="absolute -bottom-10 right-0 w-48 h-48 text-black opacity-5 rotate-[10deg] pointer-events-none"
+                        />
+
+                        <h3 className="text-3xl font-black uppercase mb-8 text-center relative z-10">Antes de enviar...</h3>
+                        <div className="grid md:grid-cols-3 gap-6 relative z-10">
                             <div className="bg-black text-white border-4 border-primary p-6 shadow-[8px_8px_0px_0px_#a6a6a6] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#000000] group">
                                 <Mail size={32} className="mb-4 text-primary group-hover:text-white transition-colors" />
                                 <h4 className="font-black uppercase text-lg mb-2">Orçamentos</h4>

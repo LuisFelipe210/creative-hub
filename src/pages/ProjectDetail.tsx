@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Share2, Copy, X, Home, ChevronRight } from "luci
 import { FaWhatsapp, FaTwitter } from "react-icons/fa";
 import { toast } from "sonner";
 import SEO from "@/components/SEO";
+import ButterflyLogo from "@/components/ButterflyLogo"; // <--- IMPORTAÇÃO AQUI
 
 // --- IMPORTANDO OS DADOS CENTRALIZADOS ---
 import { allProjects } from "@/data/projects";
@@ -123,8 +124,13 @@ const ProjectDetail = () => {
 
                             <h1 className="text-4xl md:text-7xl lg:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 {project.client} <br />
-                                <span className="text-primary" style={{ WebkitTextStroke: '1px black' }}>
+                                {/* BORBOLETA 1: NO TÍTULO */}
+                                <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '1px black' }}>
                                     {project.title}
+                                    <ButterflyLogo
+                                        className="absolute -top-4 -right-8 w-12 h-12 md:w-16 md:h-16 text-black rotate-[20deg] pointer-events-none"
+                                        opacity={1}
+                                    />
                                 </span>
                             </h1>
                         </div>
@@ -173,17 +179,22 @@ const ProjectDetail = () => {
                             <div className="bg-primary selection:bg-neutral-900 selection:text-primary p-8 rounded-2xl border-4 border-black
                                            shadow-[12px_12px_0px_0px_#000000] relative overflow-hidden">
 
-                                <span className="absolute top-0 left-0 bg-black text-primary px-3 py-1 font-black text-[10px] uppercase tracking-widest rounded-br-lg">
+                                {/* BORBOLETA 2: TEXTURA NO CARD ROSA */}
+                                <ButterflyLogo
+                                    className="absolute -bottom-6 -right-6 w-32 h-32 text-black opacity-10 rotate-[-15deg] pointer-events-none"
+                                />
+
+                                <span className="absolute top-0 left-0 bg-black text-primary px-3 py-1 font-black text-[10px] uppercase tracking-widest rounded-br-lg relative z-10">
                                     O ponto chave
                                 </span>
 
-                                <h3 className="text-3xl font-black uppercase text-black mt-6 mb-4 leading-snug">
+                                <h3 className="text-3xl font-black uppercase text-black mt-6 mb-4 leading-snug relative z-10">
                                     O DESAFIO
                                 </h3>
 
-                                <div className="h-0.5 w-full bg-black mb-4"></div>
+                                <div className="h-0.5 w-full bg-black mb-4 relative z-10"></div>
 
-                                <p className="text-gray-900 font-bold leading-relaxed text-base md:text-lg">
+                                <p className="text-gray-900 font-bold leading-relaxed text-base md:text-lg relative z-10">
                                     {project.challenge || project.description}
                                 </p>
                             </div>
@@ -259,23 +270,23 @@ const ProjectDetail = () => {
                         </div>
 
                         {/* CARD DE RESULTADO - ELEMENTO INDEPENDENTE, IRMÃO DO GRID */}
-                        <div className="w-full overflow-x-clip">
-                            {/* AJUSTES AQUI: MT-[-2px] no mobile para colar na ultima foto, MT-8 no desktop */}
-                            <div className={`relative p-10 pt-16 md:p-14 bg-black text-white border-4 border-primary
-                                            mt-[-2px] md:mt-8
-                                            shadow-[8px_8px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu 
-                                            rounded-b-2xl rounded-t-none md:rounded-2xl`}>
 
-                                {/* SELO DE DESTAQUE */}
+                        <div className="w-full overflow-x-clip">
+                            <div className={`relative p-10 pt-16 md:p-14 bg-black text-white border-4 border-primary mt-[-2px] md:mt-8 shadow-[8px_8px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu rounded-b-2xl rounded-t-none md:rounded-2xl`}>
+
+                                <ButterflyLogo
+                                    className="absolute -top-10 -left-10 w-80 h-80 text-primary opacity-10 rotate-12 pointer-events-none"
+                                />
+
                                 <div className="absolute top-[-15px] right-8 bg-primary text-black px-4 py-1 font-black text-xs uppercase rotate-2 border-2 border-black shadow-[2px_2px_0px_0px_#000000] z-10">
                                     CASE DE SUCESSO
                                 </div>
-
                                 <h3 className="text-4xl md:text-5xl font-black text-center uppercase mb-4 leading-none">
                                     O <span className="text-primary" style={{ WebkitTextStroke: '1px #EEACC5' }}>Resultado</span>
                                 </h3>
+
                                 <p className="text-gray-300 max-w-2xl mx-auto font-medium text-lg leading-relaxed">
-                                    Entregamos não apenas um design bonito, mas uma ferramenta de negócios que posicionou a marca em outro patamar de mercado, gerando autoridade e lucro.
+                                    Entregamos não apenas um design bonito, mas uma ferramenta de negócios que posicionou a marca em outro patamar de mercado, gerando autoridade e lucro.
                                 </p>
                             </div>
                         </div>
@@ -289,6 +300,12 @@ const ProjectDetail = () => {
             {/* NAV FOOTER  */}
             <Link to={`/portfolio/${nextProject.slug}`} className="block group border-t-2 border-black bg-primary relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/50 md:bg-black translate-y-full md:translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+
+                {/* BORBOLETA 4: FOOTER INTERATIVO */}
+                <div className="absolute right-10 bottom-10 opacity-20 group-hover:opacity-40 transition-opacity pointer-events-none hidden md:block">
+                    <ButterflyLogo className="w-48 h-48 text-black group-hover:text-white rotate-[-10deg]" />
+                </div>
+
                 <div className="container mx-auto px-4 py-20 md:py-32 relative z-10 flex flex-col items-center justify-center text-center">
                     <span className="text-sm font-black uppercase tracking-[0.3em] mb-4 text-black md:text-gray-500 group-hover:text-primary transition-colors">
                         Próximo Case

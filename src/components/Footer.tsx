@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
 import { FaInstagram, FaLinkedin, FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import ButterflyLogo from "@/components/ButterflyLogo";
 
 const Footer = () => {
     // Pega o ano atual automaticamente
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-black text-white pt-20 pb-10 border-t-2 border-accent mt-auto">
-            <div className="container mx-auto px-4">
+        <footer className="bg-black text-white pt-20 pb-10 border-t-2 border-accent mt-auto relative overflow-hidden">
+
+            {/* --- BORBOLETA DE FUNDO (MARCA D'ÁGUA) --- */}
+            <div className="absolute -top-20 -right-20 pointer-events-none z-0">
+                <ButterflyLogo
+                    className="w-[500px] h-[500px] text-primary opacity-[0.07] rotate-12"
+                />
+            </div>
+
+            <div className="container mx-auto px-4 relative z-10">
                 <div className="grid md:grid-cols-4 gap-12 mb-16">
 
                     {/* COLUNA 1: LOGO E SOBRE */}
@@ -31,35 +40,35 @@ const Footer = () => {
                                 href="https://wa.me/5574991394805"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all"
+                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all group"
                                 title="WhatsApp"
                             >
-                                <FaWhatsapp size={20} />
+                                <FaWhatsapp size={20} className="group-hover:scale-110 transition-transform" />
                             </a>
                             <a
                                 href="https://www.instagram.com/brandcriativo/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all"
+                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all group"
                                 title="Instagram"
                             >
-                                <FaInstagram size={20} />
+                                <FaInstagram size={20} className="group-hover:scale-110 transition-transform" />
                             </a>
                             <a
                                 href="#"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all"
+                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all group"
                                 title="LinkedIn"
                             >
-                                <FaLinkedin size={20} />
+                                <FaLinkedin size={20} className="group-hover:scale-110 transition-transform" />
                             </a>
                             <a
                                 href="mailto:Trajanoiasmim9@gmail.com"
-                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all"
+                                className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all group"
                                 title="Email"
                             >
-                                <FaEnvelope size={20} />
+                                <FaEnvelope size={20} className="group-hover:scale-110 transition-transform" />
                             </a>
                         </div>
                     </div>
@@ -68,11 +77,11 @@ const Footer = () => {
                     <div>
                         <h4 className="text-md font-black uppercase text-primary mb-6">Menu</h4>
                         <ul className="space-y-4 font-bold text-sm uppercase tracking-wider text-gray-300">
-                            <li><Link to="/" className="hover:text-white hover:translate-x-2 transition-transform block">Home</Link></li>
-                            <li><Link to="/sobre" className="hover:text-white hover:translate-x-2 transition-transform block">Sobre</Link></li>
-                            <li><Link to="/servicos" className="hover:text-white hover:translate-x-2 transition-transform block">Serviços</Link></li>
-                            <li><Link to="/portfolio" className="hover:text-white hover:translate-x-2 transition-transform block">Portfólio</Link></li>
-                            <li><Link to="/contato" className="hover:text-white hover:translate-x-2 transition-transform block">Contato</Link></li>
+                            <li><Link to="/" className="hover:text-white hover:translate-x-2 transition-transform block w-fit">Home</Link></li>
+                            <li><Link to="/sobre" className="hover:text-white hover:translate-x-2 transition-transform block w-fit">Sobre</Link></li>
+                            <li><Link to="/servicos" className="hover:text-white hover:translate-x-2 transition-transform block w-fit">Serviços</Link></li>
+                            <li><Link to="/portfolio" className="hover:text-white hover:translate-x-2 transition-transform block w-fit">Portfólio</Link></li>
+                            <li><Link to="/contato" className="hover:text-white hover:translate-x-2 transition-transform block w-fit">Contato</Link></li>
                         </ul>
                     </div>
 
@@ -80,8 +89,8 @@ const Footer = () => {
                     <div>
                         <h4 className="text-md font-black uppercase text-primary mb-6">Fale Comigo</h4>
                         <ul className="space-y-4 text-gray-300">
-                            <li className="flex gap-3 items-start">
-                                <FaWhatsapp className="text-primary shrink-0 mt-1" size={18} />
+                            <li className="flex gap-3 items-start group">
+                                <FaWhatsapp className="text-primary shrink-0 mt-1 group-hover:text-white transition-colors" size={18} />
                                 <div>
                                     <span className="block font-bold text-xs uppercase text-gray-500">WhatsApp</span>
                                     <a href="https://wa.me/5574991394805" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-white transition-colors">
@@ -89,8 +98,8 @@ const Footer = () => {
                                     </a>
                                 </div>
                             </li>
-                            <li className="flex gap-3 items-start">
-                                <FaEnvelope className="text-primary shrink-0 mt-1" size={18} />
+                            <li className="flex gap-3 items-start group">
+                                <FaEnvelope className="text-primary shrink-0 mt-1 group-hover:text-white transition-colors" size={18} />
                                 <div>
                                     <span className="block font-bold text-xs uppercase text-gray-500">Email</span>
                                     <a href="mailto:Trajanoiasmim9@gmail.com" className="font-bold break-all hover:text-white transition-colors">
@@ -98,8 +107,8 @@ const Footer = () => {
                                     </a>
                                 </div>
                             </li>
-                            <li className="flex gap-3 items-start">
-                                <FaMapMarkerAlt className="text-primary shrink-0 mt-1" size={18} />
+                            <li className="flex gap-3 items-start group">
+                                <FaMapMarkerAlt className="text-primary shrink-0 mt-1 group-hover:text-white transition-colors" size={18} />
                                 <div>
                                     <span className="block font-bold text-xs uppercase text-gray-500">Local</span>
                                     <span className="font-bold">Juazeiro - BA</span>
@@ -110,9 +119,9 @@ const Footer = () => {
                 </div>
 
                 {/* BARRA INFERIOR */}
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold uppercase text-gray-500 tracking-widest">
+                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold uppercase text-gray-500 tracking-widest relative">
                     <p>&copy; {currentYear} Iasmim Trajano. Todos os direitos reservados.</p>
-                    <p>Feito com <span className="text-primary">♥</span></p>
+                    <p>Feito com <span className="text-primary animate-pulse">♥</span></p>
                 </div>
             </div>
         </footer>

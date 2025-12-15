@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { ArrowUpRight, Eye, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import ButterflyLogo from "@/components/ButterflyLogo"; // <--- IMPORTAÇÃO AQUI
 
 // --- IMPORTANDO DADOS CENTRALIZADOS ---
 import { allProjects } from "@/data/projects";
@@ -65,8 +66,13 @@ const PortfolioPage = () => {
 
                             <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter text-left">
                                 Meus <br />
-                                <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
+                                {/* BORBOLETA 1: NO TÍTULO */}
+                                <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '2px black' }}>
                                     Projetos
+                                    <ButterflyLogo
+                                        className="absolute -top-6 -right-10 w-12 h-12 md:w-16 md:h-16 text-black rotate-[25deg] pointer-events-none"
+                                        opacity={1}
+                                    />
                                 </span>.
                             </h1>
                         </div>
@@ -84,10 +90,18 @@ const PortfolioPage = () => {
             <div className="bg-dots-pattern w-full relative z-0">
 
                 {/* DESKTOP LAYOUT */}
-                <section className="hidden lg:flex container mx-auto px-4 py-10 gap-12 h-[85vh] items-stretch">
+                <section className="hidden lg:flex container mx-auto px-4 py-10 gap-12 h-[85vh] items-stretch relative">
+
+                    {/* BORBOLETA 2: GIGANTE ATRÁS DA LISTA */}
+                    <div className="absolute top-20 left-10 z-0 pointer-events-none">
+                        <ButterflyLogo
+                            className="w-96 h-96 text-primary rotate-[-10deg]"
+                            opacity={0.3}
+                        />
+                    </div>
 
                     {/* LISTA LATERAL */}
-                    <div className="w-5/12 flex flex-col bg-[#fffbff] border-2 border-black rounded-2xl shadow-[8px_8px_0px_0px_#000000] overflow-hidden">
+                    <div className="w-5/12 flex flex-col bg-[#fffbff]/95 backdrop-blur-sm border-2 border-black rounded-2xl shadow-[8px_8px_0px_0px_#000000] overflow-hidden relative z-10">
 
                         <div className="bg-[#fffbff] p-5 border-b-2 border-black z-20">
                             <div className="flex justify-between text-xs font-bold uppercase text-gray-400">
@@ -152,10 +166,15 @@ const PortfolioPage = () => {
                     </div>
 
                     {/* PREVIEW DA IMAGEM + BOTÃO */}
-                    <div className="w-7/12 h-full relative">
+                    <div className="w-7/12 h-full relative z-10">
                         <div className="w-full h-full rounded-2xl overflow-hidden shadow-[12px_12px_0px_0px_#000000] border-4 border-primary bg-gray-900 group relative">
 
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
+
+                            {/* BORBOLETA 3: BRANCA NO PREVIEW */}
+                            <div className="absolute top-4 left-4 z-20 mix-blend-overlay opacity-50 pointer-events-none">
+                                <ButterflyLogo className="w-32 h-32 text-white rotate-12" color="white" />
+                            </div>
 
                             {/* SKELETON NA PREVIEW */}
                             <ImageWithSkeleton
@@ -187,7 +206,13 @@ const PortfolioPage = () => {
                 {/* MOBILE LAYOUT */}
                 <section className="lg:hidden container mx-auto px-4 py-12 space-y-12">
                     {allProjects.map((project) => (
-                        <Link to={`/portfolio/${project.slug}`} key={project.id} className="block group bg-[#fffbff] border-2 border-black p-4 rounded-3xl shadow-[8px_8px_0px_0px_#000000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all">
+                        <Link to={`/portfolio/${project.slug}`} key={project.id} className="block group bg-[#fffbff] border-2 border-black p-4 rounded-3xl shadow-[8px_8px_0px_0px_#000000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all relative overflow-hidden">
+
+                            {/* BORBOLETA 4: PEQUENA NO CARD MOBILE */}
+                            <ButterflyLogo
+                                className="absolute -top-4 -right-4 w-20 h-20 text-primary opacity-20 pointer-events-none"
+                                color="#EEACC5"
+                            />
 
                             <div className="relative aspect-[4/3] overflow-hidden border-2 border-black rounded-2xl mb-6">
                                 <ImageWithSkeleton
