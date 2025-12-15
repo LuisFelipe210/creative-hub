@@ -18,6 +18,69 @@ import { allServices } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
 import ButterfliesScene from "@/components/Butterflies.tsx";
 
+// --- NOVO COMPONENTE SVG DA BORBOLETA (O QUE VOCÊ MANDOU) ---
+const ButterflyLogo = ({ color = "currentColor", opacity = 1, className, ...props }: React.SVGProps<SVGSVGElement> & { color?: string, opacity?: number }) => {
+    return (
+        <svg
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${className} drop-shadow-md`}
+            viewBox="0 0 1280 805"
+            preserveAspectRatio="xMidYMid meet"
+            {...props}
+        >
+            <g
+                transform="translate(0.000000,805.000000) scale(0.100000,-0.100000)"
+                fill={color}
+                stroke="none"
+                opacity={opacity}
+            >
+                <path d="M11730 8034 c-252 -34 -607 -121 -840 -204 -382 -137 -974 -418
+-1310 -623 -493 -300 -968 -669 -1565 -1213 -442 -403 -742 -761 -980 -1169
+-32 -55 -69 -117 -82 -137 -50 -81 -104 -28 -111 110 -4 65 -2 77 22 112 18
+27 26 53 26 82 0 37 -6 47 -49 89 -27 26 -63 50 -80 54 -17 4 -31 11 -31 17 0
+19 110 196 184 296 81 108 141 179 365 427 164 182 287 332 368 453 37 54 97
+122 179 198 104 98 184 192 184 217 0 15 -55 6 -86 -14 -19 -11 -69 -66 -112
+-122 -43 -56 -88 -113 -100 -127 -11 -14 -72 -90 -133 -170 -147 -191 -291
+-362 -606 -720 l-259 -295 -91 -8 c-83 -8 -96 -7 -161 16 -64 24 -78 34 -168
+129 -55 57 -241 247 -414 423 -358 363 -474 488 -676 731 -132 158 -182 204
+-223 204 -39 0 76 -157 218 -296 73 -71 160 -163 194 -204 120 -147 205 -236
+432 -452 313 -298 499 -502 577 -636 l18 -30 -38 -19 c-45 -23 -82 -89 -82
+-146 0 -21 10 -61 21 -88 18 -41 21 -62 16 -113 -7 -74 -32 -133 -61 -142 -24
+-8 -49 18 -192 202 -566 724 -1397 1415 -2433 2023 -509 299 -1318 621 -1928
+767 -301 72 -475 96 -728 101 -340 8 -518 -23 -732 -127 l-102 -50 -46 -78
+c-59 -102 -104 -218 -112 -292 -5 -54 -3 -67 23 -118 27 -54 29 -66 35 -222 5
+-150 8 -170 32 -220 14 -30 40 -113 57 -185 17 -71 42 -149 56 -172 14 -24 61
+-73 105 -110 93 -78 121 -121 143 -216 9 -38 31 -101 49 -140 35 -76 150 -251
+197 -302 47 -51 53 -73 61 -232 l8 -151 55 -129 c77 -185 113 -294 130 -403
+27 -167 90 -351 168 -490 75 -132 204 -306 279 -376 52 -48 162 -78 347 -94
+141 -12 306 -3 616 35 113 14 247 28 298 31 l93 7 -90 -63 c-216 -151 -444
+-340 -498 -412 -14 -18 -90 -161 -169 -318 -177 -351 -228 -498 -228 -662 0
+-51 5 -68 40 -125 97 -161 160 -422 160 -660 0 -53 2 -58 44 -97 204 -192 238
+-237 358 -470 l72 -141 117 -58 c64 -31 195 -109 290 -172 151 -100 177 -120
+194 -157 28 -58 105 -133 174 -167 80 -41 173 -67 346 -96 203 -35 266 -51
+357 -92 l77 -36 113 6 c181 9 337 26 361 38 13 7 77 13 162 14 131 1 146 3
+227 33 47 18 164 70 260 117 95 47 211 98 257 112 l84 26 62 96 c220 336 322
+589 614 1514 103 323 185 553 209 580 9 11 26 17 41 15 22 -3 28 -11 39 -53
+32 -127 37 -273 18 -611 -19 -335 -17 -441 11 -589 25 -138 112 -327 155 -341
+49 -15 82 25 136 163 101 259 112 473 53 1024 -40 376 -47 499 -28 499 8 0 19
+-6 25 -13 6 -7 63 -164 125 -348 313 -917 576 -1576 704 -1765 23 -33 60 -77
+83 -98 41 -37 131 -86 159 -86 8 0 50 -23 94 -51 203 -130 359 -164 827 -179
+168 -5 321 -12 341 -15 26 -3 57 4 116 29 162 69 411 140 635 181 l97 18 38
+56 c110 159 319 326 583 463 52 27 101 55 108 62 7 7 33 66 58 132 46 123 90
+201 128 232 12 9 28 31 35 49 14 34 67 88 170 174 96 80 111 116 111 259 0
+180 27 272 156 532 l73 147 -20 78 c-48 181 -124 354 -303 683 -99 182 -125
+223 -174 268 -73 69 -209 159 -443 296 -170 99 -267 163 -229 151 35 -11 450
+-45 615 -51 281 -10 672 28 763 75 48 25 56 34 142 176 178 295 270 546 270
+736 0 62 9 98 70 278 81 238 108 354 117 501 6 101 7 106 40 145 51 59 114
+197 183 398 70 205 100 269 169 361 28 37 54 74 59 84 16 31 31 105 42 217 7
+61 23 143 36 183 29 89 30 125 3 231 -22 89 -20 152 6 187 22 29 19 133 -6
+198 -117 314 -551 487 -1049 420z"/>
+            </g>
+        </svg>
+    );
+};
+
 // --- COMPONENTE DE IMAGEM COM SKELETON ---
 const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -158,7 +221,6 @@ const Home = () => {
             <Navigation />
 
             {/* --- HERO SECTION ORIGINAL E ASSIMÉTRICA --- */}
-            {/* OTIMIZAÇÃO MOBILE: pt-28 no mobile, min-h-[auto] para não forçar altura */}
             <section className="relative pt-28 md:pt-32 pb-16 md:pb-32 min-h-[auto] md:min-h-[92vh] flex items-center bg-[#fffbff] overflow-hidden border-b-4 border-black">
 
                 <ButterfliesScene />
@@ -167,7 +229,7 @@ const Home = () => {
                 <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none bg-[radial-gradient(#000_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
 
-                {/* TIPOGRAFIA GIGANTE DE FUNDO (Parallax) - Escondida no Mobile */}
+                {/* TIPOGRAFIA GIGANTE DE FUNDO (Parallax) */}
                 <div
                     className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap z-0 pointer-events-none select-none opacity-[0.04] font-black text-[10vw] uppercase leading-none text-black transition-transform duration-100 ease-out"
                     style={{ transform: `translate(calc(-50% + ${mousePosition.x * -20}px), calc(-50% + ${mousePosition.y * -20}px))` }}
@@ -179,7 +241,6 @@ const Home = () => {
                     <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-8 items-center">
 
                         {/* --- COLUNA DA ESQUERDA (Texto & CTAs) --- */}
-                        {/* OTIMIZAÇÃO MOBILE: text-center no mobile, alinhamento ajustado */}
                         <div className="lg:col-span-6 relative z-20 animate-in slide-in-from-bottom duration-1000 text-center lg:text-left">
 
                             <div className="inline-flex mb-6 items-center gap-2 bg-black text-white border-2 border-black px-4 py-2 font-black uppercase tracking-widest text-xs shadow-[6px_6px_0px_0px_#EEACC5] rotate-2 md:-rotate-2 hover:rotate-0 transition-transform">
@@ -218,13 +279,11 @@ const Home = () => {
                                 style={{ transform: `rotate(12deg) translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
                             ></div>
 
-                            {/* Camada de Fundo 2 (ROSA - EXISTENTE) - Fica no meio */}
                             <div
                                 className="absolute w-[80%] h-[70%] bg-primary border-4 border-black shadow-[6px_6px_0px_0px_#000] rotate-6 top-6 right-4 md:top-10 md:right-0 z-10 transition-transform duration-200 ease-out"
                                 style={{ transform: window.innerWidth > 768 ? `rotate(6deg) translate(${mousePosition.x * -10}px, ${mousePosition.y * -10}px)` : 'rotate(6deg)' }}
                             ></div>
 
-                            {/* Camada Principal (IMAGEM/LOGO) - Fica na frente */}
                             <div
                                 className="relative w-[85%] h-[75%] bg-accent border-4 border-black p-2 shadow-[6px_6x_0px_0px_#000000] -rotate-3 z-20 hover:rotate-0 transition-all duration-500 group transform-gpu hover:-translate-x-[4px] hover:-translate-y-[4px]"
                                 style={{ transform: window.innerWidth > 768 ? `rotate(-3deg) translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` : 'rotate(-3deg)' }}
@@ -299,7 +358,6 @@ const Home = () => {
                                         {item.title}
                                     </h3>
 
-                                    {/* Descrição limitada para não quebrar o layout */}
                                     <p className="text-gray-700 font-medium text-sm leading-relaxed mb-6 line-clamp-3">
                                         {item.description}
                                     </p>
@@ -416,10 +474,28 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* SOBRE */}
+                {/* SOBRE COM BORBOLETAS SVG ADICIONADAS */}
                 <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
-                    <div className="bg-[#fffbff] border-4 border-black rounded-xl md:rounded-2xl p-6 md:p-12 shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5] flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu">
-                        <div className="w-full md:w-1/3 relative">
+                    <div className="bg-[#fffbff] border-4 border-black rounded-xl md:rounded-2xl p-6 md:p-12 shadow-[10px_10px_0px_0px_#EEACC5] md:shadow-[16px_16px_0px_0px_#EEACC5] flex flex-col md:flex-row items-center gap-8 md:gap-10 transition-all duration-500 hover:shadow-[14px_14px_0px_0px_#EEACC5] transform-gpu relative overflow-hidden">
+
+                        {/* --- DECORAÇÃO DE BORBOLETAS SVG (ATUALIZADO) --- */}
+                        <div className="absolute inset-0 z-0 pointer-events-none">
+                            {/* Borboleta Rosa Grande (Canto Superior Direito) */}
+                            <ButterflyLogo
+                                color="#94a3b8"
+                                opacity={0.3}
+                                className="absolute -top-10 -right-10 w-48 h-48 md:w-64 md:h-64 rotate-12"
+                            />
+                            {/* Borboleta Cinza Pequena (Próxima à foto) */}
+                            <ButterflyLogo
+                                color="#EEACC5"
+                                opacity={0.15}
+                                className="absolute bottom-[-40px] left-[35%] w-32 h-32 md:w-40 md:h-40 -rotate-12"
+                            />
+                        </div>
+
+                        {/* Conteúdo com z-10 para ficar por cima das borboletas */}
+                        <div className="w-full md:w-1/3 relative z-10">
                             <div className="relative aspect-square rounded-lg border-4 border-black overflow-hidden shadow-[8px_8px_0px_0px_#EEACC5] rotate-1 hover:rotate-0 transition-all duration-500">
                                 <ImageWithSkeleton src="/iasmim.png" alt="Iasmim" className="object-cover w-full h-full" />
                                 <div className="absolute inset-4 border-2 border-primary pointer-events-none"></div>
@@ -427,7 +503,9 @@ const Home = () => {
                             <div className="absolute top-[-10px] right-[-10px] bg-primary text-black px-3 py-1 font-black text-xs uppercase rotate-3 shadow-[2px_2px_0px_0px_#000000] border-2 border-black z-20">IMPACTO VISUAL</div>
                             <div className="absolute bottom-[-10px] left-[-10px] bg-black text-white px-3 py-1 font-black text-xs uppercase -rotate-3 border-2 border-primary shadow-md z-20">DESIGN DE PESO</div>
                         </div>
-                        <div className="w-full md:w-2/3 space-y-4 md:space-y-6 text-left">
+
+                        {/* Conteúdo com z-10 para ficar por cima das borboletas */}
+                        <div className="w-full md:w-2/3 space-y-4 md:space-y-6 text-left relative z-10">
                             <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-tight">
                                 Design com <br className="hidden md:block"/>
                                 <span className="bg-primary px-2">Propósito</span>.
