@@ -1,12 +1,13 @@
-// --- COMPONENTE BORBOLETA SVG (DEFINITIVO) ---
+// --- COMPONENTE BORBOLETA SVG ---
 const ButterflySVG = ({
                           className,
                           scale = 1,
                           flutterSpeed = "animate-flutter-medium",
                           driftSpeed = "animate-drift-slow",
                           delay = "0s",
-                          opacity = 1, // Padrão agora é 1 (totalmente visível)
-                          color = "text-[#f5f5f5]" // Um branco off-white pra não estourar
+                          opacity = 1,
+                          color = "text-[#f5f5f5]",
+                          blur = 0 // NOVA PROPRIEDADE: Valor do desfoque em pixels (padrão 0 = sem desfoque)
                       }: {
     className?: string,
     scale?: number,
@@ -14,7 +15,8 @@ const ButterflySVG = ({
     driftSpeed?: string,
     delay?: string,
     opacity?: number,
-    color?: string
+    color?: string,
+    blur?: number
 }) => {
     return (
         <div
@@ -22,15 +24,15 @@ const ButterflySVG = ({
             style={{
                 transform: `scale(${scale})`,
                 animationDelay: delay,
-                opacity: opacity
+                opacity: opacity,
+                filter: `blur(${blur}px)` // <--- AQUI A MÁGICA
             }}
         >
             <div className={`${flutterSpeed} origin-center`}>
                 <svg
                     version="1.0"
                     xmlns="http://www.w3.org/2000/svg"
-                    // Aumentei o tamanho base da classe w-32 para w-40
-                    className={`w-40 h-auto ${color} drop-shadow-md filter`}
+                    className={`w-40 h-auto ${color} drop-shadow-md`}
                     viewBox="0 0 1280 805"
                     preserveAspectRatio="xMidYMid meet"
                 >
@@ -88,17 +90,18 @@ const ButterfliesScene = () => {
     return (
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden w-full h-full">
 
-            {/* Borboleta 1 - GIGANTE (Canto Superior Esquerdo) */}
+            {/* Borboleta 1 - GIGANTE & DESFOCADA (Parece que está colada na lente) */}
             <ButterflySVG
                 className="top-[5%] left-[2%]"
                 scale={1.8}
                 flutterSpeed="animate-flutter-slow"
                 driftSpeed="animate-drift-slow"
                 opacity={1}
-                color="text-accent/70"
+                color="text-accent"
+                blur={2} // <--- AQUI (Leve desfoque)
             />
 
-            {/* Borboleta 2 - GRANDE (Canto Inferior Direito) */}
+            {/* Borboleta 2 - GRANDE & FOCADA (Ponto de interesse) */}
             <ButterflySVG
                 className="bottom-[10%] right-[5%]"
                 scale={2.5}
@@ -106,21 +109,23 @@ const ButterfliesScene = () => {
                 driftSpeed="animate-drift-medium"
                 delay="-5s"
                 opacity={0.95}
-                color="text-primary/60"
+                color="text-primary/50"
+                blur={4}
             />
 
-            {/* Borboleta 3 - MÉDIA (Fundo / Centro Topo) */}
+            {/* Borboleta 3 - MÉDIA & MUITO DESFOCADA (Ao fundo) */}
             <ButterflySVG
-                className="top-[20%] right-[30%]"
+                className="top-[20%] right-[10%]"
                 scale={2.0}
                 flutterSpeed="animate-flutter-fast"
                 driftSpeed="animate-drift-slow"
                 delay="-12s"
                 opacity={0.8}
-                color="text-accent/50"
+                color="text-accent/90"
+                blur={0}
             />
 
-            {/* Borboleta 4 - MÉDIA (Canto Inferior Esquerdo) */}
+            {/* Borboleta 4 - MÉDIA & DESFOCADA */}
             <ButterflySVG
                 className="bottom-[20%] left-[15%]"
                 scale={1.2}
@@ -128,18 +133,20 @@ const ButterfliesScene = () => {
                 driftSpeed="animate-drift-medium"
                 delay="-8s"
                 opacity={0.9}
-                color="text-primary/80"
+                color="text-primary/90"
+                blur={0}
             />
 
-            {/* Borboleta 5 - CENTRAL (NOVA) */}
+            {/* Borboleta 5 - CENTRAL & LEVEMENTE DESFOCADA */}
             <ButterflySVG
-                className="top-[45%] left-[45%]" // Centralizada (aproximadamente)
-                scale={1.6} // Tamanho médio/grande
+                className="top-[45%] left-[45%]"
+                scale={1.6}
                 flutterSpeed="animate-flutter-slow"
                 driftSpeed="animate-drift-slow"
                 delay="-2s"
                 opacity={0.9}
-                color="text-primary/30" // Cor accent para variar
+                color="text-accent/40"
+                blur={1} // Desfoque sutil
             />
 
         </div>
