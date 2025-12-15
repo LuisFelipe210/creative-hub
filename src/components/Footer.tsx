@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { FaInstagram, FaLinkedin, FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 const Footer = () => {
+    // Pega o ano atual automaticamente
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="bg-black text-white pt-20 pb-10 border-t-2 border-accent mt-auto">
             <div className="container mx-auto px-4">
@@ -9,19 +12,20 @@ const Footer = () => {
 
                     {/* COLUNA 1: LOGO E SOBRE */}
                     <div className="md:col-span-2 space-y-6">
-                        {/* LOGO PRINCIPAL */}
-                        <img
-                            src="/logo.svg"
-                            alt="Iasmim Trajano"
-                            className="w-32 h-auto object-contain brightness-0 invert"
-                        />
+                        <div className="bg-primary  shadow-[4px_4px_0px_0px_#a6a6a6] p-3 w-fit">
+                            <img
+                                src="/logo.svg"
+                                alt="Iasmim Trajano"
+                                className="w-24 h-auto object-contain"
+                            />
+                        </div>
 
                         <p className="text-gray-400 font-medium max-w-sm leading-relaxed">
                             Transformando ideias em marcas fortes e visuais que vendem.
                             Design estratégico com alma e resultado.
                         </p>
 
-                        {/* ÍCONES SOCIAIS (AGORA COM WHATSAPP) */}
+                        {/* ÍCONES SOCIAIS */}
                         <div className="flex gap-4">
                             <a
                                 href="https://wa.me/5574991394805"
@@ -33,7 +37,7 @@ const Footer = () => {
                                 <FaWhatsapp size={20} />
                             </a>
                             <a
-                                href="#"
+                                href="https://www.instagram.com/brandcriativo/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="bg-white/10 p-3 rounded-full hover:bg-primary hover:text-black transition-all"
@@ -107,7 +111,7 @@ const Footer = () => {
 
                 {/* BARRA INFERIOR */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold uppercase text-gray-500 tracking-widest">
-                    <p>&copy; 2025 Iasmim Trajano. Todos os direitos reservados.</p>
+                    <p>&copy; {currentYear} Iasmim Trajano. Todos os direitos reservados.</p>
                     <p>Feito com <span className="text-primary">♥</span></p>
                 </div>
             </div>

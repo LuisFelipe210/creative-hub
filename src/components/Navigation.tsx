@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-
-// --- IMPORTANDO DADOS CENTRALIZADOS ---
 import { allServices } from "@/data/services";
 
 const Navigation = () => {
@@ -11,8 +9,6 @@ const Navigation = () => {
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const location = useLocation();
 
-    // --- CRIAÇÃO AUTOMÁTICA DOS LINKS DE SERVIÇO ---
-    // Pega o título e o slug do arquivo central e monta o array de links
     const serviceLinks = allServices.map((service) => ({
         name: service.title,
         path: `/servicos/${service.slug}`
@@ -38,7 +34,6 @@ const Navigation = () => {
         };
     }, [isOpen]);
 
-    // Função pra subir pro topo ao clicar na Logo/Home
     const scrollToTop = () => {
         window.scrollTo(0, 0);
         setIsOpen(false);
@@ -72,22 +67,23 @@ const Navigation = () => {
         >
             <div className="container mx-auto flex justify-between items-center">
 
-                {/* LOGO */}
                 <Link
                     to="/"
-                    className="relative z-50 transition-transform hover:scale-105"
+                    className="relative z-50 transition-transform duration-300  active:scale-95"
                     onClick={scrollToTop}
                 >
-                    <img
-                        src="/logo2.svg"
-                        alt="Logo Brand Criativo – voltar para a home"
-                        className="h-12 w-auto object-contain md:hidden"
-                    />
-                    <img
-                        src="/logo2.svg"
-                        alt="Logo Brand Criativo – voltar para a home"
-                        className="h-16 w-auto object-contain hidden md:block"
-                    />
+                    <div className="bg-primary shadow-[4px_4px_0px_0px_#a6a6a6] p-1.5 md:p-2 flex items-center justify-center hover:shadow-none transition-all hover:translate-x-1 hover:translate-y-1">
+                        <img
+                            src="/logo.svg"
+                            alt="Logo Brand Criativo – voltar para a home"
+                            className="h-8 w-auto object-contain md:hidden"
+                        />
+                        <img
+                            src="/logo.svg"
+                            alt="Logo Brand Criativo – voltar para a home"
+                            className="h-12 w-auto object-contain hidden md:block"
+                        />
+                    </div>
                 </Link>
 
                 {/* MENU DESKTOP */}

@@ -11,12 +11,19 @@ const NotFound = () => {
             <SEO title="404 - Página não encontrada" description="Ops! Essa página sumiu do mapa." />
 
             {/* --- LOGO NO CANTO (FIXA) --- */}
-            <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 z-30 hover:scale-105 transition-transform">
-                <img
-                    src="/logo2.svg"
-                    alt="Iasmim Trajano"
-                    className="w-24 md:w-32 h-auto object-contain"
-                />
+            <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 z-30  transition-transform">
+                <div className="bg-primary shadow-[4px_4px_0px_0px_#a6a6a6] p-1.5 md:p-2 flex items-center justify-center hover:shadow-none transition-all hover:translate-x-1 hover:translate-y-1">
+                    <img
+                        src="/logo.svg"
+                        alt="Logo Brand Criativo – voltar para a home"
+                        className="h-8 w-auto object-contain md:hidden"
+                    />
+                    <img
+                        src="/logo.svg"
+                        alt="Logo Brand Criativo – voltar para a home"
+                        className="h-12 w-auto object-contain hidden md:block"
+                    />
+                </div>
             </Link>
 
             {/* --- ELEMENTOS DECORATIVOS FLUTUANTES (MAIS DETALHES) --- */}
