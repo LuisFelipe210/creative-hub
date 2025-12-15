@@ -180,19 +180,19 @@ const Home = () => {
                         <div className="lg:col-span-6 relative z-20 animate-in slide-in-from-bottom duration-1000 text-center lg:text-left">
 
                             <div className="inline-flex mb-6 items-center gap-2 bg-black text-white border-2 border-black px-4 py-2 font-black uppercase tracking-widest text-xs shadow-[6px_6px_0px_0px_#EEACC5] rotate-2 md:-rotate-2 hover:rotate-0 transition-transform">
-                                Available for new projects
+                                SOCIAL MEDIA I DESIGN
                             </div>
 
-                            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase text-black leading-[0.9] tracking-tighter mb-8 relative">
-                                Design que <br/>
-                                <span className="relative z-10 pl-2 pr-4 bg-primary inline-block skew-x-[-4deg] shadow-[4px_4px_0px_0px_#a6a6a6]">
-                                    não pede
-                                </span> <br/>
-                                Licença.
+                            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase text-black leading-[0.9] tracking-tighter mb-8 relative">
+                                Transforme o <br/>
+                                <span className="relative z-10 pl-2 pr-4 bg-primary inline-block skew-x-[-4deg] shadow-[1px_1px_0px_0px_#a6a6a6]">
+                                    comum
+                                </span> em <br/>
+                                extraordinário.
                             </h1>
 
                             <p className="text-base md:text-xl font-bold text-gray-800 leading-relaxed max-w-lg mx-auto lg:mx-0 border-l-0 lg:border-l-8 border-primary lg:pl-6 mb-10 bg-white/80 backdrop-blur-sm p-4 shadow-[4px_4px_0px_0px_#000] rounded-xl lg:rounded-none">
-                                Chega de ser mais um no feed. Crio identidades visuais e estratégias sociais que <span className="underline decoration-primary decoration-4 underline-offset-4">obrigam</span> sua marca a ser notada.
+                                Estratégia visual e design com <span className="underline decoration-primary decoration-4 underline-offset-4">propósito</span> para marcas que cansaram de ser ignoradas.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 pt-4 items-center lg:items-start justify-center lg:justify-start">
