@@ -45,7 +45,6 @@ const ServicesPage = () => {
                             </h1>
                         </div>
 
-                        {/* LADO DIREITO (Slide da Direita) */}
                         <div className="md:max-w-sm mb-2 pl-4 border-l-4 border-primary text-left animate-in slide-in-from-right duration-700 fade-in">
                             <p className="text-lg font-medium text-gray-600 leading-relaxed">
                                 Não é sobre postar bonitinho. É sobre construir uma presença digital sólida, estratégica e impossível de ignorar.
@@ -58,18 +57,25 @@ const ServicesPage = () => {
             {/* --- CORPO DA PÁGINA --- */}
             <div className="bg-dots-pattern w-full relative z-0">
 
-                {/* LISTA DE SERVIÇOS - USANDO DADOS CENTRALIZADOS */}
+                {/* LISTA DE SERVIÇOS */}
                 <section className="py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both fade-in">
                     <div className="flex flex-col bg-white backdrop-blur-sm border-2 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_#000000]">
-                        {allServices.map((service) => (
+                        {allServices.map((service, index) => (
                             <div
                                 key={service.id}
                                 onMouseEnter={() => setActiveService(service.id)}
                                 onMouseLeave={() => setActiveService(null)}
-                                className="group border-b-2 border-black last:border-b-0 relative transition-all duration-500"
+                                // LÓGICA DO FUNDO INVERTIDA:
+                                // Index 0 (1º item) = Par = bg-primary (Rosa)
+                                // Index 1 (2º item) = Ímpar = bg-white (Branco)
+                                // Desktop (md:) = Sempre bg-white
+                                className={`group border-b-2 border-black last:border-b-0 relative transition-all duration-500 ${
+                                    index % 2 === 0 ? 'bg-primary md:bg-white' : 'bg-white'
+                                }`}
                             >
+                                {/* OVERLAY DE HOVER */}
                                 <div className={`absolute inset-0 bg-primary origin-left transition-transform duration-500 ease-out z-0 ${
-                                    activeService === service.id ? "scale-x-100" : "scale-x-100 md:scale-x-0"
+                                    activeService === service.id ? "scale-x-100" : "scale-x-0"
                                 }`}></div>
 
                                 <Link to={service.link} className="relative z-10 block py-10 md:py-14 px-6 md:px-10">
@@ -122,24 +128,20 @@ const ServicesPage = () => {
                     </div>
                 </section>
 
-                {/* --- SEÇÃO PROCESSO (FLUXOGRAMA BRUTALISTA) --- */}
+                {/* --- SEÇÃO PROCESSO --- */}
                 <section className="py-24 bg-black text-white relative overflow-hidden border-y-4 border-primary">
-
-                    {/* Efeito de ruído no fundo para dar textura */}
                     <div className="absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0"></div>
 
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="text-center mb-20">
-                            {/* Título Agressivo e Padronizado */}
                             <h2 className="text-4xl md:text-6xl font-black uppercase mb-4 leading-none">
                                 Processo de <span className="text-primary" style={{ WebkitTextStroke: '1px #EEACC5' }}>Execução</span>
                             </h2>
                             <p className="text-gray-400 max-w-2xl mx-auto font-medium">
-                                Sem "achismo". Meu processo é baseado em pesquisa, estratégia e <strong> execução impecável.</strong>
+                                Sem "achismo". Meu processo é baseado em pesquisa, estratégia e <strong> execução impecável</strong>.
                             </p>
                         </div>
 
-                        {/* GRID DE CARDS COM ESTILO BRUTALISTA INVERTIDO (Preto com Sombra Rosa) */}
                         <div className="grid md:grid-cols-4 gap-8">
                             {[
                                 { icon: Target, title: "1. Imersão", desc: "Mergulho fundo no seu negócio para entender dores e objetivos. Tudo documentado.", delay: "100" },
@@ -150,21 +152,17 @@ const ServicesPage = () => {
                                 <div
                                     key={i}
                                     className={`group p-6 md:p-8 bg-black border-4 border-primary/50 text-white 
-                                rounded-xl md:rounded-2xl 
+                               
                                 shadow-[8px_8px_0px_0px_#EEACC5] hover:shadow-[12px_12px_0px_0px_#EEACC5] 
                                 transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 
                                 animate-in slide-in-from-bottom fill-mode-both duration-700`}
                                     style={{ animationDelay: `${step.delay}ms` }}
                                 >
-                                    {/* Número do Passo Grande */}
                                     <div className="text-4xl font-black text-primary mb-4 leading-none border-b border-white/10 pb-2">
                                         {step.title.split('.')[0]}.
                                     </div>
-
                                     <step.icon className="w-10 h-10 text-primary mb-4 mt-2 group-hover:scale-[1.05] transition-transform" />
-
                                     <h3 className="text-xl font-black uppercase mb-3 text-white">{step.title.split('.')[1].trim()}</h3>
-
                                     <p className="text-gray-400 text-sm leading-relaxed font-medium">
                                         {step.desc}
                                     </p>

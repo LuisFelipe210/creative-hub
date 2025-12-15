@@ -322,17 +322,17 @@ const ContactPage = () => {
                     <div className="border-t-2 border-black pt-12 animate-in slide-in-from-bottom duration-700 delay-500 fill-mode-both">
                         <h3 className="text-3xl font-black uppercase mb-8 text-center">Antes de enviar...</h3>
                         <div className="grid md:grid-cols-3 gap-6">
-                            <div className="bg-black text-white border-4 border-primary p-6 rounded-2xl shadow-[8px_8px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#EEACC5] group">
+                            <div className="bg-black text-white border-4 border-primary p-6 shadow-[8px_8px_0px_0px_#a6a6a6] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#000000] group">
                                 <Mail size={32} className="mb-4 text-primary group-hover:text-white transition-colors" />
                                 <h4 className="font-black uppercase text-lg mb-2">Orçamentos</h4>
                                 <p className="text-sm font-medium text-gray-400">Respondo propostas comerciais em até 24h úteis. Seja detalhista no briefing.</p>
                             </div>
-                            <div className="bg-black text-white border-4 border-primary p-6 rounded-2xl shadow-[8px_8px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#EEACC5] group">
+                            <div className="bg-black text-white border-4 border-primary p-6 shadow-[8px_8px_0px_0px_#a6a6a6] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#000000] group">
                                 <Users size={32} className="mb-4 text-primary group-hover:text-white transition-colors" />
                                 <h4 className="font-black uppercase text-lg mb-2">Parcerias</h4>
                                 <p className="text-sm font-medium text-gray-400">Aberta a collabs com outros criativos e agências. Mande sua ideia!</p>
                             </div>
-                            <div className="bg-black text-white border-4 border-primary p-6 rounded-2xl shadow-[8px_8px_0px_0px_#EEACC5] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#EEACC5] group">
+                            <div className="bg-black text-white border-4 border-primary p-6  shadow-[8px_8px_0px_0px_#a6a6a6] transition-all duration-300 transform-gpu hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_#000000] group">
                                 <Target size={32} className="mb-4 text-primary group-hover:text-white transition-colors" />
                                 <h4 className="font-black uppercase text-lg mb-2">Consultoria</h4>
                                 <p className="text-sm font-medium text-gray-400">Precisa só de um direcionamento? Também faço consultorias de 1h via Meet.</p>

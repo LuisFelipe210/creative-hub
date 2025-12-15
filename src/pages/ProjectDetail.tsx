@@ -194,7 +194,7 @@ const ProjectDetail = () => {
                                 <div className="relative">
                                     <button
                                         onClick={() => setIsShareOpen(!isShareOpen)}
-                                        className={`w-full flex items-center justify-center gap-2 border-2 border-black py-3 rounded-xl font-bold uppercase transition-all ${isShareOpen ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white"
+                                        className={`w-full flex items-center justify-center gap-2 border-2 border-black py-3 rounded-xl font-bold uppercase transition-all ${isShareOpen ? "bg-accent text-black" : "bg-accent hover:bg-black hover:text-white"
                                         }`}
                                     >
                                         {isShareOpen ? <X size={18} /> : <Share2 size={18} />}

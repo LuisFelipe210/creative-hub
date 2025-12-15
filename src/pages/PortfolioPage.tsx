@@ -153,7 +153,7 @@ const PortfolioPage = () => {
 
                     {/* PREVIEW DA IMAGEM + BOTÃO */}
                     <div className="w-7/12 h-full relative">
-                        <div className="w-full h-full rounded-3xl overflow-hidden shadow-[12px_12px_0px_0px_#000000] border-4 border-primary bg-gray-900 group relative">
+                        <div className="w-full h-full rounded-2xl overflow-hidden shadow-[12px_12px_0px_0px_#000000] border-4 border-primary bg-gray-900 group relative">
 
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
 
@@ -174,7 +174,7 @@ const PortfolioPage = () => {
                             <div className="absolute bottom-8 left-8 z-20">
                                 <Link
                                     to={`/portfolio/${hoveredProject.slug}`}
-                                    className="flex items-center gap-3 bg-white text-black border-2 border-black px-8 py-4 rounded-full font-black text-sm uppercase hover:bg-primary hover:scale-105 transition-all shadow-[4px_4px_0px_0px_#000000]"
+                                    className="flex items-center gap-3 bg-white text-black border-2 border-black px-8 py-4 rounded-xl font-black text-sm uppercase hover:translate-x-1 hover:translate-y-1 transition-all shadow-[4px_4px_0px_0px_#000000] hover:shadow-none"
                                 >
                                     <Eye size={20} />
                                     Ver Detalhes do Projeto
@@ -190,7 +190,6 @@ const PortfolioPage = () => {
                         <Link to={`/portfolio/${project.slug}`} key={project.id} className="block group bg-[#fffbff] border-2 border-black p-4 rounded-3xl shadow-[8px_8px_0px_0px_#000000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all">
 
                             <div className="relative aspect-[4/3] overflow-hidden border-2 border-black rounded-2xl mb-6">
-                                {/* SKELETON NO MOBILE */}
                                 <ImageWithSkeleton
                                     src={project.image}
                                     alt={project.title}
@@ -214,7 +213,6 @@ const PortfolioPage = () => {
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm font-medium leading-tight">
-                                    {/* Ajuste: usando description do arquivo central */}
                                     {project.description}
                                 </p>
                             </div>
