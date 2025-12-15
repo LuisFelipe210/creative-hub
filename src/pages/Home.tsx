@@ -16,6 +16,7 @@ import 'swiper/css/navigation';
 import { allProjects } from "@/data/projects";
 import { allServices } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
+import ButterfliesScene from "@/components/Butterflies.tsx";
 
 // --- COMPONENTE DE IMAGEM COM SKELETON ---
 const ImageWithSkeleton = ({ src, alt, className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
@@ -159,6 +160,8 @@ const Home = () => {
             {/* --- HERO SECTION ORIGINAL E ASSIMÉTRICA --- */}
             {/* OTIMIZAÇÃO MOBILE: pt-28 no mobile, min-h-[auto] para não forçar altura */}
             <section className="relative pt-28 md:pt-32 pb-16 md:pb-32 min-h-[auto] md:min-h-[92vh] flex items-center bg-[#fffbff] overflow-hidden border-b-4 border-black">
+
+                <ButterfliesScene />
 
                 {/* TEXTURA DE FUNDO */}
                 <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none bg-[radial-gradient(#000_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
