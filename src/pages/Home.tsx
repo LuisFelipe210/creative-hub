@@ -163,14 +163,6 @@ const Home = () => {
                 <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none bg-[radial-gradient(#000_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
 
-                {/* TIPOGRAFIA GIGANTE DE FUNDO (Parallax) */}
-                <div
-                    className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap z-0 pointer-events-none select-none opacity-[0.04] font-black text-[10vw] uppercase leading-none text-black transition-transform duration-100 ease-out"
-                    style={{ transform: `translate(calc(-50% + ${mousePosition.x * -20}px), calc(-50% + ${mousePosition.y * -20}px))` }}
-                >
-                    Iasmim Trajano
-                </div>
-
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-12 gap-y-12 lg:gap-8 items-center">
 

@@ -80,10 +80,6 @@ const ServiceDetail = () => {
                                 <h1 className="text-5xl md:text-8xl font-black uppercase text-black leading-[0.85] tracking-tighter relative z-10">
                                     {service.title}
                                 </h1>
-                                <ButterflyLogo
-                                    className="absolute -top-6 -right-10 w-16 h-16 text-black rotate-12 z-0 hidden md:block"
-                                    opacity={0.8}
-                                />
                             </div>
                         </div>
 

@@ -69,10 +69,6 @@ const PortfolioPage = () => {
                                 {/* BORBOLETA 1: NO TÍTULO */}
                                 <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '2px black' }}>
                                     Projetos
-                                    <ButterflyLogo
-                                        className="absolute -top-6 -right-10 w-12 h-12 md:w-16 md:h-16 text-black rotate-[25deg] pointer-events-none"
-                                        opacity={1}
-                                    />
                                 </span>.
                             </h1>
                         </div>

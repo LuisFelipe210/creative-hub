@@ -43,10 +43,6 @@ const ServicesPage = () => {
                                 {/* BORBOLETA 1: POUSADA NO TÍTULO */}
                                 <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '2px black' }}>
                                     Criativas
-                                    <ButterflyLogo
-                                        className="absolute -top-8 -right-8 w-16 h-16 text-black rotate-12 drop-shadow-sm pointer-events-none"
-                                        opacity={1}
-                                    />
                                 </span>.
                             </h1>
                         </div>

@@ -244,10 +244,6 @@ const ContactPage = () => {
                                 {/* BORBOLETA 2: NO TÍTULO */}
                                 <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '2px black' }}>
                                     Conversar
-                                    <ButterflyLogo
-                                        className="absolute -top-6 -right-10 w-16 h-16 text-black rotate-[20deg] pointer-events-none"
-                                        opacity={1}
-                                    />
                                 </span>?
                             </h1>
                         </div>

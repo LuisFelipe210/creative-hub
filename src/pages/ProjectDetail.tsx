@@ -127,10 +127,6 @@ const ProjectDetail = () => {
                                 {/* BORBOLETA 1: NO TÍTULO */}
                                 <span className="text-primary relative inline-block" style={{ WebkitTextStroke: '1px black' }}>
                                     {project.title}
-                                    <ButterflyLogo
-                                        className="absolute -top-4 -right-8 w-12 h-12 md:w-16 md:h-16 text-black rotate-[20deg] pointer-events-none"
-                                        opacity={1}
-                                    />
                                 </span>
                             </h1>
                         </div>
