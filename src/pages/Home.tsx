@@ -178,12 +178,8 @@ const Home = () => {
                                 <span className="relative z-10 pl-2 pr-4 bg-primary inline-block skew-x-[-4deg] shadow-[1px_1px_0px_0px_#a6a6a6]">
                                     comum
                                 </span> em <br/>
-                                {/* BORBOLETA 1: TÍTULO */}
                                 <span className="relative inline-block">
                                     extraordinário.
-                                    <ButterflyLogo
-                                        className="absolute -top-6 -right-10 w-12 h-12 md:w-16 md:h-16 text-black rotate-[20deg]"
-                                    />
                                 </span>
                             </h1>
 
