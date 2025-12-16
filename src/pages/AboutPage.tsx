@@ -60,10 +60,6 @@ const AboutPage = () => {
                                 {/* BORBOLETA 1: TÍTULO */}
                                 <span className="relative inline-block">
                                     Criativa
-                                    <ButterflyLogo
-                                        className="absolute -top-6 -right-10 w-12 h-12 md:w-16 md:h-16 text-black rotate-[25deg]"
-                                        opacity={1}
-                                    />
                                 </span> & <br />
                                 <span className="text-primary" style={{ WebkitTextStroke: '2px black' }}>
                                     Estrategista

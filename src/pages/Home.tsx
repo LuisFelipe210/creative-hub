@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { ArrowRight, Star, ArrowUpRight, Quote, ArrowLeft, ChevronRight, ChevronLeft, Sparkles } from "lucide-react";
+import { ArrowRight, Star, ArrowUpRight, Quote, ArrowLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation as SwiperNavigation, Autoplay } from 'swiper/modules';
@@ -178,7 +178,13 @@ const Home = () => {
                                 <span className="relative z-10 pl-2 pr-4 bg-primary inline-block skew-x-[-4deg] shadow-[1px_1px_0px_0px_#a6a6a6]">
                                     comum
                                 </span> em <br/>
-                                extraordinário.
+                                {/* BORBOLETA 1: TÍTULO */}
+                                <span className="relative inline-block">
+                                    extraordinário.
+                                    <ButterflyLogo
+                                        className="absolute -top-6 -right-10 w-12 h-12 md:w-16 md:h-16 text-black rotate-[20deg]"
+                                    />
+                                </span>
                             </h1>
 
                             <p className="text-base md:text-xl font-bold text-gray-800 leading-relaxed max-w-lg mx-auto lg:mx-0 border-l-0 lg:border-l-8 border-primary lg:pl-6 mb-10 bg-white/80 backdrop-blur-sm p-4 shadow-[4px_4px_0px_0px_#000] rounded-xl lg:rounded-none">
@@ -257,13 +263,19 @@ const Home = () => {
             <div className="bg-dots-pattern w-full flex-1 relative z-0">
 
                 {/* SERVIÇOS (ATUALIZADO E BRUTALISTA) */}
-                <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both">
-                    <div className="text-center mb-10 md:mb-12">
+                <section className="py-16 md:py-20 container mx-auto px-4 animate-in slide-in-from-bottom duration-700 delay-200 fill-mode-both relative">
+
+                    {/* BORBOLETA 2: GIGANTE NO FUNDO DOS SERVIÇOS */}
+                    <ButterflyLogo
+                        className="absolute top-0 -left-20 w-[600px] h-[600px] text-primary opacity-[0.05] pointer-events-none rotate-12"
+                    />
+
+                    <div className="text-center mb-10 md:mb-12 relative z-10">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Serviços</span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">Minhas <span className="bg-primary px-2">Soluções</span></h2>
                     </div>
-                    {/* GRID DE 4 COLUNAS NO DESKTOP PARA CABER TUDO */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
                         {allServices.slice(0, 4).map((item, index) => (
                             <Link
                                 key={item.id}
@@ -275,7 +287,6 @@ const Home = () => {
                                          transition-all duration-300 transform-gpu justify-between"
                             >
                                 <div>
-                                    {/* ÍCONE BRUTALISTA COM FUNDO */}
                                     <div className="mb-6 p-4 bg-primary border-2 border-black w-fit  group-hover:rotate-6 transition-transform duration-300 shadow-[4px_4px_0px_0px_#000]">
                                         <item.icon size={32} className="text-black" strokeWidth={2.5} />
                                     </div>
@@ -297,7 +308,7 @@ const Home = () => {
                             </Link>
                         ))}
                     </div>
-                    <div className="text-center mt-16">
+                    <div className="text-center mt-16 relative z-10">
                         <Link to="/servicos" className="inline-flex items-center gap-2 font-bold uppercase border-2 border-black bg-primary   px-8 py-3 rounded-xl text-black transition-colors text-base shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
                             Ver Mais Detalhes <ArrowRight size={18} />
                         </Link>
@@ -306,6 +317,13 @@ const Home = () => {
 
                 {/* CASES DE IMPACTO */}
                 <section className="py-16 md:py-20 bg-black text-white rounded-t-[2.5rem] md:rounded-t-[3rem] relative overflow-hidden border-t-4 border-primary animate-in slide-in-from-bottom duration-700 delay-300 fill-mode-both">
+
+                    {/* BORBOLETA 3: BRANCA NO FUNDO PRETO DOS CASES */}
+                    <ButterflyLogo
+                        className="absolute -top-10 right-0 w-96 h-96 text-white opacity-[0.03] rotate-[-10deg] pointer-events-none"
+                        color="#ffffff"
+                    />
+
                     <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-6">
@@ -352,14 +370,22 @@ const Home = () => {
 
                 {/* --- SEÇÃO DE DEPOIMENTOS --- */}
                 <section className="py-20 border-b-2 border-black bg-[#fffbff] overflow-hidden relative">
-                    <div className="container mx-auto px-4 mb-10 text-center">
+
+                    {/* BORBOLETA 4: ROSA PEQUENA PERTO DO TÍTULO DEPOIMENTOS */}
+                    <div className="absolute top-10 right-[20%] pointer-events-none">
+                        <ButterflyLogo
+                            className="w-24 h-24 text-primary rotate-12 opacity-40"
+                        />
+                    </div>
+
+                    <div className="container mx-auto px-4 mb-10 text-center relative z-10">
                         <span className="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">Feedback</span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none">
                             <span className="bg-primary px-2">Quem</span> Confia
                         </h2>
                     </div>
 
-                    <div className="w-full relative group/carousel">
+                    <div className="w-full relative group/carousel z-10">
 
                         <BrutalistArrow direction="left" onClick={() => swiperRef?.slidePrev()} />
                         <BrutalistArrow direction="right" onClick={() => swiperRef?.slideNext()} />
@@ -448,14 +474,20 @@ const Home = () => {
 
                 {/* CTA */}
                 <section className="py-16 md:py-20 container mx-auto px-4 text-center">
-                    <div className="max-w-3xl mx-auto">
-                        <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none">
+                    <div className="max-w-3xl mx-auto relative">
+
+                        {/* BORBOLETA 5: RODAPÉ DO CARD CTA */}
+                        <ButterflyLogo
+                            className="absolute -bottom-10 -left-10 w-40 h-40 text-black opacity-[0.05] pointer-events-none"
+                        />
+
+                        <h2 className="text-4xl md:text-6xl font-black uppercase text-black mb-6 leading-none relative z-10">
                             Pronto pra <span className="bg-primary px-2">Começar</span>?
                         </h2>
-                        <p className="text-gray-700 font-bold text-base md:text-lg mb-10">
+                        <p className="text-gray-700 font-bold text-base md:text-lg mb-10 relative z-10">
                             Vamos transformar suas ideias em uma marca forte e lucrativa.
                         </p>
-                        <Link to="/contato" className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black px-8 py-4 md:px-10 shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all active:scale-[0.98] transform-gpu">
+                        <Link to="/contato" className="inline-flex items-center gap-3 font-black text-base md:text-lg uppercase rounded-xl bg-primary text-black border-2 border-black px-8 py-4 md:px-10 shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all active:scale-[0.98] transform-gpu relative z-10">
                             Solicitar Orçamento <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
