@@ -84,7 +84,6 @@ const AboutPage = () => {
                     <div className="grid lg:grid-cols-3 gap-8 items-stretch">
 
                         {/* COLUNA ESQUERDA: TEXTO MANIFESTO (2/3) */}
-                        {/* COLUNA ESQUERDA: TEXTO MANIFESTO (2/3) */}
                         <div className="lg:col-span-2 bg-[#fffbff]/90 backdrop-blur-sm p-8 md:p-12 border-2 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000000] animate-in slide-in-from-bottom duration-700 relative">
 
                             {/* --- BORBOLETA 1: DECORAÇÃO NO CANTO DO TEXTO --- */}
